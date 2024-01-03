@@ -1,15 +1,13 @@
 import mongoose from 'mongoose';
 
-const certificatesSchemaObject = [
-    {
-        type: Buffer,
-        category: {
-            type: String,
-            required: true
-        },
-        updatedAt: Date.now()
-    }
-];
+const certificatesTypes = {
+    type: Buffer,
+    category: {
+        type: String,
+        required: true
+    },
+    updatedAt: Date.now()
+}
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,7 +25,10 @@ const studentSchema = new mongoose.Schema({
         type: Buffer,
         required: true
     },
-    certificates: certificatesSchemaObject,
+    certificates: {
+        type: [certificatesTypes],
+        default: []
+    },
     createdAt: {
         type: Date,
         default: Date.now()
@@ -38,5 +39,5 @@ const studentSchema = new mongoose.Schema({
     }
 })
 
-const StudentModel = mongoose.model('Student', studentSchema) || mongoose.models.Student;
-export default StudentModel;
+const Student = mongoose.model('Student', studentSchema) || mongoose.models.Student;
+export default Student;
