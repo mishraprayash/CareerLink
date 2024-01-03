@@ -57,6 +57,6 @@ internshipSchema.pre('save',function(next){
     }
     next();
 })
-const internshipModel = mongoose.model('Internship', internshipSchema) || mongoose.models.Internship;
+const Internship = mongoose.model('Internship', internshipSchema) || mongoose.models.Internship;
 
-export default internshipModel;
+export default Internship;
