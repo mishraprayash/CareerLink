@@ -35,5 +35,5 @@ adminSchema.pre('save', function (next) {
     next();
 });
 
-const admin =  mongoose.model('admin', adminSchema);
+const admin =  mongoose.model('admin', adminSchema) || mongoose.models.admin;
 export default admin;
