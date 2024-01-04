@@ -40,69 +40,66 @@ const industrySectors = [
     "Energy, Nuclear Energy"
 ];
 
-const companySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "Please provide your company name"]
-    },
-    email: {
-        type: String,
-        required: [true, "Please provide your email address"],
-        unique: true,
-        match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Provide valid email'],
-    },
-    password: {
-        type: String,
-        required: [true, "Please provide a password"],
-        minlength: [8, "Password length must not be less than 8 characters"]
-    },
-    companyInfo: {
-        category: {
+const companySchema = new mongoose.Schema(
+    {
+        name: {
             type: String,
-            enum: engineeringCategories
+            required: [true, "Please provide your company name"]
         },
-        industrySectors: {
+        email: {
             type: String,
-            enum: industrySectors
-        }
-    },
-    logo: {
-        type: Buffer,
-        required: [true, "Please provide the company logo"]
-    },
-    registrationFile: {
-        data: {
+            required: [true, "Please provide your email address"],
+            unique: true,
+            match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Provide valid email'],
+        },
+        password: {
+            type: String,
+            required: [true, "Please provide a password"],
+            minlength: [8, "Password length must not be less than 8 characters"]
+        },
+        companyInfo: {
+            category: {
+                type: String,
+                enum: engineeringCategories
+            },
+            industrySectors: {
+                type: String,
+                enum: industrySectors
+            }
+        },
+        logo: {
             type: Buffer,
-            required: [true, "Please provide the registrationn file of your company"],
-            unique: true
-        }
+            required: [true, "Please provide the company logo"]
+        },
+        registrationFile: {
+            data: {
+                type: Buffer,
+                required: [true, "Please provide the registrationn file of your company"],
+                unique: true
+            }
+        },
+        address: {
+            city: String,
+            state: String,
+            zipCode: String
+        },
+        foundYear: {
+            type: Number,
+            required: [true, "Please provide the found year"]
+        },
+        state: {
+            type: String,
+            enum: ["Pending", "Approved"],
+            default: "Pending"
+        },
     },
-    address: {
-        city: String,
-        state: String,
-        zipCode: String
-    },
-    foundYear: {
-        type: Number,
-        required: [true, "Please provide the found year"]
-    },
-    state:{
-        type:String,
-        enum:["Pending","Approved"],
-        default:"Pending"
-    },
-    createdAt: {
-        type: Date,
-        default:Date.now()
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now()
+    {
+        timestamps: true
     }
-});
+);
 
-companySchema.pre('save',function(next){
-    if(this.isNew && this.state!=="Pending"){
+companySchema.pre('save', function (next) {
+    if (this.isNew && this.state !== "Pending") {
         return next(new Error("Invalid State"));
     }
 })
