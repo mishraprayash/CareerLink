@@ -1,0 +1,41 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+ 
+  
+}
+ 
+.footerpart{
+ 
+  background-color:black;
+  
+  color: white;
+  height: 280px;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
+
+ 
+}
+.footer1{
+flex: 1;
+
+}
+.footer2{
+ 
+  flex:1;
+  
+}
+
+.footer3{
+  flex: 1;
+  
+}
+.clogo{
+  
+  height: 50px;
+  width:50px;
+}
