@@ -19,9 +19,9 @@
     display: grid;
     grid-template-columns:100px minmax(250px,1fr) 300px;
     padding: 10px 25px;
-    z-index: 2;
+    z-index: 20;
     position: fixed;
-  }
+    border: solid 1px rgb(47, 10, 95);}
   .name{
     color: white;
     font-weight: 800;

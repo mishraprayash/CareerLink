@@ -9,7 +9,7 @@ const navbar = () => {
   return (
     <div className="nav">
     <div className="logo">
-      <img className="logoimg" src="../../image/logo.png"/>
+      <img className="logoimg" src="/logo.png"/>
     </div>
     <div className="name">CareerLink</div>
     <div className="forbutton">

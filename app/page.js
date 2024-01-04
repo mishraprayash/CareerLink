@@ -4,6 +4,7 @@ import Explore from './components/Explore/page.jsx'
 import Navbar from './components/Navbar/page.jsx'
 import Profile from './components/Profile/page.jsx'
 import Footer from './components/Footer/page.jsx'
+import LandingPage from './components/landingpage/page.jsx'
 
 export default function Home() {
   return (
@@ -12,7 +13,9 @@ export default function Home() {
        
       </div>
       <Navbar/>
-      
+      <LandingPage/>
+      <Footer/>
+     
     </main>
   )
 }
