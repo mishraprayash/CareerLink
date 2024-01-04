@@ -5,7 +5,7 @@ const certificatesSchemaObject = [
         type: Buffer,
         category: {
             type: String,
-            required: true
+            
         },
         updatedAt: Date.now()
     }
@@ -27,16 +27,10 @@ const studentSchema = new mongoose.Schema({
         type: Buffer,
         required: true
     },
-    certificates: certificatesSchemaObject,
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now()
-    }
-})
+    certificates: certificatesSchemaObject
+}, {
+    timestamps: true, // This will add createdAt and updatedAt fields
+  })
 
 const StudentModel = mongoose.model('Student', studentSchema) || mongoose.models.Student;
 export default StudentModel;
