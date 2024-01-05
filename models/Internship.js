@@ -44,8 +44,9 @@ const internshipSchema = new mongoose.Schema(
         },
     },
     {
-        timestamps:true
-});
+        timestamps: true
+    }
+);
 
 internshipSchema.pre('save', function (next) {
     if (this.isNew && this.state !== "Pending") {

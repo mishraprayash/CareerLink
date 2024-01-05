@@ -30,11 +30,21 @@ const studentSchema = new mongoose.Schema(
             type: [certificatesTypes],
             default: []
         },
+        role: {
+            type: String,
+            enum: {
+                values: ["Student"],
+                message: '{VALUE} isnot Supported.'
+            },
+            default: "Student",
+        }
     },
     {
         timestamps: true
     }
 );
+
+
 
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema);
 export default Student;

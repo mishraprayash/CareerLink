@@ -1,8 +1,7 @@
 import connectDB from "@/config/database";
-import Admin from "@/models/admin";
+import Admin from "@/models/Admin";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 export async function POST(request) {
     try {
@@ -23,14 +22,7 @@ export async function POST(request) {
         if (!isPasswordMatched) {
             return NextResponse.json({ msg: "Invalid Creddentials" });
         }
-        const tokenData = {
-            id: adminExist._id,
-            username,
-            email: adminExist.email
-        };
-
-        const { JWT_SECRET } = process.env;
-        const token = jwt.sign(tokenData, JWT_SECRET, { expiresIn: '7d' });
+        const token = Admin.createJWT()
 
         const response = NextResponse.json({ msg: "Successful Login", success: true, token: token }, { status: 200});
 

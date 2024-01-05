@@ -1,4 +1,5 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 const engineeringCategories = [
     "Civil Engineering",
@@ -89,9 +90,20 @@ const companySchema = new mongoose.Schema(
         },
         state: {
             type: String,
-            enum: ["Pending", "Approved"],
+            enum: {
+                values: ["Pending", "Approved"],
+                message: '{VALUE} is not Supported.',
+            },
             default: "Pending"
         },
+        role: {
+            type: String,
+            enum: {
+                values: ["Company"],
+                message: '{VALUE} isnot Supported.'
+            },
+            default: "Company",
+        }
     },
     {
         timestamps: true
@@ -103,6 +115,18 @@ companySchema.pre('save', function (next) {
         return next(new Error("Invalid State"));
     }
 })
+companySchema.methods.createJWT() = function (){
+    const { JWT_SECRET } = process.env;
+    const tokenData = {
+        id: this._id,
+        name:this.name,
+        email: this.email,
+        role: this.role
+    };
+    return jwt.sign(tokenData,JWT_SECRET,{
+        expiresIn:'7d'
+    })
+}
 
 const Company = mongoose.models.Company || mongoose.model('Company', companySchema);
 export default Company;
