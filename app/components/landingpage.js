@@ -1,7 +1,7 @@
 import React from 'react'
-import './landingStyle.css'
+import './styles/landingStyle.css'
 
-const landingPage = () => {
+const LandingPage = () => {
   return (
     <div className='lpage'>
       <div className="content">
@@ -18,7 +18,7 @@ const landingPage = () => {
           <p className="boxp" >career guidance program</p>
           <p className="boxp">training from experts</p>
         </div>
-        <img className="firstimg"src="../../Image/logo.png"/>
+        <img className="firstimg"src="/image/logo.png"/>
         
 
       </div>
@@ -27,7 +27,7 @@ const landingPage = () => {
     <div className="singlecontent">
       <div className="right">
         
-        <img className="otherimg"src="../../Image/collaboration.jpg"/>
+        <img className="otherimg"src="/image/collaboration.jpg"/>
         
         
       </div>
@@ -43,11 +43,11 @@ const landingPage = () => {
     <div className="singlecontent"> <div className="left">
         <h1>Trusted Affiliation</h1>
         <p>"At CareerLink, we stand among the best, backed by partnerships with industry giants like [Notable Company 1], [Notable Company 2], and [Notable Company 3]. Join us for unparalleled opportunities and trusted connections in your journey to success."</p>
-        <img className="extraimg"src="../../Images/tick.png"/>
+        <img className="extraimg"src="/image/tick.png"/>
       </div>
       <div className="right">
         
-        <img className="extraimg"src="../../Images/handshakingz.jpg"/>
+        <img className="extraimg"src="/image/handshakingz.jpg"/>
         
         
       </div>
@@ -60,7 +60,7 @@ const landingPage = () => {
 </div>
 <div className="right">
         
-  <img className="extraimg"src="../../Images/handshaking.jpg"/>
+  <img className="extraimg"src="/image/handshaking.jpg"/>
   
   
 </div>
@@ -71,4 +71,4 @@ const landingPage = () => {
   )
 }
 
-export default landingPage
+export default LandingPage

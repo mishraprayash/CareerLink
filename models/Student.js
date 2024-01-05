@@ -7,9 +7,13 @@ const certificatesSchemaObject = [
             type: String,
             required: true
         },
-        updatedAt: Date.now()
+        updatedAt: {
+            type: Date,
+            default: Date.now
+        }
     }
 ];
+
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -38,5 +42,5 @@ const studentSchema = new mongoose.Schema({
     }
 })
 
-const StudentModel = mongoose.model('Student', studentSchema) || mongoose.models.Student;
+const StudentModel = mongoose.models.Student || mongoose.model('Student', studentSchema);
 export default StudentModel;

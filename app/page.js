@@ -1,10 +1,8 @@
 
 import Image from 'next/image'
-import Explore from './components/Explore/page.jsx'
-import Navbar from './components/Navbar/page.jsx'
-import Profile from './components/Profile/page.jsx'
-import Footer from './components/Footer/page.jsx'
-import LandingPage from './components/landingpage/page.jsx'
+
+
+import LandingPage from './components/landingpage.js'
 
 export default function Home() {
   return (
@@ -12,9 +10,8 @@ export default function Home() {
       <div className='text-center'>
        
       </div>
-      <Navbar/>
       <LandingPage/>
-      <Footer/>
+     
      
     </main>
   )
