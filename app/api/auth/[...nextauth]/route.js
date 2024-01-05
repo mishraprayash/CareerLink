@@ -44,7 +44,7 @@ const handleAuth=NextAuth({
                 await connectToDB();
                 const sessionStudent=await Student.findOne({email:session.user.email})
                 if(sessionStudent){
-                    session.user.id=sessionStudent._idtoString();
+                    session.user.id=sessionStudent._id.toString();
                 }
                } catch (error) {
                 console.error('Error retrieving user from the database:', error);
