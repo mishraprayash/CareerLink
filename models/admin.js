@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 const adminSchema = new mongoose.Schema(
     {
@@ -19,8 +20,17 @@ const adminSchema = new mongoose.Schema(
         },
         state: {
             type: String,
-            enum: ['Pending', 'Approved'],
+            enum: {
+                values: ['Pending', 'Approved'],
+                message: '{VALUE} is not supported.'
+            },
             default: 'Pending'
+        },
+        role: {
+            type: String,
+            enum: { values: ['Admin'], message: '{VALUE} isnot supported.' },
+            default: "Admin"
+
         },
         forgotPasswordToken: String,
         forgotPasswordTokenExpires: Date
@@ -29,15 +39,29 @@ const adminSchema = new mongoose.Schema(
         timestamps: true
     },
 
-
 );
 
 adminSchema.pre('save', function (next) {
+    if (this.role !== "Admin") {
+        return next(new Error("Invalid role assignment during creation of document"));
+    }
     if (this.isNew && this.state !== "Pending") {
         return next(new Error("Invalid state for saving the document"));
     }
     next();
 });
 
+adminSchema.methods.createJWT = function () {
+    const { JWT_SECRET } = process.env;
+    const tokenData = {
+        id: this._id,
+        username: this.username,
+        email: this.email,
+        role: this.role
+    };
+    return jwt.sign(tokenData,JWT_SECRET,{
+        expiresIn:'7d'
+    })
+}
 const Admin = mongoose.models.admin || mongoose.model('admin', adminSchema);
 export default Admin;
