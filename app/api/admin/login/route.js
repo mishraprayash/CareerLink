@@ -10,9 +10,7 @@ export async function POST(request) {
         if (!username || !password) {
             return NextResponse.json({ msg: "Invalid Credentials" });
         }
-        const adminExist = await Admin.findOne({
-            username: username
-        })
+        const adminExist = await Admin.findOne({ $and: [{ username: username }, { state: "Approved" }] })
         if (!adminExist) {
             return NextResponse.json({ msg: "Invalid Creddentials" })
         }
@@ -24,7 +22,7 @@ export async function POST(request) {
         }
         const token = Admin.createJWT()
 
-        const response = NextResponse.json({ msg: "Successful Login", success: true, token: token }, { status: 200});
+        const response = NextResponse.json({ msg: "Successful Login", success: true, token: token }, { status: 200 });
 
         // setting jwt token in cookies
         response.cookies.set("token", token, { httpOnly: true });
