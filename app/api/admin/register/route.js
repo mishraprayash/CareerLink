@@ -8,8 +8,6 @@ export async function POST(request) {
         await connectDB();
         const body = await request.json();
         const { username, email, password } = body;
-        console.log(username, email, password);
-    
         const user = await Admin.findOne({
             $or: [{ email: email }, { username: username }]
         });

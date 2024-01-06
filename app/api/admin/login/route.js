@@ -23,7 +23,6 @@ export async function POST(request) {
         const token = Admin.createJWT()
 
         const response = NextResponse.json({ msg: "Successful Login", success: true, token: token }, { status: 200 });
-
         // setting jwt token in cookies
         response.cookies.set("token", token, { httpOnly: true });
         return response;
