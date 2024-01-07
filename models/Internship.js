@@ -39,8 +39,16 @@ const internshipSchema = new mongoose.Schema(
             default: "Pending",
         },
         company: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Company'
+        },
+        role: {
+            type: String,
+            enum: {
+                values: ["Internship"],
+                message: '{VALUE} isnot Supported.'
+            },
+            default: "Internship",
         },
     },
     {
