@@ -10,21 +10,25 @@ export async function POST(request) {
         if (!username || !password) {
             return NextResponse.json({ msg: "Invalid Credentials" });
         }
-        const adminExist = await Admin.findOne({ $and: [{ username: username }, { state: "Approved" }] })
+        const adminExist = await Admin.findOne({ $and: [{ username: username }, { state: "Approved" }] });
         if (!adminExist) {
-            return NextResponse.json({ msg: "Invalid Creddentials" })
+            return NextResponse.json({ msg: "Admin Doesnot Exist" });
+        }
+        if (!adminExist.verified) {
+            return NextResponse.json({ msg: "Verify your email first" }, { status: 400 });
         }
         // checking if password is macthed.
         const isPasswordMatched = await bcrypt.compare(password, adminExist.password);
 
         if (!isPasswordMatched) {
-            return NextResponse.json({ msg: "Invalid Creddentials" });
+            return NextResponse.json({ msg: "Invalid Login Creddentials" });
         }
-        const token = Admin.createJWT()
-
+        // creating a JWT 
+        const token = adminExist.createJWT()
         const response = NextResponse.json({ msg: "Successful Login", success: true, token: token }, { status: 200 });
-        // setting jwt token in cookies
-        response.cookies.set("token", token, { httpOnly: true });
+
+        // setting jwt token in cookies and sending in response object
+        response.cookies.set("token", token, { httpOnly: true, secure: true });
         return response;
 
     } catch (error) {
