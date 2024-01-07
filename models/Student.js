@@ -1,13 +1,24 @@
 import mongoose from 'mongoose';
 
-const certificatesTypes = {
-    type: Buffer,
-    category: {
+// const certificatesTypes = {
+//     type: Buffer,
+//     category: {
+//         type: String,
+//         required: true
+//     },
+//     updatedAt: Date.now()
+// }
+const socialMediaSchema = new mongoose.Schema({
+    type: {
         type: String,
-        required: true
+        enum: ['linkedin', 'github', 'other'],
+        required: true,
     },
-    updatedAt: Date.now()
-}
+    link: {
+        type: String,
+        required: true,
+    },
+});
 const studentSchema = new mongoose.Schema(
     {
         name: {
@@ -26,9 +37,39 @@ const studentSchema = new mongoose.Schema(
             type: Buffer,
             required: true
         },
-        certificates: {
-            type: [certificatesTypes],
-            default: []
+        gender:{
+            type:String,
+            enum:["Male","Female"]
+        },
+        age:{
+            type:Number,
+        },
+        about:{
+            type:String,
+        },
+        bio:{
+            type:String,
+        },
+        address:{
+            state:{
+                type:String,
+            },
+            district:{
+                type:String,
+            },
+            street:{
+                type:String,
+            }
+        },
+        socialmedia:[socialMediaSchema],
+        certificates: [
+            {
+            data: Buffer,
+            category:String
+            }
+        ],
+        cv:{
+            type:Buffer
         },
         role: {
             type: String,

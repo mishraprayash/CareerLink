@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose"
-
+import { Schema } from "mongoose";
 const internshipSchema = new mongoose.Schema(
     {
         position: {
