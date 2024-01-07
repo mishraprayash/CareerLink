@@ -56,12 +56,13 @@ const internshipSchema = new mongoose.Schema(
     }
 );
 
-internshipSchema.pre('save', function (next) {
+internshipSchema.path('state').validate(function (value) {
     if (this.isNew && this.state !== "Pending") {
-        return next(new Error("Invalid State"));
+        throw new Error("Invalid State");
     }
-    next();
-})
-const Internship = mongoose.models.Internship || mongoose.model('Internship', internshipSchema);
+    return true;
+}, 'There has been attempt to overwrite the default values in the creation process');
 
+
+const Internship = mongoose.models.Internship || mongoose.model('Internship', internshipSchema);
 export default Internship;
