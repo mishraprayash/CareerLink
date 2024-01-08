@@ -88,6 +88,11 @@ const companySchema = new mongoose.Schema(
             type: Number,
             required: [true, "Please provide the found year"]
         },
+        verified: {
+            type: Boolean,
+            required:true,
+            default: false
+        },
         state: {
             type: String,
             enum: {
@@ -103,29 +108,59 @@ const companySchema = new mongoose.Schema(
                 message: '{VALUE} isnot Supported.'
             },
             default: "Company",
-        }
+        },
+        verifyToken: String,
+        verifyTokenExpiration: Date,
+        forgotPasswordToken: String,
+        forgotPasswordTokenExpiration: Date
     },
     {
         timestamps: true
     }
 );
 
-companySchema.pre('save', function (next) {
-    if (this.isNew && this.state !== "Pending") {
-        return next(new Error("Invalid State"));
+// custom validation for handling default values while creating the document for the first time e.g registration
+companySchema.path('state').validate(function (value) {
+    if (this.isNew && value !== 'Pending' && this.verified) {
+        throw new Error("Invalid State");
     }
-})
-companySchema.methods.createJWT() = function (){
+    return true;
+}, 'There has been attempt to overwrite the default values in the registration process');
+
+// creation of JWT 
+companySchema.methods.createJWT = function () {
     const { JWT_SECRET } = process.env;
     const tokenData = {
         id: this._id,
-        name:this.name,
+        name: this.name,
         email: this.email,
         role: this.role
     };
-    return jwt.sign(tokenData,JWT_SECRET,{
-        expiresIn:'7d'
+    return jwt.sign(tokenData, JWT_SECRET, {
+        expiresIn: '7d'
     })
+}
+
+// verifying email method
+companySchema.methods.verifyEmail = function () {
+    try {
+        const emailResponse = sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
+        return emailResponse;
+    } catch (error) {
+        console.error('Error sending verification email:', error);
+        throw new Error('Failed to send verification email');
+    }
+};
+
+// reset password method
+companySchema.methods.resetPassword = function () {
+    try {
+        const emailResponse = sendEmail(this.email, "RESET_PASSWORD", this._id.toString(), this.role);
+        return emailResponse;
+    } catch (error) {
+        console.error('Error sending password reset email:', error);
+        throw new Error('Failed to send password reset email');
+    }
 }
 
 const Company = mongoose.models.Company || mongoose.model('Company', companySchema);

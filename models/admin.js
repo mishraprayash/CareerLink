@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import { sendEmail } from "@/helpers/mailservice/sendEmail";
 
 const adminSchema = new mongoose.Schema(
     {
@@ -11,12 +12,17 @@ const adminSchema = new mongoose.Schema(
         username: {
             type: String,
             required: true,
-            minlength: [8, "The minimum characters must not be less than 8 characters"]
+            minlength: [5, "The minimum characters must not be less than 8 characters"]
         },
         password: {
             type: String,
             required: [true, "Please provide a password"],
             minlength: [8, "Password must not be less than 8 characters"],
+        },
+        verified: {
+            type: Boolean,
+            required: true,
+            default: false
         },
         state: {
             type: String,
@@ -32,8 +38,10 @@ const adminSchema = new mongoose.Schema(
             default: "Admin"
 
         },
+        verifyToken: String,
+        verifyTokenExpiration: Date,
         forgotPasswordToken: String,
-        forgotPasswordTokenExpires: Date
+        forgotPasswordTokenExpiration: Date
     },
     {
         timestamps: true
@@ -41,16 +49,15 @@ const adminSchema = new mongoose.Schema(
 
 );
 
-adminSchema.pre('save', function (next) {
-    if (this.role !== "Admin") {
-        return next(new Error("Invalid role assignment during creation of document"));
+// custom validation for handling default values while creating the document for the first time e.g registration
+adminSchema.path('state').validate(function (value) {
+    if (this.isNew && value !== 'Pending' && this.verified) {
+        throw new Error("Invalid State");
     }
-    if (this.isNew && this.state !== "Pending") {
-        return next(new Error("Invalid state for saving the document"));
-    }
-    next();
-});
+    return true;
+}, 'There has been attempt to overwrite the default values in the registration process');
 
+// creation of JWT 
 adminSchema.methods.createJWT = function () {
     const { JWT_SECRET } = process.env;
     const tokenData = {
@@ -59,9 +66,32 @@ adminSchema.methods.createJWT = function () {
         email: this.email,
         role: this.role
     };
-    return jwt.sign(tokenData,JWT_SECRET,{
-        expiresIn:'7d'
+    return jwt.sign(tokenData, JWT_SECRET, {
+        expiresIn: '7d'
     })
 }
+// verifying email method
+adminSchema.methods.verifyEmail = function () {
+    try {
+        const emailResponse = sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
+        return emailResponse;
+    } catch (error) {
+        console.error('Error sending verification email:', error);
+        throw new Error('Failed to send verification email');
+    }
+
+};
+// reset password method
+adminSchema.methods.resetPassword = function () {
+    try {
+        const emailResponse = sendEmail(this.email, "RESET_PASSWORD", this._id.toString(), this.role);
+        return emailResponse;
+    } catch (error) {
+        console.error('Error sending password reset email:', error);
+        throw new Error('Failed to send password reset email');
+    }
+
+}
+
 const Admin = mongoose.models.admin || mongoose.model('admin', adminSchema);
 export default Admin;

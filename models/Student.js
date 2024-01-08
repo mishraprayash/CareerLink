@@ -37,6 +37,14 @@ const studentSchema = new mongoose.Schema(
             type: Buffer,
             required: true
         },
+        verified: {
+            type: Boolean,
+            required:true,
+            default: false
+        },
+        certificates: {
+            type: [certificatesTypes],
+            default: []
         gender:{
             type:String,
             enum:["Male","Female"]
@@ -84,8 +92,6 @@ const studentSchema = new mongoose.Schema(
         timestamps: true
     }
 );
-
-
 
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema);
 export default Student;
