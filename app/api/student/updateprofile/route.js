@@ -2,12 +2,6 @@ import multer from 'multer'
 import { NextResponse } from 'next/server';
 import Student from '@/models/Student';
 import { connectToDB } from '@/utils/connecttodb';
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 export const middleware = upload.fields([
@@ -87,12 +81,20 @@ export async function POST(request) {
         };
 
         student.certificates.push(certificate);
-        await student.save();
+
+        await student.save();  
+
       } catch (error) {
         console.error('Error processing certificate:', error);
         // Handle the error as needed
       }
     }
+    const socialmedias = formData.getAll('socialmedia');
+    for(const socialmedia of socialmedias ){
+      student.socialmedia.push(socialmedia)
+      await student.save()
+    }
+
 
 
     return NextResponse.json({

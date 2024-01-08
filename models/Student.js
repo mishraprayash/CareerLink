@@ -42,9 +42,6 @@ const studentSchema = new mongoose.Schema(
             required:true,
             default: false
         },
-        certificates: {
-            type: [certificatesTypes],
-            default: []
         gender:{
             type:String,
             enum:["Male","Female"]
