@@ -1,10 +1,11 @@
+import connectDB from "@/config/database";
 import { NextResponse } from "next/server";
-
 import Admin from "@/models/Admin";
 import bcryptjs from "bcryptjs";
 
 export async function POST(request) {
     try {
+        await connectDB();
         const { searchParams } = new URL(request.url);
         const token = searchParams.get('token');
         const { password, confirmPassword } = await request.json();
@@ -12,7 +13,7 @@ export async function POST(request) {
             return NextResponse.json({ msg: "Not a valid password or token" }, { status: 400 });
         }
         if (password !== confirmPassword) {
-            return NextResponse.json({ msg: "Password doesnot match" }, { status: 400 });
+            return NextResponse.json({ msg: "Password and ConfirmPassword doesnot match" }, { status: 400 });
         }
         const admin = await Admin.findOne({
             forgotPasswordToken: token,
@@ -28,5 +29,6 @@ export async function POST(request) {
         return NextResponse.json({ msg: "Password Changed Successfully", }, { status: 200, });
     } catch (error) {
         console.log(error.message);
+        return NextResponse.json({ msg: "Internal Server Error" }, { status: 500 });
     }
 }

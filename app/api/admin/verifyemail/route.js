@@ -1,28 +1,22 @@
 import { NextResponse } from "next/server";
 import Admin from "@/models/Admin";
 import connectDB from "@/config/database";
+import { decodeJWTAdmin } from "@/helpers/validateAdminToken";
+import { handleEmailVerification } from "@/helpers/handleEmailVerification";
 
-export async function GET(request) {
+
+
+// when company wants to verify they will get routed to the
+// https://domain.com/api/company/verifyemail
+
+// this token is hashed db id of a user which we get from the cookies.
+
+export async function POST(request) {
     try {
         await connectDB();
-        const { searchParams } = new URL(request.url);
-        const token = searchParams.get('token')
-        if (!token) {
-            return NextResponse.json({ msg: "No Token" }, { status: 400 });
-        }
-        const admin = await Admin.findOne({
-            verifyToken: token,
-            verifyTokenExpiration: { $gt: Date.now() },
-        });
-        if (!admin) {
-            return NextResponse.json({ msg: "Invalid token", success: false }, { status: 400 });
-        }
-        admin.verified = true;
-        admin.verifyToken = undefined;
-        admin.verifyTokenExpiration = undefined;
-        await admin.save();
-        return NextResponse.redirect('/',request.nextUrl);
+        return handleEmailVerification(request, Admin, decodeJWTAdmin);
     } catch (error) {
+        console.log("Error during email verification", error);
         return NextResponse.json({ error: error.message, }, { status: 500 });
     }
 }

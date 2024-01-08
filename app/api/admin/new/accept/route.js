@@ -1,13 +1,14 @@
 import connectDB from "@/config/database";
 import { NextResponse } from "next/server";
 import { validateModel } from "../validateModel";
-// import { decodeJWT } from "@/helpers/getDatafromtoken";
+
+/*for passing role use the useState hook in the client side to update the state
+id for one(admin or internship or company) that needs to be accepted. 
+Role means ModelType  here.*/
 
 export async function POST(request) {
     try {
         await connectDB();
-        // for passing role use the useState hook in the client side to update the state
-        // id for one that needs to be acceppted and role means Model here.
         const { id, role } = await request.json();
         if (!id || !role) {
             return NextResponse.json({ msg: "Invalid id or role" }, { status: 400 });
