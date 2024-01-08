@@ -43,7 +43,7 @@ const industrySectors = [
 
 const companySchema = new mongoose.Schema(
     {
-        name: {
+        companyName: {
             type: String,
             required: [true, "Please provide your company name"]
         },
@@ -129,14 +129,15 @@ companySchema.path('state').validate(function (value) {
 
 // creation of JWT 
 companySchema.methods.createJWT = function () {
-    const { JWT_SECRET } = process.env;
+    const { JWT_SECRET_COMPANY } = process.env;
     const tokenData = {
         id: this._id,
-        name: this.name,
+        name: this.companyName,
         email: this.email,
-        role: this.role
+        role: this.role,
+        verified:this.verified
     };
-    return jwt.sign(tokenData, JWT_SECRET, {
+    return jwt.sign(tokenData, JWT_SECRET_COMPANY, {
         expiresIn: '7d'
     })
 }
