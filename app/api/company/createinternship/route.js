@@ -14,12 +14,12 @@ export async function POST(request) {
         if (!position || !location || !isRemote || !workTime || !description || !startDate || !endDate) {
             return NextResponse.json({ msg: "Missing Fields" }, { status: 400 });
         }
-        const token = decodeJWTCompany(request);
-        if (!token) {
-            return NextResponse.json({ msg: "Invalid Token" }, { status: 400 });
+        const decodedToken = decodeJWTCompany(request);
+        if (!decodedToken) {
+            return NextResponse.json({ msg: "Token Validation Error"}, { status: 401 });
         }
         if (!token.verified) {
-            return NextResponse.json({ msg: "Compnay Email isnot verified to create the internship" }, { status: 400 });
+            return NextResponse.json({ msg: "Compnay Email isnot verified to create the internship" }, { status: 401 });
         }
         const internship = await Internship.create({
             position, location, isRemote, workTime, description, startDate, endDate,
@@ -28,7 +28,7 @@ export async function POST(request) {
         if (!internship) {
             return NextResponse.json({ msg: "Error creating an internship" }, { status: 400 });
         }
-        return NextResponse.json({ msg: "Internship created" }, { status: 200 });
+        return NextResponse.json({ msg: "Internship created" }, { status: 201 });
 
     } catch (error) {
         return NextResponse.json({ msg: "Internal Server Error" }, { status: 500 });
