@@ -59,14 +59,14 @@ adminSchema.path('state').validate(function (value) {
 
 // creation of JWT 
 adminSchema.methods.createJWT = function () {
-    const { JWT_SECRET } = process.env;
+    const { JWT_SECRET_ADMIN } = process.env;
     const tokenData = {
         id: this._id,
         username: this.username,
         email: this.email,
         role: this.role
     };
-    return jwt.sign(tokenData, JWT_SECRET, {
+    return jwt.sign(tokenData, JWT_SECRET_ADMIN, {
         expiresIn: '7d'
     })
 }
