@@ -95,3 +95,20 @@ adminSchema.methods.resetPassword = function () {
 
 const Admin = mongoose.models.admin || mongoose.model('admin', adminSchema);
 export default Admin;
+
+
+
+
+/*
+When we want a certain documents to be deleted automaticaly we can use the MongoDB TTL feature.
+using mongoose also we can achieve this very easiily
+For exmaple: 
+
+let currentSchema = mongoose.Schema({
+    id: String,
+    name: String,
+    packageId: Number,
+    age: Number
+}, {timestamps: true});
+
+currentSchema.index({createdAt: 1},{expireAfterSeconds: 3600});*/
