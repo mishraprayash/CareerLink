@@ -19,14 +19,20 @@ export async function POST(request) {
             forgotPasswordToken: token,
             forgotPasswordTokenExpiration: { $gt: Date.now() },
         });
+        const checkOldPassword = bcryptjs.compare(password, admin.password);
+        if (checkOldPassword) {
+            return NextResponse.json({ msg: "This password has already been used in the past times. Please provide another password" }, { status: 400 });
+        }
         if (!admin) {
             return NextResponse.json({ msg: "Invalid Token or Token Expired" }, { status: 400 });
         }
         admin.password = await bcryptjs.hash(confirmPassword, 10);
         admin.forgotPasswordToken = undefined;
         admin.forgotPasswordTokenExpiration = undefined;
+        admin.state = "Pending";
         await admin.save();
-        return NextResponse.json({ msg: "Password Changed Successfully", }, { status: 200, });
+        console.log(`Password changed for admin with username: ${admin.username} at ${new Date()}`);
+        return NextResponse.json({ msg: "Password Changed Successfully. Now you need to be again approved by admin to access the admin portal", }, { status: 200, });
     } catch (error) {
         console.log(error.message);
         return NextResponse.json({ msg: "Internal Server Error" }, { status: 500 });

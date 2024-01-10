@@ -1,21 +1,36 @@
+import connectDB from "@/config/database";
+import { NextResponse } from "next/server";
 import Admin from "@/models/Admin";
-import { NextResponse } from "next/server"
 
 export async function POST(request) {
     try {
+        await connectDB();
         const { username, email } = await request.json();
         if (!username && !email) {
             return NextResponse.json({ msg: "Username or email missing" }, { status: 400 });
         }
-        const adminExist = await Admin.findOne({ username: username, email: email });
+        // checking if the user is valid or not.
+        const adminExist = await Admin.findOne({ username: username, email: email, state: "Approved", verified: true });
         if (!adminExist) {
-            return NextResponse.json({ msg: "Admin Not Found" }, { status: 400 });
+            return NextResponse.json({ msg: "Admin Not Verified or Invalid Credentials" }, { status: 400 });
         }
-        const emailResponse = adminExist.verifyEmail();
-        console.log("From API", emailResponse.messageId);
-        return NextResponse.json({ msg: "Verification Link Sent Successfully" }, { status: 200 });
+        // handling reset password
+        handleResetPassword(adminExist);
+
+        return NextResponse.json({ msg: "ResetPassword Link Sent Successfully" }, { status: 200 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ msg: "Internal Server Error" });
+    }
+}
+
+// function for sending a email link to reset password
+async function handleResetPassword(admin) {
+    try {
+        const emailResponse = await admin.resetPassword();
+        console.log(`Password Reset Email Link Sent for ${admin.username} at ${new Date()} with messageId x${emailResponse.messageId}`);
+    } catch (error) {
+        console.log("Admin verification link could not be send.");
+        return NextResponse.json({msg:"Error in Sending Reset Password Link"},{status:404});
     }
 }

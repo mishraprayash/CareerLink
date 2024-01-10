@@ -14,9 +14,11 @@ export async function POST(request) {
         if (!adminExist) {
             return NextResponse.json({ msg: "Admin Doesnot Exist" });
         }
-        if (!adminExist.verified) {
-            return NextResponse.json({ msg: "Verify your email first" }, { status: 400 });
-        }
+        // if (!adminExist.verified) {
+        //     const emailResponse = adminExist.verifyEmail();
+        //     console.log(emailResponse);
+        //     return NextResponse.json({ msg: "Verify your email first" }, { status: 400 });
+        // }
         // checking if password is macthed.
         const isPasswordMatched = await bcrypt.compare(password, adminExist.password);
 

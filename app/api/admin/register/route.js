@@ -25,8 +25,9 @@ export async function POST(request) {
             );
         }
         // send a verification link
-        const emailResponse = await savedAdmin.verifyEmail();
-        console.log("MessageId for emailResponse",emailResponse.messageId);
+        sendVerificationEmail(savedAdmin);
+
+
         return NextResponse.json(
             { msg: "Admin Applied for registration and verification link has been sent to the email" },
             { status: 201 }
@@ -38,5 +39,16 @@ export async function POST(request) {
             { msg: "Error occured during registration" },
             { status: 400 }
         );
+    }
+}
+
+
+async function sendVerificationEmail(admin) {
+    try {
+        const emailResponse = await admin.verifyEmail();
+        console.log(`Verification Email Link Sent for ${admin.username} at ${new Date()} with messageId x${emailResponse.messageId}`);
+    } catch (error) {
+        console.log("Admin verification link could not be send.");
+
     }
 }
