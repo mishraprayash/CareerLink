@@ -9,7 +9,7 @@ export async function GET(request) {
         if (!allInternships) {
             return NextResponse.json({ msg: "No Internship available" }, { status: 200 })
         }
-        return NextResponse.json({ Internship: allInternships }, { status: 200 })
+        return NextResponse.json({ data: allInternships }, { status: 200 })
     } catch (error) {
         return NextResponse.json({ msg: "Internal Server Error" }, { status: 500 })
     }
