@@ -11,7 +11,7 @@
 .lpage{
   background-color: #004aad;
   background-image: linear-gradient(90deg, #004aad, #cb6ce6);
-  padding:180px 50px 300px 50px;
+  padding:100px 50px 300px 50px;
 }
 .content{
   display: flex;
@@ -37,7 +37,7 @@
     border: solid 1px rgb(216, 33, 51);
     background: linear-gradient(to right, #000000, #3533cd); 
     color: #fffeff;
-   
+   padding: 4px 8px;
   }
 
 .right{
