@@ -66,8 +66,15 @@ const Navbar = () => {
                 </button>
               ))
             }
+             <Link href='/signupCompany' >
+              <button className="registerbtn"> COMPONY REGISTER</button>
+              </Link>
+         
+            <Link href='/loginCompany' >
             <button className="loginbtn">COMPONY LOGIN</button>
-            <button className="registerbtn"> COMPONY REGISTER</button>
+              </Link>
+             
+          
 
           </div>
           )
