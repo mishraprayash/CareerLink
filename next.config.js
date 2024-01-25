@@ -1,9 +1,9 @@
-/** @type {import('next').NextConfig} */
-// next.config.js
+// /** @type {import('next').NextConfig} */
+// // next.config.js
 
-module.exports = {
-    images: {
-      domains: ['lh3.googleusercontent.com'],
-    },
-  };
+// module.exports = {
+//     images: {
+    
+//     },
+//   };
   

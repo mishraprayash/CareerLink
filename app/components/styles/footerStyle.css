@@ -7,15 +7,16 @@
 }
  
 .footerpart{
- 
-  background-color:black;
-  color: white;
+  /* background-color: #0F1035;  */
+  background-color: #7FC7D9;
+  background-image: linear-gradient(90deg,   #7FC7D9, #365486);  
+  color: #0F1035;
   height: 250px;
   width: 100%;
   display: flex;
   flex-direction: row;
   z-index: 10;
-  border:saddlebrown 1px solid;
+  /* border:saddlebrown 1px solid; */
 position:relative;
 margin-bottom: 0;
 

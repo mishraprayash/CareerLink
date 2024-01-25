@@ -11,6 +11,7 @@ const handleAuth = NextAuth({
             clientSecret: process.env.CLIENT_SECRET,
         })
     ],
+    secret: process.env.NEXTAUTH_SECRET, 
     callbacks: {
         async signIn({ profile, account, user }) {
             try {

@@ -5,7 +5,7 @@
 }
 body {
   padding: 0;
-  margin-top: 70px;
+  /* margin-top: 70px; */
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
  
@@ -36,19 +36,29 @@ a:hover {
 }
 .left {
   height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7FC7D9;
 }
 .left,
 .right {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #7FC7D9;
 }
-.left {
+.left div.makecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 70%;
+  border-radius: 12px;
   background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/logo.png");
   background-size: cover;
 }
-.left .copy {
+.left .makecenter .copy {
   text-align: center;
   --webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -66,7 +76,10 @@ a:hover {
   font-size: 1rem;
 }
 .right form {
-  width: 330px;
+  width: 70%;
+  background-color: #DCF2F1;
+  padding: 8px;
+  border-radius: 12px;
 }
 form input[type="email"],
 form input[type="password"] {
@@ -175,11 +188,18 @@ label {
     display: flex;
     width: 50%;
     height: auto;
+    background-image: linear-gradient(90deg,  #7FC7D9,#365486 );  
+  }.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #7FC7D9; */
+    background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);  
   }
-  .left {
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.993)), url("/image/logo.png");
+  .left .makecenter{
+    background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/logo.png");
   }
-  .left p {
-    color: aliceblue;
+  .left p,.left h1 {
+    color: #0F1035;
   }
 }

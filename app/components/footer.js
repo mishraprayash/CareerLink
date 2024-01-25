@@ -28,9 +28,9 @@ const Footer = () => {
 <p>explore opportunities</p></div>
     <div className="footer3"><h2>SOCIAL</h2>
     <div className=" flex justify-center">
-    <FontAwesomeIcon icon={faFacebook} size="xs" className="h-12 p-2  text-blue-800" />
-    <FontAwesomeIcon icon={faLinkedin} size="xs" className="h-12 p-2 text-blue-600" />
-    <FontAwesomeIcon icon={faInstagram} size="xs" className="h-12 p-2 text-blue-600" />
+    <FontAwesomeIcon icon={faFacebook} size="xs" className="h-12 p-2  text-[#0F1035]" />
+    <FontAwesomeIcon icon={faLinkedin} size="xs" className="h-12 p-2 text-[#0F1035]" />
+    <FontAwesomeIcon icon={faInstagram} size="xs" className="h-12 p-2 text-[#0F1035]" />
     </div>
    
      </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import './styles/landingStyle.css'
-
+import Image from 'next/image'
 const LandingPage = () => {
   return (
     <div className='lpage'>
@@ -18,7 +18,9 @@ const LandingPage = () => {
           <p className="boxp" >career guidance program</p>
           <p className="boxp">training from experts</p>
         </div>
-        <img className="firstimg"src="/image/logo.png"/>
+        {/* <img className="firstimg"src="/image/logo.png"/> */}
+        <Image src="/image/logo.png" alt="logo" className='firstimg' width={500} height={300} />
+    
         
 
       </div>
@@ -27,9 +29,8 @@ const LandingPage = () => {
     <div className="singlecontent">
       <div className="right">
         
-        <img className="otherimg"src="/image/collaboration.jpg"/>
-        
-        
+        {/* <img className="otherimg"src="/collaboration.jpg"/> */}
+        <Image className="otherimg" src="/image/collaboration.jpg" width={400} height={400} />       
       </div>
 
       <div className="left">
@@ -43,12 +44,14 @@ const LandingPage = () => {
     <div className="singlecontent"> <div className="left">
         <h1>Trusted Affiliation</h1>
         <p>"At CareerLink, we stand among the best, backed by partnerships with industry giants like [Notable Company 1], [Notable Company 2], and [Notable Company 3]. Join us for unparalleled opportunities and trusted connections in your journey to success."</p>
-        <img className="extraimg"src="/image/tick.png"/>
+        {/* <img className="extraimg"src="/image/tick.png"/> */}
+        <Image className="extraimg" src="/image/tick.png" alt="tick" width={500} height={300} />
+    
       </div>
       <div className="right">
         
-        <img className="extraimg"src="/image/handshakingz.jpg"/>
-        
+        {/* <img className="extraimg"src="/image/handshakingz.jpg"/> */}
+        <Image className="extraimg" src="/image/handshakingz.jpg" alt="handshaking" width={500} height={300} /> 
         
       </div>
     </div>
@@ -60,7 +63,8 @@ const LandingPage = () => {
 </div>
 <div className="right">
         
-  <img className="extraimg"src="/image/handshaking.jpg"/>
+  {/* <img className="extraimg"src="/image/handshaking.jpg"/> */}
+  <Image className="extraimg" src="/image/handshaking.jpg" alt="handshaking" width={500} height={300} />
   
   
 </div>

@@ -7,10 +7,13 @@ const page = () => {
     <div class="body">
       <div class="split-screen">
         <div class="left">
+          <div className="makecenter">
+
           <section class="copy">
             <h1>Welcome To</h1>
             <p>CareerLink</p>
           </section>
+          </div>
         </div>
         <div class="right">
           <form>

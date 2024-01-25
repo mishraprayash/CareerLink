@@ -9,8 +9,8 @@
   color:blueviolet
 }
 .lpage{
-  background-color: #004aad;
-  background-image: linear-gradient(90deg, #004aad, #cb6ce6);
+  background-color: #7FC7D9;
+  background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);  
   padding:100px 50px 300px 50px;
 }
 .content{
@@ -64,11 +64,12 @@
     margin-bottom: -100px;
   }
 .box{
-  height: 115px;
+  height: 155px;
   width: 200px;
-  background: white;
+  background: #DCF2F1;
+  color:  #0F1035;
   position: absolute;
-  bottom: -50px;
+ bottom: 10%;
   right: 0;
   border-radius: 10px;
   z-index: 2;

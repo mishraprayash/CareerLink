@@ -18,10 +18,13 @@ function Login() {
   return (
     <div class="split-screen">
       <div class="left">
+        <div className="makecenter">
+
         <section class="copy">
           <h1>Welcome Back To</h1>
           <p>CareerLink</p>
         </section>
+        </div>
       </div>
 
       <div class="right">
