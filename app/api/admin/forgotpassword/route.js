@@ -1,4 +1,5 @@
 import Admin from "@/models/Admin";
+
 import { NextResponse } from "next/server"
 
 export async function POST(request) {
