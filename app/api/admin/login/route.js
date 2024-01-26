@@ -1,5 +1,5 @@
 import connectDB from "@/config/database";
-import Admin from "@/models/admin";
+import Admin from "@/models/Admin";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 

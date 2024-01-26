@@ -1,6 +1,6 @@
 import connectDB from "@/config/database";
 import { NextResponse } from "next/server";
-import Admin from "@/models/admin";
+import Admin from "@/models/Admin";
 import bcrypt from "bcryptjs";
 export async function POST(request) {
     try {
