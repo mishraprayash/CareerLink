@@ -33,20 +33,21 @@ a:hover {
 .split-screen {
   display: flex;
   flex-direction: column;
+  background-color: #F2F4F7;
 }
 .left {
   height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #7FC7D9;
+  /* background-color: #7FC7D9; */
 }
 .left,
 .right {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #7FC7D9;
+  /* background-color: #7FC7D9; */
 }
 .left div.makecenter {
   display: flex;
@@ -179,6 +180,7 @@ label {
   .split-screen {
     flex-direction: row;
     height: 100vh;
+    background-color: #F2F4F7;
   }
   h1 {
     color: aliceblue;
@@ -188,13 +190,13 @@ label {
     display: flex;
     width: 50%;
     height: auto;
-    background-image: linear-gradient(90deg,  #7FC7D9,#365486 );  
+    /* background-image: linear-gradient(90deg,  #7FC7D9,#365486 );   */
   }.left {
     display: flex;
     justify-content: center;
     align-items: center;
     /* background-color: #7FC7D9; */
-    background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);  
+    /* background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);   */
   }
   .left .makecenter{
     background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/logo.png");

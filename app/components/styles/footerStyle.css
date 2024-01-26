@@ -8,8 +8,9 @@
  
 .footerpart{
   /* background-color: #0F1035;  */
-  background-color: #7FC7D9;
-  background-image: linear-gradient(90deg,   #7FC7D9, #365486);  
+  /* background-color: #7FC7D9;
+  background-image: linear-gradient(90deg,   #7FC7D9, #365486);   */
+  background-color: #DBE7C9;
   color: #0F1035;
   height: 250px;
   width: 100%;
@@ -43,7 +44,10 @@ text-align: center;
   flex:1;
   
 }
-
+.header{
+  color: #108A00;
+  font-size: large;
+}
 .footer3{
   flex: 1;
   

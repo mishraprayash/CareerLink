@@ -9,7 +9,7 @@ const Footer = () => {
    
        <div className="footerpart">
     <div className="footer1">
-      <h2>ABOUT US</h2>
+      <h2 className="header">ABOUT US</h2>
       <div className="college">
         <div className="">
           <Image className=" ml-12" src="/image/campuslogo.png" width={260} height={130}/></div>
@@ -22,11 +22,11 @@ const Footer = () => {
        <p>E-mail : info@ioepas.edu.np</p>
       </div>
     </div>
-    <div className="footer2"><h2>COMPANIES</h2>
+    <div className="footer2"><h2 className="header">COMPANIES</h2>
     <p>partnership</p>
   <p>career</p>
 <p>explore opportunities</p></div>
-    <div className="footer3"><h2>SOCIAL</h2>
+    <div className="footer3"><h2 className="header">SOCIAL</h2>
     <div className=" flex justify-center">
     <FontAwesomeIcon icon={faFacebook} size="xs" className="h-12 p-2  text-[#0F1035]" />
     <FontAwesomeIcon icon={faLinkedin} size="xs" className="h-12 p-2 text-[#0F1035]" />

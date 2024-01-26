@@ -9,15 +9,18 @@
   color:blueviolet
 }
 .lpage{
-  background-color: #7FC7D9;
-  background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);  
+  /* background-color: #7FC7D9;
+  background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);   */
+  background-color: #F2F4F7;
+  color: black;
   padding:100px 50px 300px 50px;
 }
 .content{
   display: flex;
   flex-direction: column;
   
-  color: #ced1f4;
+  /* color: #ced1f4; */
+  color:black;
   row-gap: 80px;
 }
 .singlecontent{
@@ -31,15 +34,21 @@
 .left{
   flex:1;
   padding: 20px;
+  background-color: #DBE7C9;
+  border-radius: 8px;
   }
   .forexplorebtn {
    margin: 30px auto ;
     border: solid 1px rgb(216, 33, 51);
-    background: linear-gradient(to right, #000000, #3533cd); 
+    /* background: linear-gradient(to right, #000000, #3533cd);  */
+    background-color: #108A00;
     color: #fffeff;
    padding: 4px 8px;
   }
-
+.header{
+  color: #108A00;
+  font-size: large;
+}
 .right{
   position: relative;
   flex:1;
