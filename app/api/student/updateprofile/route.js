@@ -2,10 +2,6 @@ import multer from 'multer'
 import { NextResponse } from 'next/server';
 import Student from '@/models/Student';
 import { connectToDB } from '@/utils/connecttodb';
-<<<<<<< HEAD
-=======
-
->>>>>>> bibek
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 export const middleware = upload.fields([
