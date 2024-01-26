@@ -1,0 +1,112 @@
+
+.one{
+    /* min-h-screen bg-gray-100 flex justify-center items-center px-20 */
+    background-color: #F2F4F7;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+   padding: 10px ;
+    
+
+
+}
+/* .two{space-y-10} */
+/* .two{
+    margin-top: 40px;
+}
+.three{
+    /* text-center mt-10 text-4xl font-bold */
+    /* text-align: center;
+    margin-top: 40px;
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: bold;} */
+
+.four{
+    /* four flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500 */
+display: flex;
+align-items: center;
+/* padding: 50px; */
+
+background-color: #DBE7C9;
+border-radius: 20px;
+box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+}
+.five
+ {/*flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg} */
+
+display: flex;
+align-items: center;
+height: 60px;
+padding: 16px;
+width:371px ;
+margin-left: 0px;
+border-radius: 10px;
+background-color: #DCF2F1;
+}
+
+/* .six{  
+     h-6 w-6 opacity-30 
+    height: 24px;
+    width:24px ;
+    opacity: 0.3;
+    
+} */
+.six{
+    color: gray;
+}
+.seven{
+
+    /*  seven bg-gray-100 outline-none */
+   
+    font-size: 20px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+   border-radius: 10px;
+    background-color: rgb(211, 204, 204);
+     width: 400px; 
+    height: 40px;
+
+   
+}
+.seven::placeholder{
+    font-size: 20px;
+    color: black;
+}
+
+/* .eight{
+    /* flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer */
+    /* display: flex;
+    padding: 16px 12px;
+    border-radius: 12px;
+    color: rgb(107,114,128);
+    font-weight: 600;
+    cursor: pointer;} */
+
+
+    /*  h-6 w-6 */
+    /* height: 24px;
+    width: 24px; */
+
+.ten{
+background-color: #108A00;
+padding: 5px 5px;
+color: white;
+font-weight: 600;
+border-radius: 18px;
+width: 100px;
+margin: auto 8px;
+
+    /* bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer */
+}
+.eleven{
+   font-size: 18px;
+    margin-left: 8px;
+}
+.nine{
+    margin-left: 5px;
+    margin-right: 5px;
+ 
+    color: gray
+}

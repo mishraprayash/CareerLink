@@ -1,0 +1,31 @@
+*{
+   
+   box-sizing:border-box;
+}
+  .main{
+   margin: 0;
+   padding: 0;
+   box-sizing:border-box;
+   background-color: #F2F4F7;
+ }
+  .aCard{
+   display: flex;
+   flex-direction: row;
+   margin: 0px 90px;
+   height: 500px;
+width: auto;
+
+padding: 50px;
+background-color: #DCF2F1;
+border-radius: 12px;
+border:solid 1px rgb(32, 32, 80);
+}
+.left{
+
+   width: 600px;
+   display: flex;
+   flex-direction: column;
+}
+.right{
+   flex: 1;
+}

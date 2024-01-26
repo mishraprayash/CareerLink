@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
-// const certificatesTypes = {
-//     type: Buffer,
-//     category: {
-//         type: String,
-//         required: true
-//     },
-//     updatedAt: Date.now()
-// }
+const certificatesTypes = {
+    type: Buffer,
+    category: {
+        type: String,
+        required: true
+    },
+    updatedAt: Date.now()
+}
 const socialMediaSchema = new mongoose.Schema({
     type: {
         type: String,
@@ -42,6 +42,7 @@ const studentSchema = new mongoose.Schema(
             required:true,
             default: false
         },
+       
         gender:{
             type:String,
             enum:["Male","Female"]
