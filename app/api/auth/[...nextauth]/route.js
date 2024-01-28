@@ -67,4 +67,4 @@ const handleAuth = NextAuth({
     }
 })
 
-export { handleAuth as GET, handleAuth as POST }
+export { handleAuth as GET, handleAuth as POST ,handleAuth}

@@ -19,6 +19,11 @@ const internshipSchema = new mongoose.Schema(
             type: String,
             enum: ['Full-Time', 'Part-Time', "Hybrid"]
         },
+        noofVacancy:{
+            type:Number,
+            required:[true,"How many interns?"]
+        },
+        skillsRequired:[{type:String}],
         description: {
             type: String,
             minlength: 50,
@@ -43,6 +48,12 @@ const internshipSchema = new mongoose.Schema(
             ref: 'Company',
             required: true
         },
+        applicants:[
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Student',
+            }
+        ],
         role: {
             type: String,
             enum: {

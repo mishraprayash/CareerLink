@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 export default async function connectDB() {
     try {
-        if (!process.env.DATABASE_LOCAL) {
+        if (!process.env.MONGO_URL) {
             throw new Error('Database connection string is not provided.');
         }
-        await mongoose.connect(process.env.DATABASE_LOCAL,{
+        await mongoose.connect(process.env.MONGO_URL,{
             dbName:"CareerLink"
         });
 

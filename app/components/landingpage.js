@@ -19,7 +19,7 @@ const LandingPage = () => {
           <p className="boxp">training from experts</p>
         </div>
         {/* <img className="firstimg"src="/image/logo.png"/> */}
-        <Image src="/image/logo.png" alt="logo" className='firstimg' width={500} height={300} />
+        <Image src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/tuzqbpgoquw2pg6ytgon.png" alt="logo" className='firstimg' width={500} height={300} />
     
         
 
@@ -30,7 +30,7 @@ const LandingPage = () => {
       <div className="right">
         
         {/* <img className="otherimg"src="/collaboration.jpg"/> */}
-        <Image className="otherimg" src="/image/collaboration.jpg" width={400} height={400} />       
+        <Image className="otherimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/kgd5nkourxfvehtwlsiq.jpg" width={400} height={400} />       
       </div>
 
       <div className="left">
@@ -45,13 +45,13 @@ const LandingPage = () => {
         <h1 className='header'>Trusted Affiliation</h1>
         <p>"At CareerLink, we stand among the best, backed by partnerships with industry giants like [Notable Company 1], [Notable Company 2], and [Notable Company 3]. Join us for unparalleled opportunities and trusted connections in your journey to success."</p>
         {/* <img className="extraimg"src="/image/tick.png"/> */}
-        <Image className="extraimg" src="/image/tick.png" alt="tick" width={500} height={300} />
+        <Image className="extraimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/qbkeuuktrhlywc8qzzxo.png" alt="tick" width={500} height={300} />
     
       </div>
       <div className="right">
-        
+      
         {/* <img className="extraimg"src="/image/handshakingz.jpg"/> */}
-        <Image className="extraimg" src="/image/handshakingz.jpg" alt="handshaking" width={500} height={300} /> 
+        <Image className="extraimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/ab62m6gftdbevhixphda.jpg" alt="handshaking" width={500} height={300} /> 
         
       </div>
     </div>
@@ -64,7 +64,7 @@ const LandingPage = () => {
 <div className="right">
         
   {/* <img className="extraimg"src="/image/handshaking.jpg"/> */}
-  <Image className="extraimg" src="/image/handshaking.jpg" alt="handshaking" width={500} height={300} />
+  <Image className="extraimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/caougtcgbdotesnx1e8r.jpg" alt="handshaking" width={500} height={300} />
   
   
 </div>

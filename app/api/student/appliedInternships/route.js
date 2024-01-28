@@ -3,25 +3,34 @@ import { connectToDB } from '@/utils/connecttodb';
 import Internship from "@/models/Internship";
 import { getServerSession } from "next-auth/next"
 import { handleAuth } from "../../auth/[...nextauth]/route";
-import { decodeJWTCompany } from "@/helpers/validateCompanyToken";
-import { decodeJWTAdmin } from "@/helpers/validateAdminToken";
+import Student from "@/models/Student";
 export async function GET(request) {
     try {
         await connectToDB();
        
     const session = await getServerSession(handleAuth)
-    const decodedTokenCompany = decodeJWTCompany(request);
-    const decodedTokenAdmin=decodeJWTAdmin(request)
-    if(!session && !decodedTokenCompany && !decodedTokenAdmin){
+    if(!session){
      return NextResponse.json({
        msg: "You must be signed in to view interships on this page.",
      },{status:401})
    }
-        const allInternships = await Internship.find({state: "Approved" });
+   const studentEmail=session.user.email;
+   const student=await Student.find({email:studentEmail,verified:true})
+   const studentId=student._id;
 
+        const Internships = await Internship.find({
+            applicants: { $in: [mongoose.Types.ObjectId(studentId)] },
+            state: "Approved"
+    });
+    if (!Internships || Internships.length === 0) {
+        return NextResponse.json({
+            msg: 'No internships found for the specified student',
+        }, { status: 200 });
+      
+      }
         return NextResponse.json({
             msg: 'Internships fetched successfully',
-            Internships: allInternships
+            Internships: Internships
         }, { status: 200 });
     } catch (error) {
         console.log(error);

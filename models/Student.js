@@ -1,13 +1,8 @@
 import mongoose from 'mongoose';
-
-const certificatesTypes = {
-    type: Buffer,
-    category: {
-        type: String,
-        required: true
-    },
-    updatedAt: Date.now()
-}
+const photoModel=new mongoose.Schema({
+    public_id:String,
+    secure_url:String
+});
 const socialMediaSchema = new mongoose.Schema({
     type: {
         type: String,
@@ -33,10 +28,11 @@ const studentSchema = new mongoose.Schema(
             match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Provide valid email'],
             unique: true
         },
-        profilePicture: {
-            type: Buffer,
-            required: true
-        },
+         profilePicture: photoModel
+        ,
+        cv:photoModel,
+        certificates: [photoModel],
+        
         verified: {
             type: Boolean,
             required:true,
@@ -68,15 +64,6 @@ const studentSchema = new mongoose.Schema(
             }
         },
         socialmedia:[socialMediaSchema],
-        certificates: [
-            {
-            data: Buffer,
-            category:String
-            }
-        ],
-        cv:{
-            type:Buffer
-        },
         role: {
             type: String,
             enum: {
@@ -88,8 +75,7 @@ const studentSchema = new mongoose.Schema(
     },
     {
         timestamps: true
-    }
-);
-
+    })
+    
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema);
 export default Student;

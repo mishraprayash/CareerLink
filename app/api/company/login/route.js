@@ -24,14 +24,13 @@ export async function POST(request) {
             return NextResponse.json({ msg: "Invalid Creddentials" });
         }
 
-        const token = Company.createJWT();
-
-        const response = NextResponse.json({ msg: "Successful Login"}, { status: 200 });
+        const token = companyExist.createJWT();
+        const response = NextResponse.json({ msg: "Successful Login",redirectUrl:"/api/company/updateprofile"}, { status: 200 });
         // setting jwt token in cookies
         response.cookies.set("token", token, { httpOnly: true });
         return response;
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ msg: "Internal Server Error" },{status:500});
+        return NextResponse.json({ msg: "Internal Server Error" ,error:error},{status:500});
     }
 }

@@ -68,16 +68,23 @@ const companySchema = new mongoose.Schema(
                 enum: industrySectors
             }
         },
+        companyDescription:{
+            type:String
+        },
+        phoneNO:{
+            type:Number,
+            match:[/^(98|97)\d{8}$/]
+        },
         logo: {
             type: Buffer,
-            required: [true, "Please provide the company logo"]
+            // required: [true, "Please provide the company logo"]
         },
         registrationFile: {
-            data: {
+            
                 type: Buffer,
-                required: [true, "Please provide the registrationn file of your company"],
+                // required: [true, "Please provide the registrationn file of your company"],
                 unique: true
-            }
+            
         },
         address: {
             city: String,
@@ -86,11 +93,11 @@ const companySchema = new mongoose.Schema(
         },
         foundYear: {
             type: Number,
-            required: [true, "Please provide the found year"]
+            // required: [true, "Please provide the found year"]
         },
         verified: {
             type: Boolean,
-            required:true,
+            // required:true,
             default: false
         },
         state: {

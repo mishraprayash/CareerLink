@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth/next"
 import { handleAuth } from "../../auth/[...nextauth]/route";
 import { decodeJWTCompany } from "@/helpers/validateCompanyToken";
 import { decodeJWTAdmin } from "@/helpers/validateAdminToken";
-export async function GET(request) {
+export async function GET(request,{params}) {
     try {
         await connectToDB();
        
@@ -17,7 +17,7 @@ export async function GET(request) {
        msg: "You must be signed in to view interships on this page.",
      },{status:401})
    }
-        const allInternships = await Internship.find({state: "Approved" });
+        const allInternships = await Internship.find({state: "Approved" ,_id:params.Id});
 
         return NextResponse.json({
             msg: 'Internships fetched successfully',

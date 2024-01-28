@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <div className="nav">
       <div className="logo">
-        <Image className="logoimg" src="/image/logo.png" width={40} height={40} />
+        <Image className="logoimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/tuzqbpgoquw2pg6ytgon.png" width={40} height={40} />
       </div>
       <div className="name">CareerLink</div>
       <div className="forbutton flex ">

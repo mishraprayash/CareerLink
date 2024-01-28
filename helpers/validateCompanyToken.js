@@ -7,7 +7,7 @@ export async function decodeJWTCompany(request) {
             return false;
         }
         const { JWT_SECRET_COMPANY } = process.env;
-        const decodedToken = jwt.verify(token, JWT_SECRET_COMPANY);
+        const decodedToken = jwt.verify(token.value, JWT_SECRET_COMPANY);
         if(!decodedToken){
             return false;
         }

@@ -1,54 +1,116 @@
-import multer from 'multer'
-import { NextResponse } from 'next/server';
-import Student from '@/models/Student';
-import { connectToDB } from '@/utils/connecttodb';
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-export const middleware = upload.fields([
-  { name: 'profilePicture', maxCount: 1 },
-  { name: 'certificates', maxCount: 10 }, // Adjust maxCount as needed
-]);
+import { getServerSession } from "next-auth/next"
+import { handleAuth } from "../../auth/[...nextauth]/route";
+
+import path from 'path'
+import fs from "fs/promises"
+import Student from "@/models/Student";
+import { NextResponse } from "next/server";
+import connectDB from '@/config/database';
+import { v2 as cloudinary } from 'cloudinary';
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_APIKEY,
+  api_secret: process.env.CLOUD_SECRET
+});
+const savetolocal = async (files, id) => {
+
+
+  const uploadPromises = files.map(async (file) => {
+    try {
+      const data = await file.arrayBuffer();
+      const buffer = Buffer.from(data);
+      // const id = uuidv4();
+      const name = file.name.split('.')[0];
+      const ext = file.type.split('/')[1];
+      const uploadDir = path.join(
+        'D:\\e-folder\\New Volume\\projects\\next.js\\CareerLink-Minor-project',
+        'public',
+        
+        `${id}-${name}.${ext}`
+      );
+
+      // Await the writeFile call
+      await fs.writeFile(uploadDir, buffer);
+      return { filepath: uploadDir, filename: name, id: id }
+    } catch (error) {
+      console.error('Error processing file:', error);
+    }
+  });
+
+  // Wait for all promises to resolve
+  return await Promise.all(uploadPromises);
+};
+
+const saveonefiletolocal = async (file, id) => {
+  try {
+    const data = await file.arrayBuffer();
+    const buffer = Buffer.from(data);
+    const name = file.name.split('.')[0];
+    const ext = file.type.split('/')[1];
+    const uploadDir = path.join(
+      'D:\\e-folder\\New Volume\\projects\\next.js\\career-backend',
+      'public',
+      `${id}-${name}.${ext}`
+    );
+
+    // Await the writeFile call
+    await fs.writeFile(uploadDir, buffer);
+    return { filepath: uploadDir, filename: name, id: id };
+  } catch (error) {
+    console.error('Error processing file:', error);
+    return []; // or handle the error appropriately
+  }
+};
+
+
+const uploadtoCloudinary = async (files) => {
+  const multiplefilePromise = files.map((file) => {
+    return cloudinary.uploader.upload(file.filepath, { folder: `Careerlink/${file.id}` });
+  });
+  return await Promise.all(multiplefilePromise);
+}
+const uploadToCloudinary = async (file) => {
+  try {
+    const result = await cloudinary.uploader.upload(file.filepath, { folder: `Careerlink/${file.id}` });
+    return result;
+  } catch (error) {
+    // Handle error appropriately (e.g., log or throw)
+    console.error('Error uploading to Cloudinary:', error);
+    throw error;
+  }
+};
 
 
 export async function POST(request) {
   try {
-    await connectToDB();
+   
+    const session = await getServerSession(handleAuth)
+   if(!session){
+    return NextResponse.json({
+      msg: "You must be signed in to view the protected content on this page.",
+    },{status:401})
+  }
+  const studentEmail=session.user.email;
+    await connectDB()
+
+
     const formData = await request.formData()
+    console.log(formData)
     const nonFileEntries = Array.from(formData.entries())
       .filter(([key, value]) => !(value instanceof File));
 
     // Destructure the non-file entries
     const nonFileData = Object.fromEntries(nonFileEntries);
-    console.log(nonFileData)
-    const { email, gender, age, about, bio, state, district, street, } = nonFileData
+    // console.log(nonFileData)
+    const { name, gender, age, about, bio, state, district, street, } = nonFileData
+    if (!name || !gender || !age || !about || !bio || !state||!district||!street) {
+      return NextResponse.json({ msg: "Missing Fields" }, { status: 400 });
+  }
 
-    const profile = formData.get('profilePicture')
-    // Convert the file to a Buffer
-    const bytes = await profile.arrayBuffer()
-    const profilebuffer = Buffer.from(bytes)
-    console.log(profilebuffer)
-
-
-
-    if (!profile.type.startsWith('image')) {
-      throw new BadRequestError('Please Upload Image');
-    }
-    if (profile.size > 500 * 1024) {
-      throw new Error('Please upload image smaller 1MB');
-    }
-
-
-    const cvupload = formData.get('cv')
-    const cvbytes = await cvupload.arrayBuffer()
-    const cvbuffer = Buffer.from(cvbytes)
-    console.log(cvbuffer)
-
-
-
-    // Update the existing student profile or create a new one
     const student = await Student.findOneAndUpdate(
-      { email },
+      { email:studentEmail },
       {
+        name,
         gender,
         age,
         about,
@@ -58,53 +120,115 @@ export async function POST(request) {
           district,
           street,
         },
-        profilePicture: profilebuffer,
-        cv: cvbuffer
-
       },
       { new: true, runValidators: true }
     );
-    // console.log('Student Profile Updated:', student);
-
-    const certificates = formData.getAll('certificates');
-
-
-    for (const file of certificates) {
-      console.log(file)
-      try {
-        const certificateBytes = await file.arrayBuffer();
-        const certificateBuffer = Buffer.from(certificateBytes);
-
-        const certificate = {
-          data: certificateBuffer,
-          category: file.type,
-        };
-
-        student.certificates.push(certificate);
-
-        await student.save();  
-
-      } catch (error) {
-        console.error('Error processing certificate:', error);
-        // Handle the error as needed
-      }
-    }
+if(!student){
+  return NextResponse.json({
+    msg: "email not found"
+  }, { status: 400 });
+}
     const socialmedias = formData.getAll('socialmedia');
-    for(const socialmedia of socialmedias ){
-      student.socialmedia.push(socialmedia)
-      await student.save()
+    for (const socialmediaString of socialmedias) {
+      // Parse the JSON string into an array of objects
+      const socialmediaArray = JSON.parse(socialmediaString);
+    
+      // Assuming student.socialmedia is an array, you can push each entry
+      for (const socialmedia of socialmediaArray) {
+        student.socialmedia.push(socialmedia);
+      }
+    
+      // Save the updated student
+      await student.save();
     }
+    const id = student._id
+    console.log(id)
+    const profile = formData.get('profilePicture')
+    const cvfile = formData.get('cv')
+    const certificatesfile = formData.getAll('certificates')
 
+// size limit 
+//for profile
+if(!profile.type.startsWith('image')){
+  return NextResponse.json({
+      msg:"Please Upload Image"
+    }, { status: 400 });
+}
+if(profile.size>200*1024){
+  return NextResponse.json({
+      msg:"Please upload image smaller 100kb"
+    }, { status: 400 });
+}
 
-
+// for cv
+if(!cvfile.type.startsWith('application')){
+  return NextResponse.json({
+      msg:"Please Upload Pdf file"
+    }, { status: 400 });
+}
+if(cvfile.size>500*1024){
+  return NextResponse.json({
+      msg:"Please upload pdf smaller 500kb"
+    }, { status: 400 });
+}
+// for certificates
+certificatesfile.map(certificate =>{
+  if(!certificate.type.startsWith('image')){
     return NextResponse.json({
-      msg: 'Student profile updated successfully',
-      // student,
+        msg:"Please Upload Image"
+      }, { status: 400 });
+}
+if(certificate.size>500*1024){
+    return NextResponse.json({
+        msg:"Please upload image smaller 100kb"
+      }, { status: 400 });
+}
+
+})
+    //save to local
+    const profilePath = await saveonefiletolocal(profile, id)
+    const cvPath = await saveonefiletolocal(cvfile, id)
+    const certificatesPath = await savetolocal(certificatesfile, id)
+
+    //upload to cloudinary
+    const profileUpload = await uploadToCloudinary(profilePath)
+    const cvupload = await uploadToCloudinary(cvPath)
+    const certificatesUpload = await uploadtoCloudinary(certificatesPath)
+
+    //delete file
+    fs.unlink(profilePath.filepath)
+    fs.unlink(cvPath.filepath)
+    certificatesPath.map(file => fs.unlink(file.filepath))
+
+    //update student schema
+
+    const profilePicture = {}
+    profilePicture.public_id = profileUpload.public_id;
+    profilePicture.secure_url = profileUpload.secure_url
+
+
+    const cv = {}
+    cv.public_id = cvupload.public_id;
+    cv.secure_url = cvupload.secure_url
+
+
+    const certificates = certificatesUpload.map(certificate => {
+      return { public_id: certificate.public_id, secure_url: certificate.secure_url }
+    })
+    console.log(certificates)
+    const updatedStudent = await Student.findOneAndUpdate({ _id: id }, { profilePicture, cv, certificates })
+    await updatedStudent.save()
+   
+    const st = await Student.find({ _id: id })
+    console.log(st)
+    return NextResponse.json({
+      msg: 'Student profile updated successfully', student: st
     }, { status: 200 });
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.log(err)
     return NextResponse.json({
-      error: 'Internal Server Error',
-    }, { status: 500 });
+      msg: err
+    }, { status: 400 });
   }
+
 }

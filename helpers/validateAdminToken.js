@@ -7,7 +7,7 @@ export async function decodeJWTAdmin(request, Model) {
             return false;
         }
         const { JWT_SECRET_ADMIN } = process.env;
-        const decodedToken = jwt.verify(token, JWT_SECRET_ADMIN);
+        const decodedToken = jwt.verify(token.value, JWT_SECRET_ADMIN);
         if (!decodedToken) {
             return false;
         }
