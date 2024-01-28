@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
+import { SignJWT } from "jose";
 import { sendEmail } from "@/helpers/mailservice/sendEmail";
+
 
 const adminSchema = new mongoose.Schema(
     {
@@ -12,12 +13,12 @@ const adminSchema = new mongoose.Schema(
         username: {
             type: String,
             required: true,
-            minlength: [5, "The minimum characters must not be less than 8 characters"]
+            minLength: [5, "The minimum characters must not be less than 8 characters"]
         },
         password: {
             type: String,
             required: [true, "Please provide a password"],
-            minlength: [8, "Password must not be less than 8 characters"],
+            minLength: [8, "Password must not be less than 8 characters"]
         },
         verified: {
             type: Boolean,
@@ -66,35 +67,71 @@ adminSchema.methods.createJWT = function () {
         email: this.email,
         role: this.role
     };
-    return jwt.sign(tokenData, JWT_SECRET_ADMIN, {
-        expiresIn: '7d'
-    })
+    return new SignJWT({ ...tokenData })
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .setExpirationTime('1h')
+        .setIssuedAt()
+        .sign(new TextEncoder().encode(JWT_SECRET_ADMIN));
 }
 // verifying email method
-adminSchema.methods.verifyEmail = function () {
+adminSchema.methods.verifyEmail = async function () {
     try {
-        const emailResponse = sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
-        return emailResponse;
+        await sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
     } catch (error) {
-        console.error('Error sending verification email:', error);
-        throw new Error('Failed to send verification email');
+        console.error("Error sending verification email:", error);
+        throw new Error("Failed to send verification email");
     }
 
 };
 // reset password method
-adminSchema.methods.resetPassword = function () {
+adminSchema.methods.resetPassword = async function () {
     try {
-        const emailResponse = sendEmail(this.email, "RESET_PASSWORD", this._id.toString(), this.role);
-        return emailResponse;
+        await sendEmail(this.email, "RESET_PASSWORD", this._id.toString(), this.role);
     } catch (error) {
-        console.error('Error sending password reset email:', error);
-        throw new Error('Failed to send password reset email');
+        console.error("Error sending password reset email:", error);
+        throw new Error("Failed to send password reset email");
     }
 
 }
+adminSchema.methods.passwordChanged = async function () {
+    try {
+        console.log("PASSWORD CHANED LINK TO BE SENT");
+        await sendEmail(this.email, "PASSWORD_CHANGED", this._id.toString(), this.role);
+    } catch (error) {
+        console.log(error);
+        // throw new Error("Failed to send the password changed link");
+    }
+}
+adminSchema.methods.Rejected = async function () {
+    try {
+        console.log("Rejected email being sent to", this.username);
+        await sendEmail(this.email, "REJECTED", this._id.toString(), this.role);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-const Admin = mongoose.models.admin || mongoose.model('admin', adminSchema);
+adminSchema.methods.Accepted = async function () {
+    try {
+        console.log("Accepted Email to be sent to ", this.username);
+        await sendEmail(this.email, "ACCEPTED", this._id.toString(), this.role);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const Admin = mongoose.models.Admin || mongoose.model('Admin', adminSchema);
 export default Admin;
+
+
+
+
+// function myListener() {
+//     console.log("Event Triggered");
+// }
+// Admin.on('myEvent', myListener)
+// Admin.off('myEvent', myListener)
+
 
 
 
