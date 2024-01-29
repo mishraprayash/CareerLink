@@ -77,7 +77,7 @@ adminSchema.methods.createJWT = function () {
 // verifying email method
 adminSchema.methods.verifyEmail = async function () {
     try {
-        await sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
+        // await sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
     } catch (error) {
         console.error("Error sending verification email:", error);
         throw new Error("Failed to send verification email");

@@ -1,5 +1,5 @@
 import Internship from "@/models/Internship";
-import connectDB from "@/config/database";
+import connectDB from "@/config/dbconfig/database";
 import { NextResponse } from "next/server"
 
 export async function GET(request) {
