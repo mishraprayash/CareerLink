@@ -1,4 +1,4 @@
-import connectDB from "@/config/database";
+import connectDB from "@/config/dbconfig/database";
 import Internship from "@/models/Internship";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next"

@@ -1,8 +1,7 @@
 import NextAuth from "next-auth/next"
 import GoogleProvider from "next-auth/providers/google"
-
 import Student from '@/models/Student'
-import { connectToDB } from "@/utils/connecttodb"
+import connectDB from "@/config/dbconfig/database"
 
 const handleAuth = NextAuth({
     providers: [
@@ -15,7 +14,7 @@ const handleAuth = NextAuth({
     callbacks: {
         async signIn({ profile, account, user }) {
             try {
-                await connectToDB();
+                await connectDB()
                 if (account.provider === 'google' && profile.email.endsWith('@wrc.edu.np')) {
                     const existingStudent = await Student.findOne({ email: profile.email })
                     if (!existingStudent) {
@@ -42,7 +41,7 @@ const handleAuth = NextAuth({
         },
         async session({ session,token,user }) {
             try {
-                await connectToDB();
+                await connectDB()
                 const sessionStudent = await Student.findOne({ email: session.user.email })
                 if (sessionStudent) {
                     session.user.id = sessionStudent._id.toString();

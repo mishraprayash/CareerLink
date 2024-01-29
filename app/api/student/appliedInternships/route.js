@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
-import { connectToDB } from '@/utils/connecttodb';
+
 import Internship from "@/models/Internship";
 import { getServerSession } from "next-auth/next"
 import { handleAuth } from "../../auth/[...nextauth]/route";
 import Student from "@/models/Student";
+import connectDB from "@/config/dbconfig/database";
 export async function GET(request) {
     try {
-        await connectToDB();
+        await connectDB()
        
     const session = await getServerSession(handleAuth)
     if(!session){

@@ -1,5 +1,5 @@
 import Internship from "@/models/Internship";
-import connectDB from "@/config/database";
+import connectDB from "@/config/dbconfig/database";
 import { NextResponse } from "next/server"
 
 export async function GET(request, { params }) {
@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
         if (!internship) {
             return NextResponse.json({ msg: "No Internship available" }, { status: 200 })
         }
-        return NextResponse.json({ Internship: internship }, { status: 200 })
+        return NextResponse.json({ data: internship }, { status: 200 })
     } catch (error) {
         return NextResponse.json({ msg: "Internal Server Error" }, { status: 500 })
     }

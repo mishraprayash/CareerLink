@@ -5,7 +5,7 @@ import path from 'path'
 import fs from "fs/promises"
 import Student from "@/models/Student";
 import { NextResponse } from "next/server";
-import connectDB from '@/config/database';
+import connectDB from "@/config/dbconfig/database";
 import { v2 as cloudinary } from 'cloudinary';
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -69,9 +69,23 @@ const uploadtoCloudinary = async (files) => {
   });
   return await Promise.all(multiplefilePromise);
 }
-const uploadToCloudinary = async (file) => {
+
+const uploadToCloudinary = async (file,id) => {
   try {
-    const result = await cloudinary.uploader.upload(file.filepath, { folder: `Careerlink/${file.id}` });
+    const arrayBuffer=await file.arrayBuffer()
+    const buffer=new Uint8Array(arrayBuffer)
+    console.log(buffer,id)
+ const result=   await new Promise((resolve,reject)=>{
+      cloudinary.uploader.upload_stream({
+        folder: `Careerlink/Student/${id}`,
+      },function(error,result){
+        if(error){
+          reject(error)
+          return;
+        }
+        resolve(result)
+      }).end(buffer)
+    })
     return result;
   } catch (error) {
     // Handle error appropriately (e.g., log or throw)
@@ -79,7 +93,6 @@ const uploadToCloudinary = async (file) => {
     throw error;
   }
 };
-
 
 export async function POST(request) {
   try {
@@ -186,21 +199,32 @@ if(certificate.size>500*1024){
 
 })
     //save to local
-    const profilePath = await saveonefiletolocal(profile, id)
-    const cvPath = await saveonefiletolocal(cvfile, id)
-    const certificatesPath = await savetolocal(certificatesfile, id)
+    // const profilePath = await saveonefiletolocal(profile, id)
+    // const cvPath = await saveonefiletolocal(cvfile, id)
+    // const certificatesPath = await savetolocal(certificatesfile, id)
 
     //upload to cloudinary
-    const profileUpload = await uploadToCloudinary(profilePath)
-    const cvupload = await uploadToCloudinary(cvPath)
-    const certificatesUpload = await uploadtoCloudinary(certificatesPath)
+    const profileUpload = await uploadToCloudinary(profile,id)
+    const cvupload = await uploadToCloudinary(cvfile,id)
+    
+const uploadCertificates = async (files, id) => {
+  const uploadPromises = files.map(async (file) => {
+    const result = await uploadToCloudinary(file, id);
+    return result;
+  });
 
-    //delete file
-    fs.unlink(profilePath.filepath)
-    fs.unlink(cvPath.filepath)
-    certificatesPath.map(file => fs.unlink(file.filepath))
+  return Promise.all(uploadPromises);
+};
 
-    //update student schema
+const certificatesUpload = await uploadCertificates(certificatesfile, id);
+    // const certificatesUpload = await uploadtoCloudinary(certificatesPath,id)
+
+    // //delete file
+    // fs.unlink(profilePath.filepath)
+    // fs.unlink(cvPath.filepath)
+    // certificatesPath.map(file => fs.unlink(file.filepath))
+
+    // //update student schema
 
     const profilePicture = {}
     profilePicture.public_id = profileUpload.public_id;

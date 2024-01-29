@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
-
+import { SignJWT } from "jose"
+import { sendEmail } from "@/helpers/mailservice/sendEmail";
 const engineeringCategories = [
     "Civil Engineering",
     "Mechanical Engineering",
@@ -41,6 +41,10 @@ const industrySectors = [
     "Energy, Nuclear Energy"
 ];
 
+const photoModel=new mongoose.Schema({
+    public_id:String,
+    secure_url:String
+});
 const companySchema = new mongoose.Schema(
     {
         companyName: {
@@ -56,7 +60,7 @@ const companySchema = new mongoose.Schema(
         password: {
             type: String,
             required: [true, "Please provide a password"],
-            minlength: [8, "Password length must not be less than 8 characters"]
+            minLength: [8, "Password length must not be less than 8 characters"]
         },
         companyInfo: {
             category: {
@@ -68,24 +72,18 @@ const companySchema = new mongoose.Schema(
                 enum: industrySectors
             }
         },
-        companyDescription:{
-            type:String
-        },
+        
         phoneNO:{
             type:Number,
             match:[/^(98|97)\d{8}$/]
         },
-        logo: {
-            type: Buffer,
-            // required: [true, "Please provide the company logo"]
+        description: {
+            type: String,
+            minLength: ["50", "Please provide some description about your Company"],
+            maxLength: ["500", "Description shouldnot exceed more than 500 characters"],
         },
-        registrationFile: {
-            
-                type: Buffer,
-                // required: [true, "Please provide the registrationn file of your company"],
-                unique: true
-            
-        },
+        logo: photoModel,
+        registrationFile: photoModel,
         address: {
             city: String,
             state: String,
@@ -129,6 +127,7 @@ const companySchema = new mongoose.Schema(
 // custom validation for handling default values while creating the document for the first time e.g registration
 companySchema.path('state').validate(function (value) {
     if (this.isNew && value !== 'Pending' && this.verified) {
+        console.log("Invalid State during registration");
         throw new Error("Invalid State");
     }
     return true;
@@ -142,18 +141,19 @@ companySchema.methods.createJWT = function () {
         name: this.companyName,
         email: this.email,
         role: this.role,
-        verified:this.verified
+        verified: this.verified
     };
-    return jwt.sign(tokenData, JWT_SECRET_COMPANY, {
-        expiresIn: '7d'
-    })
+    return new SignJWT({ ...tokenData })
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .setExpirationTime('1h')
+        .setIssuedAt()
+        .sign(new TextEncoder().encode(JWT_SECRET_COMPANY));
 }
 
 // verifying email method
-companySchema.methods.verifyEmail = function () {
+companySchema.methods.verifyEmail = async function () {
     try {
-        const emailResponse = sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
-        return emailResponse;
+        await sendEmail(this.email, "VERIFY_EMAIL", this._id.toString(), this.role);
     } catch (error) {
         console.error('Error sending verification email:', error);
         throw new Error('Failed to send verification email');
@@ -161,13 +161,37 @@ companySchema.methods.verifyEmail = function () {
 };
 
 // reset password method
-companySchema.methods.resetPassword = function () {
+companySchema.methods.resetPassword = async function () {
     try {
-        const emailResponse = sendEmail(this.email, "RESET_PASSWORD", this._id.toString(), this.role);
-        return emailResponse;
+        await sendEmail(this.email, "RESET_PASSWORD", this._id.toString(), this.role);
     } catch (error) {
         console.error('Error sending password reset email:', error);
         throw new Error('Failed to send password reset email');
+    }
+}
+
+
+companySchema.methods.passwordChanged = async function () {
+    try {
+        await sendEmail(this.email, "PASSWORD_CHANGED", this._id.toString(), this.role);
+    } catch (error) {
+        console.log("Error while sending password changed link", error);
+    }
+}
+companySchema.methods.Rejected = async function () {
+    try {
+        await sendEmail(this.email, "REJECTED", this._id.toString(), this.role);
+    } catch (error) {
+        console.log("Error while sending rejected link", error);
+    }
+}
+
+companySchema.methods.Accepted = async function () {
+    try {
+        console.log("Accepted Email to be sent to ", this.username);
+        await sendEmail(this.email, "ACCEPTED", this._id.toString(), this.role);
+    } catch (error) {
+        console.log("Error while sending accepted link", error);
     }
 }
 

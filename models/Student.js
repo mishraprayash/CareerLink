@@ -79,3 +79,29 @@ const studentSchema = new mongoose.Schema(
     
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema);
 export default Student;
+
+
+
+// function myListener() {
+//     console.log("Event Triggered");
+// }
+// Admin.on('myEvent', myListener)
+// Admin.off('myEvent', myListener)
+
+
+
+
+
+/*
+When we want a certain documents to be deleted automaticaly we can use the MongoDB TTL feature.
+using mongoose also we can achieve this very easiily
+For exmaple: 
+
+let currentSchema = mongoose.Schema({
+    id: String,
+    name: String,
+    packageId: Number,
+    age: Number
+}, {timestamps: true});
+
+currentSchema.index({createdAt: 1},{expireAfterSeconds: 3600});*/

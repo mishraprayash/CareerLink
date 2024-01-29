@@ -26,8 +26,8 @@ const internshipSchema = new mongoose.Schema(
         skillsRequired:[{type:String}],
         description: {
             type: String,
-            minlength: 50,
-            maxlength: 300,
+            minLength: 50,
+            maxLength: 300,
             required: true
         },
         startDate: {
@@ -62,11 +62,21 @@ const internshipSchema = new mongoose.Schema(
             },
             default: "Internship",
         },
+
+        isCompleted: {
+            type: Boolean,
+            required: true,
+            // defining a getter function
+            get: function () {
+                return new Date() > this.endDate ? true : false;
+            }
+        }
     },
     {
         timestamps: true
     }
 );
+
 
 internshipSchema.path('state').validate(function (value) {
     if (this.isNew && this.state !== "Pending") {
@@ -74,6 +84,7 @@ internshipSchema.path('state').validate(function (value) {
     }
     return true;
 }, 'There has been attempt to overwrite the default values in the creation process');
+
 
 
 const Internship = mongoose.models.Internship || mongoose.model('Internship', internshipSchema);
