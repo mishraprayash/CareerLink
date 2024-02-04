@@ -20,8 +20,9 @@ export async function PATCH(request, { params }) {
 
         await connectDB();
         console.log(session.user.email)
+        console.log(params.Id)
         const studentEmail=session.user.email
-const internship=await Internship.findOne({id:params.Id})
+const internship=await Internship.findById(params.Id)
 
         if (!internship) {
             return NextResponse.json({ msg: " internship -Unavailable" }, { status: 400 });

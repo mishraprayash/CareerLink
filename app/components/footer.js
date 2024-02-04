@@ -12,7 +12,7 @@ const Footer = () => {
       <h2 className="header">ABOUT US</h2>
       <div className="college">
         <div className="">
-          <Image className=" ml-12" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/ej5izqga34pvxuisqy1j.png" width={260} height={130}/></div>
+          <Image className=" ml-12" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/ej5izqga34pvxuisqy1j.png" width={260} height={130} alt="campus"/></div>
         <div className="name"></div>
       </div>
       <div className=" ml-12">

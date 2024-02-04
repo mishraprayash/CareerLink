@@ -30,7 +30,7 @@ const LandingPage = () => {
       <div className="right">
         
         {/* <img className="otherimg"src="/collaboration.jpg"/> */}
-        <Image className="otherimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/kgd5nkourxfvehtwlsiq.jpg" width={400} height={400} />       
+        <Image className="otherimg" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/kgd5nkourxfvehtwlsiq.jpg" width={400} height={400} alt="collaboration" />       
       </div>
 
       <div className="left">

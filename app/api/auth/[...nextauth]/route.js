@@ -45,8 +45,7 @@ const handleAuth = NextAuth({
                 const sessionStudent = await Student.findOne({ email: session.user.email })
                 if (sessionStudent) {
                     session.user.id = sessionStudent._id.toString();
-                    session.user.accessToken = token.accessToken
-                    session.user.tokenid = token.id
+                    session.user.token = token.accessToken
                 }
             } catch (error) {
                 console.error('Error retrieving user from the database:', error);
@@ -58,7 +57,6 @@ const handleAuth = NextAuth({
             // Persist the OAuth access_token and or the user id to the token right after signin
             if (account) {
                 token.accessToken = account.access_token
-                token.id = profile.id
             }
             return token;
         }

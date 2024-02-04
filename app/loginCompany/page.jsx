@@ -1,37 +1,60 @@
-"use client";
-import React from "react";
-import { useState, useContext } from "react";
-// import userContext from "./userContext";
+"use client"
+import React, { useState } from "react";
 import "./loginCompany.css";
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
+
 
 function Login() {
-  const [cemail, setCemail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-//   const { setUser } = useContext(userContext);
-
-  const handleSubmit = (e) => {
+  const [error, setError] = useState(null);
+  const router = useRouter();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUser({ cemail, password });
+console.log(email,password)
+    try {
+      // Make a POST request to your server
+      const response = await fetch("/api/company/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Response:", data);
+        router.push('/dashboard')
+    }
+    else{
+      const data = await response.json();
+      window.alert(data)
+    }
+     
+      
+    } catch (error) {
+      // Handle errors, e.g., display an error message
+      console.error("Error:", error);
+      setError("Invalid email or password");
+    }
   };
 
   return (
-    <div class="split-screen">
-      <div class="left">
+    <div className="split-screen">
+      <div className="left">
         <div className="makecenter">
-
-        <section class="copy">
-          <h1>Welcome Back To</h1>
-          <p>CareerLink</p>
-        </section>
+          <section className="copy">
+            <h1>Welcome Back To</h1>
+            <p>CareerLink</p>
+          </section>
         </div>
       </div>
 
-      <div class="right">
-        <form>
-          <section class="copy">
+      <div className="right">
+        <form onSubmit={handleSubmit}>
+          <section className="copy">
             <h2>Find the perfect fit for your Company</h2>
-            <div class="login-container">
+            <div className="login-container">
               <p>
                 Don't have an account?
                 <a href="#">
@@ -41,82 +64,55 @@ function Login() {
             </div>
           </section>
 
-          {/* <!-- <div class="input-container name">
-            <label for="fname">Company Name</label>
-            <input type="text" id="fname" class="fname" placeholder="Full Name" />
-          </div> --> */}
-
-          <div class="input-container email">
-            <label for="email">Email</label>
+          <div className="input-container email">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
-              class="email"
+              className="email"
               placeholder="example@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div class="input-container password">
-            <label for="password">Password</label>
+          <div className="input-container password">
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
-              class="password"
+              className="password"
               placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          {/* 
-          <!-- <div class="input-container cta">
-            <label class="checkbox-container">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Sign Up for email updates.
-            </label>
-          </div> 
-        
-        <label>Message</label>
-	 <textarea></textarea>
-        -->
-        <!-- <div class="input-container name">
-            <label for="fname">Location</label>
-            <input type="text" id="fname" class="fname" placeholder="City, District" />
-          </div>
-
-          <div class="input-container email">
-            <label for="phone">Enter Telephone number:</label>
-            <input type="tel" id="phone" name="phone" pattern="+[0-9]{3}-[0-9]{6}"> 
-          </div>
-
-        <div class="input-container about">
-            <label for="about">About Company</label>
-	 <textarea ></textarea>
-          </div> --> */}
-          <div class="forget">
+          <div className="forget">
             Forget password?
             <a href="#">
               <strong>Reset Now</strong>
             </a>
           </div>
 
-          <Link href='/explore' >
-          <button class="signup-btn" type="submit">
-            Login
-          </button>
-</Link>
+            <button className="signup-btn" type="submit" onClick={handleSubmit}>
+              Login
+            </button>
+         
 
-          <section class="copy legal">
+          <section className="copy legal">
             <p>
-              <span class="small">
-                By continuing,you agree to accept our <br />
+              <span className="small">
+                By continuing, you agree to accept our <br />
                 <a href="#">Privacy Policy</a>&amp;
                 <a href="#">Terms of Service</a>.
               </span>
             </p>
           </section>
         </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>
   );
 }
-export default Login;
 
+export default Login;
