@@ -1,5 +1,6 @@
 import React from "react";
 import Search from "../components/search.js"
+import CardFull from "../components/exploreCardFull.js"
 import Card from "../components/exploreCard.js"
 // import './explore.css'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +13,7 @@ const explore = () => {
     <>
     
  <Search/>
- <Card/>
+  <Card/> 
 </> 
   )
 }
