@@ -1,12 +1,12 @@
 import connectDB from "@/config/dbconfig/database";
 import { NextResponse } from "next/server";
-import Company from "@/models/Company";
+import Internship from "@/models/Internship";
 
 export async function GET(request) {
     try {
         await connectDB();
         // returns an arrray
-        const pendingInternships = await Company.find({ state: "Pending" });
+        const pendingInternships = await Internship.find({ state: "Pending" });
         if (pendingInternships.length === 0) {
             return NextResponse.json({ msg: "No any pending internships" }, { status: 404 });
         }

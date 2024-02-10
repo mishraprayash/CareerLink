@@ -29,6 +29,7 @@ export async function POST(request) {
         const response = NextResponse.json({ msg: "Successful Login" }, { status: 200 });
         // setting jwt token in cookies
         response.cookies.set("token", token, { httpOnly: true, secure: true });
+        response.cookies.set("company", "12ffhhfodrjbjbbbjbcomddpaddnyjbjjgyjgyulddogdin",);
 
         return response;
     } catch (error) {

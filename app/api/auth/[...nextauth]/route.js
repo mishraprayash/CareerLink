@@ -21,7 +21,9 @@ const handleAuth = NextAuth({
                         const newStudent = await Student.create({
                             email: profile.email,
                             name: profile.name,
-                            profilePicture: profile.picture,
+                            profilePicture:{
+                                secure_url:profile.picture,
+                            }
                         });
                         await newStudent.save();
                     }

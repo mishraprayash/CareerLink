@@ -88,11 +88,11 @@ setProfileUrl(user?.student?StudentImageUrl:CompanyImageUrl)
               ))
             }
              <Link href='/signupCompany' >
-              <button className="registerbtn"> COMPONY REGISTER</button>
+              <button className="registerbtn"> COMPANY REGISTER</button>
               </Link>
          
             <Link href='/loginCompany' >
-            <button className="loginbtn">COMPONY LOGIN</button>
+            <button className="loginbtn">COMPANY LOGIN</button>
               </Link>
              
           

@@ -7,6 +7,7 @@ export async function POST(request) {
     try {
         await connectDB();
         const { username, password } = await request.json();
+        console.log(username,password)
         if (!username || !password) {
             return NextResponse.json({ msg: "Invalid Credentials" });
         }
@@ -16,7 +17,7 @@ export async function POST(request) {
         }
         // checking if password is macthed.
         const isPasswordMatched = await bcrypt.compare(password, adminExist.password);
-
+        // console.log(isPasswordMatched)
         if (!isPasswordMatched) {
             return NextResponse.json({ msg: "Invalid Login Creddentials" });
         }
@@ -27,6 +28,7 @@ export async function POST(request) {
 
         // setting jwt token in cookies and sending in response object
         response.cookies.set("token", token, { httpOnly: true, secure: true });
+        response.cookies.set("admin", "12ffhhforjbjbbbjbadminjbjjgyjgyulogin",);
         return response;
 
     } catch (error) {
