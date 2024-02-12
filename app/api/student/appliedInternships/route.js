@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+import mongoose from "mongoose";
 import Internship from "@/models/Internship";
 import { getServerSession } from "next-auth/next"
 import { handleAuth } from "../../auth/[...nextauth]/route";
@@ -16,11 +16,10 @@ export async function GET(request) {
      },{status:401})
    }
    const studentEmail=session.user.email;
-   const student=await Student.find({email:studentEmail,verified:true})
+   const student=await Student.findOne({email:studentEmail})
    const studentId=student._id;
-
         const Internships = await Internship.find({
-            applicants: { $in: [mongoose.Types.ObjectId(studentId)] },
+            applicants: { $in: [studentId] },
             state: "Approved"
     });
     if (!Internships || Internships.length === 0) {

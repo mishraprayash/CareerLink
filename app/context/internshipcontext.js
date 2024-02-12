@@ -19,9 +19,32 @@ export const InternshipContextProvider = ({ children }) => {
     const [acceptedStatus,setAcceptedStatus]=useState(null)
     const [rejectedStatus,setRejectedStatus]=useState(null)
     const [passwordChangeStatus,setPasswordChangeStatus]=useState(null)
-    const {user}=useContext(AuthContext)
-  useEffect(()=>{
+    const [appliedInternships,setAppliedInternships]=useState(null)
 
+    const {user}=useContext(AuthContext)
+   //student -see all internship applications
+    useEffect(()=>{
+      const applications=async()=>{
+          try {
+            const response = await getReq('/api/student/appliedInternships');
+            console.log("Internships", response);
+            
+            if (!response.error) {
+              setAppliedInternships(response.Internships);
+            }
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setLoading(false);
+          }
+      }
+      if (user?.student) {
+      applications()
+      }
+    },[user?.student])
+
+    useEffect(()=>{
+   
     const runninginternships=async()=>{
       try {
         const response = await getReq('/api/company/runninginternships');
@@ -36,7 +59,9 @@ export const InternshipContextProvider = ({ children }) => {
         setLoading(false);
       }
     }
+    if (user?.company) {
     runninginternships()
+    }
   },[user?.company])
 
   useEffect(()=>{
@@ -54,8 +79,9 @@ export const InternshipContextProvider = ({ children }) => {
           setLoading(false);
         }
     }
-
+    if (user?.company) {
     pendinginternships()
+    }
   },[user?.company])
    const seeApplicants=useCallback(async(key)=>{
     try {
@@ -71,6 +97,7 @@ export const InternshipContextProvider = ({ children }) => {
         setLoading(false);
       }
    },[user?.company])
+   
    const applyforInternship=useCallback(async(key)=>{
     try {
         const response = await patchReq(`/api/student/applyinternship/${key}`);
@@ -101,8 +128,9 @@ export const InternshipContextProvider = ({ children }) => {
           setLoading(false);
         }
     }
-
+    if (user?.admin) {
     pendinginternships()
+    }
   },[user?.admin])
   useEffect(()=>{
     const pendingcompany=async()=>{
@@ -119,8 +147,9 @@ export const InternshipContextProvider = ({ children }) => {
           setLoading(false);
         }
     }
-
+    if (user?.admin) {
     pendingcompany()
+    }
   },[user?.admin])
   useEffect(()=>{
     const pendingadmin=async()=>{
@@ -137,8 +166,9 @@ export const InternshipContextProvider = ({ children }) => {
           setLoading(false);
         }
     }
-
+    if (user?.admin) {
     pendingadmin()
+    }
   },[user?.admin])
   //dashboard info
   useEffect(()=>{
@@ -156,8 +186,9 @@ export const InternshipContextProvider = ({ children }) => {
           setLoading(false);
         }
     }
-
+    if (user?.admin) {
     dashboardInfo()
+    }
   },[user?.admin])
   const accept=useCallback(async(id,role)=>{
     try {
@@ -215,7 +246,7 @@ export const InternshipContextProvider = ({ children }) => {
       }
    },[user?.admin|| user?.company])
     return (
-        <InternshipContext.Provider value={{ runningInternships, pendingInternships,loading ,applyforInternship,internshipApplyStatus,seeApplicants,applicants,pendingInternshipsAdmin,pendingCompany,pendingAdmin,adminDashboardInfo,accept,acceptedStatus,reject,rejectedStatus, changepassword,passwordChangeStatus}}>
+        <InternshipContext.Provider value={{ runningInternships, pendingInternships,loading,appliedInternships ,applyforInternship,internshipApplyStatus,setInternshipApplyStatus,seeApplicants,applicants,pendingInternshipsAdmin,pendingCompany,pendingAdmin,adminDashboardInfo,accept,acceptedStatus,reject,rejectedStatus, changepassword,passwordChangeStatus}}>
           {children}
         </InternshipContext.Provider>
       );

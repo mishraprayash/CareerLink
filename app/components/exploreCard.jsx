@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect }  from 'react'
 import './styles/exploreCard.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -11,9 +11,37 @@ library.add(fas, faTwitter, faFontAwesome, faFilter, faSearch)
 import { useContext } from 'react';
 import { InternshipContext } from '../context/internshipcontext';
 
+const overlayStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  zIndex: 9999,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const messageBoxStyle = {
+  backgroundColor: 'white',
+  padding: '20px',
+  borderRadius: '5px',
+};
+
 const exploreCard = ({ internship }) => {
   // console.log(internship)
-  const { applyforInternship, internshipApplyStatus } = useContext(InternshipContext)
+  const { applyforInternship, internshipApplyStatus,setInternshipApplyStatus } = useContext(InternshipContext)
+  useEffect(() => {
+    if (internshipApplyStatus) {
+      const timeoutId = setTimeout(() => {
+        setInternshipApplyStatus(null);
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [internshipApplyStatus]);
 
   return (
     <div className='main'>
@@ -45,9 +73,13 @@ const exploreCard = ({ internship }) => {
             </button>
           </div>
         </div>
-        {
-          internshipApplyStatus ? (window.alert(internshipApplyStatus)) : null
-        }
+        {internshipApplyStatus && (
+        <div style={overlayStyle}>
+          <div style={messageBoxStyle}>
+            {internshipApplyStatus}
+          </div>
+        </div>
+      )}
       </div>
     </div>
   )

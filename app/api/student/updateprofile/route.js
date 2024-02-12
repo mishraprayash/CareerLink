@@ -133,6 +133,7 @@ export async function POST(request) {
           district,
           street,
         },
+        profileStatus:"Updated"
       },
       { new: true, runValidators: true }
     );

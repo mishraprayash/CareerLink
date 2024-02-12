@@ -11,7 +11,7 @@ export async function GET(request, { params }) {
         if (!decodedToken) {
             return NextResponse.json({ msg: "Token Validation Error" }, { status: 400 });
         }
-        const internship = await Internship.find({ company: decodedToken.id, state: "Approved", _id: params.Id });
+        const internship = await Internship.findOne({ company: decodedToken.id, state: "Approved", _id: params.Id });
         if (!internship) {
             return NextResponse.json({ msg: "No any Internship To Show" }, { status: 404 });
         }
@@ -21,16 +21,15 @@ export async function GET(request, { params }) {
                 path: 'applicants',
                 select: '-email -verified -role -address'
             })
-            .execPopulate();
-
+            // console.log(applicants)
         if (!applicants) {
             return NextResponse.json({ message: "NO applicants" })
         }
         console.log(applicants)
-        return NextResponse.json({ msg: "Applicants fetched successfully!", applicants: applicants }, { status: 200 })
+        return NextResponse.json({ msg: "Applicants fetched successfully!", applicants: applicants.applicants }, { status: 200 })
 
     } catch (error) {
-        console.log('Error occured while fetching applicants');
+        console.log('Error occured while fetching applicants',error);
         return NextResponse.json({ msg: "Internal Server Error", error: error }, { status: 500 });
     }
 }
