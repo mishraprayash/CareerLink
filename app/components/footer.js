@@ -15,14 +15,14 @@ const Footer = () => {
             <Image className="" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/ej5izqga34pvxuisqy1j.png" width={260} height={130} alt="campus" /></div>
           <div className="name"></div>
         </div>
-        <div className="flex flex-col px-5">
+        <div className="flex flex-col px-5 text-blue-900">
           <p> P.O. Box : 46 , Lamachaur Pokhara</p>
           <p>Tel. : 061-440457, 440463, 440093, 440465</p>
           <p>Fax No. : 061-440158</p>
           <p>E-mail : <a href="mailto:info@ioepas.edu.np" className="text-blue-600">info@ioepas.edu.np</a></p>
         </div>
       </div>
-      <div className="footer2">
+      <div className="footer2 text-blue-900">
         <h2 className="header py-4">COMPANIES</h2>
         <p>Partnership</p>
         <p>Career</p>
