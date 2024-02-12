@@ -35,7 +35,7 @@ const companyLoggedInRoutes = [
   '/api/company/sendverificationlink',
   '/api/company/updateprofile',
   '/api/company/changepassword',
-       // email verification needed for this
+  // email verification needed for this
 ]
 
 const companyLoggedOutRoutes = [
@@ -47,7 +47,8 @@ const companyLoggedOutRoutes = [
 ]
 
 // remaining for handling student route
-const studentRoutes = ['/student/:path*', '/api/student/:path*','/profile']
+const studentLoggedInRoutes = ['/student/', '/api/student/:path*', '/profile']
+
 
 export async function middleware(request) {
 
@@ -59,10 +60,8 @@ export async function middleware(request) {
   //   return rateLimiterResponse;
   // }
 
-
-
   // validating the routing path
-  if (!adminLoggedInRoutes.includes(pathname) && !studentRoutes.includes(pathname) && !companyLoggedInRoutes.includes(pathname)) {
+  if (!adminLoggedInRoutes.includes(pathname) && !studentLoggedInRoutes.includes(pathname) && !companyLoggedInRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
@@ -70,8 +69,8 @@ export async function middleware(request) {
   if (adminLoggedInRoutes.includes(pathname)) {
     // decoding the token from the cookies
     const decodedToken = await decodeJWTAdmin(request);
-    
-    if (!decodedToken ||  decodedToken.role!=="Admin") {
+
+    if (!decodedToken || decodedToken.role !== "Admin") {
       return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
     }
     return NextResponse.next();
@@ -94,9 +93,9 @@ export async function middleware(request) {
     if (!nextAuthToken) {
       // Send JSON response for unauthenticated user
       const jsonResponse = NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
-  
+
       // Redirect after the delay
-      return NextResponse.redirect(new URL('/loginCompany', request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
     return NextResponse.next();
   }
