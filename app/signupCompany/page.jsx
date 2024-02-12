@@ -1,26 +1,61 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 import './signupCompany.css'
-import Link from "next/link";
+import { postReq } from "../hooks/service";
 
+import { useRouter } from "next/navigation";
 const page = () => {
+  const [formData, setFormData] = useState({
+    companyName: "",
+    email: "",
+    password: "",
+    confirmPassword:""
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if(!(formData.password===formData.confirmPassword)){
+      window.alert("Password and Confirm Password must be same")
+      return {msg:"Password and Confirm Password must be same"}
+    }
+    console.log(formData)
+    const response = await postReq("/api/company/register", formData)
+    console.log(response)
+    if (!response.error) {
+      window.alert(response.msg)
+      const router=useRouter()
+      router.push('/loginCompany')
+
+    }
+    else {
+      console.log(response.error)
+      window.alert(response.message)
+
+    };
+  }
   return (
     <div class="body">
       <div class="split-screen">
         <div class="left">
           <div className="makecenter">
 
-          <section class="copy">
-            <h1>Welcome To</h1>
-            <p>CareerLink</p>
-          </section>
+            <section class="copy">
+              <h1>Welcome To</h1>
+              <p>CareerLink</p>
+            </section>
           </div>
         </div>
         <div class="right">
-          <form>
+          <form onSubmit={handleSubmit}>
             <section class="copy">
-              
+
               <div class="login-container">
-              <h2>Create an account. It's fast & easy.</h2>
+                <h2>Create an account. It's fast & easy.</h2>
                 <p>
                   Already have an account?{" "}
                   <a href="#">
@@ -29,71 +64,54 @@ const page = () => {
                 </p>
               </div>
             </section>
-            <div class="input-container name">
-              <label for="cname">Company Name</label>
+            <div className="input-container name">
+              <label htmlFor="cname">Company Name</label>
               <input
                 type="text"
                 id="cname"
-                class="cname"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+                className="cname"
                 placeholder="Full Name"
               />
             </div>
 
-            <div class="input-container email">
-              <label for="email">Email</label>
+            <div className="input-container email">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
-                class="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="email"
                 placeholder="example@gmail.com"
               />
             </div>
-            <div class="input-container password">
-              <label for="password">Password</label>
+            <div className="input-container password">
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
-                class="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="password"
                 placeholder="Must be at least 6 characters"
               />
             </div>
-            {/* <!-- <div class="input-container cta">
-            <label class="checkbox-container">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Sign Up for email updates.
-            </label>
-          </div> 
-        
-        <label>Message</label>
-	 <textarea></textarea>
-        --> */}
-            <div class="input-container location">
-              <label for="clocation">Location</label>
+            <div className="input-container password">
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <input
-                type="text"
-                id="clocation"
-                class="clocation"
-                placeholder="City, District"
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="password"
+                placeholder="Must be at least 6 characters"
               />
-            </div>
-
-            <div class="input-container email">
-              <label for="phone">Enter Telephone number:</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="+061-123456"
-                pattern="+[0-9]-[0-9]{6}"
-              />
-            </div>
-
-            <div class="input-container about">
-              <label for="about">About Company</label>
-              <textarea
-              placeholder="Words to describe company..."
-              ></textarea>
             </div>
 
             <button class="signup-btn" type="submit">

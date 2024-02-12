@@ -34,7 +34,8 @@ const companyLoggedInRoutes = [
   '/api/company/pendinginternships',
   '/api/company/sendverificationlink',
   '/api/company/updateprofile',
-  '/api/company/changepassword'     // email verification needed for this
+  '/api/company/changepassword',
+       // email verification needed for this
 ]
 
 const companyLoggedOutRoutes = [
@@ -46,12 +47,12 @@ const companyLoggedOutRoutes = [
 ]
 
 // remaining for handling student route
-const studentRoutes = ['/student/:path*', '/api/student/:path*']
+const studentRoutes = ['/student/:path*', '/api/student/:path*','/profile']
 
 export async function middleware(request) {
 
   const { pathname } = request.nextUrl;
-  console.log("Pathname:", pathname);
+  // console.log("Pathname:", pathname);
 
   // const rateLimiterResponse = await rateLimiter(request);
   // if (typeof rateLimiterResponse !== Boolean && rateLimiterResponse !== true) {
@@ -89,9 +90,13 @@ export async function middleware(request) {
   }
   if (studentRoutes.includes(pathname)) {
 
-    const nextAuthToken = request.cookies.get('next-auth.token');
+    const nextAuthToken = request.cookies.get('next-auth.session-token');
     if (!nextAuthToken) {
-      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+      // Send JSON response for unauthenticated user
+      const jsonResponse = NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+  
+      // Redirect after the delay
+      return NextResponse.redirect(new URL('/loginCompany', request.url));
     }
     return NextResponse.next();
   }

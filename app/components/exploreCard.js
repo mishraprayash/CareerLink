@@ -1,10 +1,12 @@
-"use client";
+
+"use client"
+
 import React from 'react'
 import './styles/exploreCard.css';
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebook,  faInstagram, faLinkedin , faSearchengin,faFigma} from "@fortawesome/free-brands-svg-icons";
 import { faCoins, faEnvelope, faFilter, faSearch, fas,faLocationDot , faClock, faBriefcase} from '@fortawesome/free-solid-svg-icons'
 import { faTwitter, faFontAwesome, faLinkedinIn} from '@fortawesome/free-brands-svg-icons'
@@ -12,10 +14,17 @@ library.add(fas, faTwitter, faFontAwesome, faFilter,faSearch,faLocationDot,faCoi
 
 
 
+{/* <FontAwesomeIcon  icon={faFilter}  className="  nine h-12 p-2  "/ >*/ }
+import { useContext } from 'react';
+import { InternshipContext } from '../context/internshipcontext';
 
 
-const exploreCard = () => {
+const exploreCard = ({ internship }) => {
+  // console.log(internship)
+  const { applyforInternship, internshipApplyStatus } = useContext(InternshipContext)
+
   return (
+
     <div className='internship-card'>
     <div className="top">
         <div className="internship-position"><p>
@@ -24,7 +33,7 @@ const exploreCard = () => {
           </p></div>
         <div className="internship-name"><p>
           {/* {internship.company} */}
-          Yamini Engineering Consuntancy
+          {internship.companyName}
         </p></div>
         <div className="internship-location">
           {/* <GoLocation className='hiring-icon'/>  */}
@@ -40,7 +49,7 @@ const exploreCard = () => {
             </div>
             <div>
                 <div className="sTitle">location</div>
-                <div className="sValue">pokhara</div>
+                <div className="sValue">{internship.location}</div>
             </div>
         </div>
         <div className='onesymbol'>
@@ -49,7 +58,7 @@ const exploreCard = () => {
             </div>
             <div>
                 <div className="sTitle">time</div>
-                <div className="sValue">10-4</div>
+                <div className="sValue">{internship.workTime}</div>
             </div>
         </div>
         <div className='onesymbol'>
@@ -58,7 +67,7 @@ const exploreCard = () => {
             </div>
             <div>
                 <div className="sTitle">position</div>
-                <div className="sValue">junior developer</div>
+                <div className="sValue">{internship.position}</div>
             </div>
         </div>
         <div className='onesymbol'>
@@ -103,7 +112,7 @@ const exploreCard = () => {
             <p>Required Qualifications : </p>
             <p>
               {/* {internship.qualifications} */}
-              internship Qualifications
+              {internship.requirements}
               </p>
         </div>
     </div>
@@ -142,14 +151,55 @@ const exploreCard = () => {
                   </p>
             </div>
             <div className="appy-btn">
-                <a href="/" target="_blank">
+                {/* <a href="/" target="_blank">
                 Apply
-                </a>{' '}
+                </a> */}
+                  <button onClick={() => applyforInternship(internship._id.toString())} >
+               Apply
+           </button>
+                
+                {' '}
             </div>
         </div>
         </div>
     </div>
 </div>
+
+    // <div className='main'>
+    //   <div className='aCard'>
+    //     <div className='left'>
+    //       <div className='Clogo '>
+    //         <img className="Alogo h-19 w-auto h-24" src={internship.companyLogo ? internship.companyLogo.secure_url : "/image/collaboration.jpg"} alt='clogo' /></div>
+    //       <div className='cname'>Company: {internship.companyName}</div>
+    //       <div className='cname'>Position: {internship.position}</div>
+    //       <div className='cname'>location: {internship.location}</div>
+    //       <div className='cname'>WorkTime: {internship.workTime}</div>
+    //     </div>
+    //     <div className='right '>
+    //       <div> {internship.description}</div>
+    //       <div className='cname'>Skills : {internship.skillsRequired}</div>
+    //       <div>Starting Date:{internship.startDate}</div>
+    //       <div> Ending Date:{internship.endDate}</div>
+    //       <div> {internship.requirements}</div>
+    //       <div> {internship.responsibilities}</div>
+    //       <div> No of intern:{internship.noofVacancy}</div>
+    //       <div className="flex justify-center space-x-4">
+    //         <button onClick={() => applyforInternship(internship._id.toString())} className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600">
+    //           Apply
+    //         </button>
+
+
+    //         <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-green active:bg-green-600">
+    //           View more
+    //         </button>
+    //       </div>
+    //     </div>
+    //     {
+    //       internshipApplyStatus ? (window.alert(internshipApplyStatus)) : null
+    //     }
+    //   </div>
+    // </div>
+
   )
 }
 

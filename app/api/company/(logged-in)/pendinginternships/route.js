@@ -11,12 +11,12 @@ export async function GET(request) {
         await connectDB();
 
         // retrieving company id so that we can fetch the pending internships for that specific company
-        const decodeToken = decodeJWTCompany(request);
+        const decodeToken =await decodeJWTCompany(request);
 
         // grabbing the pending internships by referencing the company attribute.
-        const pendingInternships = await Internship.findOne({ company: decodeToken.id, state: "Pending" });
+        const pendingInternships = await Internship.find({ company: decodeToken.id, state: "Pending" });
 
-        if (!pendingInternships || pendingInternships.lenght == 0) {
+        if (!pendingInternships || pendingInternships.length === 0) {
             return NextResponse.json({ msg: "No any pending internships found" }, { status: 200 });
         }
 

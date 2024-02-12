@@ -127,6 +127,7 @@
    
     
  }
+
  .onesymbol{
    
    flex:1;
@@ -184,3 +185,24 @@
     color: #fff !important;
     transform: translateY(0.1rem);
   }
+
+  .aCard{
+   display: flex;
+   flex-direction: row;
+   margin: 0px 90px;
+   height: 500px;
+width: auto;
+
+padding: 50px;
+background-color: #DCF2F1;
+border-radius: 12px;
+border:solid 1px rgb(32, 32, 80);
+}
+.left{
+
+   width: 600px;
+   display: flex;
+   flex-direction: column;
+}
+
+

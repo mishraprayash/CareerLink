@@ -1,6 +1,10 @@
 
 import mongoose from "mongoose"
 import { Schema } from "mongoose";
+const photoModel=new mongoose.Schema({
+    public_id:String,
+    secure_url:String
+});
 const internshipSchema = new mongoose.Schema(
     {
         position: {
@@ -22,6 +26,22 @@ const internshipSchema = new mongoose.Schema(
         noofVacancy:{
             type:Number,
             required:[true,"How many interns?"]
+        },
+        responsibilities:{
+            type:String,
+            required:[true,"Add responsibilities of intern"]
+        },
+        requirements:{
+            type:String,
+            required:[true,"Requirements?"]
+        },
+        internshipType:{
+            type: String,
+            enum: ['Paid', 'Unpaid']
+        },
+        salary:{
+            type:Number,
+            match: /^[0-9]{3,}$/,
         },
         skillsRequired:[{type:String}],
         description: {
@@ -48,6 +68,11 @@ const internshipSchema = new mongoose.Schema(
             ref: 'Company',
             required: true
         },
+        companyName:{
+            type:String,
+            required:[true,"Company Name required"]
+        },
+        companyLogo:photoModel,
         applicants:[
             {
                 type: mongoose.Schema.Types.ObjectId,
@@ -65,7 +90,7 @@ const internshipSchema = new mongoose.Schema(
 
         isCompleted: {
             type: Boolean,
-            required: true,
+            // required: true,
             // defining a getter function
             get: function () {
                 return new Date() > this.endDate ? true : false;
