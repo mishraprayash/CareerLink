@@ -1,8 +1,8 @@
-'use client'
+"use client";
 import React, { useContext } from "react";
-import Search from "../components/search.js";
-import Card from "../components/exploreCard.js";
-import {ExploreContext} from "../context/explorecontext.js";
+import Search from "../components/search";
+import Card from "../components/exploreCard";
+import { ExploreContext } from "../context/explorecontext";
 
 const Explore = () => {
   const { internships, loading } = useContext(ExploreContext);
@@ -12,12 +12,10 @@ const Explore = () => {
     <>
       <Search />
       <div className="border ">
-
-      {internships  && internships.map((internship) => (
-        <Card key={internship._id} internship={internship} />
-           
-        ))}
-        
+        {internships &&
+          internships.map((internship) => (
+            <Card key={internship._id} internship={internship} />
+          ))}
       </div>
     </>
   );

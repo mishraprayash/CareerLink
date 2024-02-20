@@ -9,16 +9,16 @@ const Profile = () => {
     <div className='flex justify-center items-center h-fit'>
     {user ? (
       user.admin ? (
-        <div class="p-4 bg-gray-200 rounded shadow-md">
-          <div class="font-bold text-lg mb-2">Admin Profile</div>
-          <div class="mb-2">Username: {user.admin.username}</div>
+        <div className="p-4 bg-gray-200 rounded shadow-md">
+          <div className="font-bold text-lg mb-2">Admin Profile</div>
+          <div className="mb-2">Username: {user.admin.username}</div>
           <div>Email: {user.admin.email}</div>
         </div>
       ) : (
-        <div class="text-center">Loading data...</div>
+        <div className="text-center">Loading data...</div>
       )
     ) : (
-      <div class="text-center">You must be logged in</div>
+      <div className="text-center">You must be logged in</div>
     )}
   </div>
   

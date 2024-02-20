@@ -43,13 +43,13 @@ const StudentProfile = () => {
             <div>
               <p>
                 <strong>Address:</strong>{" "}
-                {`${profileData.address.state}, ${profileData.address.district}, ${profileData.address.street}`}
+                {`${profileData?.address?.state}, ${profileData?.address?.district}, ${profileData?.address?.street}`}
               </p>
               <p>
                 <strong>Social Media:</strong>
                 <ul>
-                  {profileData.socialmedia &&
-                    profileData.socialmedia.map((social, index) => (
+                  {profileData?.socialmedia &&
+                    profileData?.socialmedia.map((social, index) => (
                       <li key={index}>
                         {social.type}: <a href={social.link}>{social.link}</a>
                       </li>

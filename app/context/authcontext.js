@@ -7,47 +7,45 @@ import Cookies from "js-cookie";
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const { data: session } = useSession();
-// console.log(session)
-console.log(user)
-  const logoutUser = useCallback(async() => {
+  // console.log(session)
+  console.log(user)
+  const logoutUser = useCallback(async () => {
     if (session && session?.user) {
-        signOut()   
-        setUser(null)
-    }else{
-     const response=await getReq('/api/common/logout')
-     console.log(response)
-     if(!response.error){
-
-       setUser(null);
-     }
+      signOut()
+      setUser(null)
+    } else {
+      const response = await getReq('/api/common/logout')
+      console.log(response)
+      if (!response.error) {
+        setUser(null);
+      }
     }
   }, [session]);
 
-const adminsession=Cookies.get('admin')
-const companysession=Cookies.get('company')
+  const adminsession = Cookies.get('admin')
+  const companysession = Cookies.get('company')
   useEffect(() => {
-   const fetchProfile=async()=>{
-    if (session && session?.user) {
-      const response= await getReq('/api/student/profile')
-      // console.log(response)\
-      setUser(response);
-    } else if(adminsession){
-      const response= await getReq('/api/admin/getprofile')
-      if(!response.error){
-        setUser(response)
+    const fetchProfile = async () => {
+      if (session && session?.user) {
+        const response = await getReq('/api/student/profile')
+        // console.log(response)\
+        setUser(response);
+      } else if (adminsession) {
+        const response = await getReq('/api/admin/getprofile')
+        if (!response.error) {
+          setUser(response)
+        }
+      } else if (companysession) {
+        const response = await getReq('/api/company/getprofile')
+        if (!response.error) {
+          setUser(response)
+        }
+      } else {
+        setUser(null)
       }
-    }else if(companysession){
-      const response=await getReq('/api/company/getprofile')
-     if(!response.error){
-       setUser(response)
-     }
-
-    }else{
-      setUser(null)
     }
-   }
-   fetchProfile()
-   
+    fetchProfile()
+
   }, [session]);
   return (
     <AuthContext.Provider value={{ user, logoutUser }}>

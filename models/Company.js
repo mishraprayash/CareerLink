@@ -91,11 +91,9 @@ const companySchema = new mongoose.Schema(
         },
         foundYear: {
             type: Number,
-            // required: [true, "Please provide the found year"]
         },
         verified: {
             type: Boolean,
-            // required:true,
             default: false
         },
         state: {

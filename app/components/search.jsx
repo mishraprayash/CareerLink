@@ -15,7 +15,6 @@ library.add(fas, faTwitter, faFontAwesome, faFilter, faSearch)
 
 
 
-
 import Image from "next/image";
 import React from 'react';
 import './styles/search.css'

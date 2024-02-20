@@ -1,17 +1,18 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import "./loginCompany.css";
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-console.log(email,password)
+    console.log(email, password);
     try {
       // Make a POST request to your server
       const response = await fetch("/api/company/login", {
@@ -24,14 +25,11 @@ console.log(email,password)
       if (response.ok) {
         const data = await response.json();
         console.log("Response:", data);
-        router.push('/dashboard')
-    }
-    else{
-      const data = await response.json();
-      window.alert(data)
-    }
-     
-      
+        router.push("/dashboard");
+      } else {
+        const data = await response.json();
+        window.alert(data);
+      }
     } catch (error) {
       // Handle errors, e.g., display an error message
       console.error("Error:", error);
@@ -57,9 +55,9 @@ console.log(email,password)
             <div className="login-container">
               <p>
                 Don't have an account?
-                <a href="#">
+                <Link href="/signupCompany">
                   <strong>Register Now</strong>
-                </a>
+                </Link>
               </p>
             </div>
           </section>
@@ -89,22 +87,21 @@ console.log(email,password)
 
           <div className="forget">
             Forget password?
-            <a href="#">
+            <Link href="#">
               <strong>Reset Now</strong>
-            </a>
+            </Link>
           </div>
 
-            <button className="signup-btn" type="submit" onClick={handleSubmit}>
-              Login
-            </button>
-         
+          <button className="signup-btn" type="submit" onClick={handleSubmit}>
+            Login
+          </button>
 
           <section className="copy legal">
             <p>
               <span className="small">
                 By continuing, you agree to accept our <br />
-                <a href="#">Privacy Policy</a>&amp;
-                <a href="#">Terms of Service</a>.
+                <Link href="#">Privacy Policy</Link>&amp;
+                <Link href="#">Terms of Service</Link>.
               </span>
             </p>
           </section>

@@ -15,19 +15,19 @@ function Login() {
   };
 
   return (
-    <div class="split-screen">
-      <div class="left">
-        <section class="copy">
+    <div classname="split-screen">
+      <div classname="left">
+        <section classname="copy">
           <h1>Welcome Back To</h1>
           <p>CareerLink</p>
         </section>
       </div>
 
-      <div class="right">
+      <div classname="right">
         <form>
-          <section class="copy">
+          <section classname="copy">
             <h2>Find the perfect fit for your Company</h2>
-            <div class="login-container">
+            <div classname="login-container">
               <p>
                 Don't have an account?
                 <a href="#">
@@ -39,38 +39,38 @@ function Login() {
 
          
 
-          <div class="input-container email">
+          <div classname="input-container email">
             <label for="email">Email</label>
             <input
               type="email"
               id="email"
-              class="email"
+              classname="email"
               placeholder="example@gmail.com"
             />
           </div>
-          <div class="input-container password">
+          <div classname="input-container password">
             <label for="password">Password</label>
             <input
               type="password"
               id="password"
-              class="password"
+              classname="password"
               placeholder="Enter Password"
             />
           </div>
 
      
-          <div class="forget">
+          <div classname="forget">
             Forget password?
             <a href="#">
               <strong>Reset Now</strong>
             </a>
           </div>
-          <button class="signup-btn" type="submit">
+          <button classname="signup-btn" type="submit">
             Login
           </button>
-          <section class="copy legal">
+          <section classname="copy legal">
             <p>
-              <span class="small">
+              <span classname="small">
                 By continuing,you agree to accept our <br />
                 <a href="#">Privacy Policy</a>&amp;
                 <a href="#">Terms of Service</a>.

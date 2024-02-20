@@ -39,22 +39,22 @@ const page = () => {
     };
   }
   return (
-    <div class="body">
-      <div class="split-screen">
-        <div class="left">
+    <div className="body">
+      <div className="split-screen">
+        <div className="left">
           <div className="makecenter">
 
-            <section class="copy">
+            <section className="copy">
               <h1>Welcome To</h1>
               <p>CareerLink</p>
             </section>
           </div>
         </div>
-        <div class="right">
+        <div className="right">
           <form onSubmit={handleSubmit}>
-            <section class="copy">
+            <section className="copy">
 
-              <div class="login-container">
+              <div className="login-container">
                 <h2>Create an account. It's fast & easy.</h2>
                 <p>
                   Already have an account?{" "}
@@ -114,12 +114,12 @@ const page = () => {
               />
             </div>
 
-            <button class="signup-btn" type="submit">
+            <button className="signup-btn" type="submit">
               Register
             </button>
-            <section class="copy legal">
+            <section className="copy legal">
               <p>
-                <span class="small">
+                <span className="small">
                   By continuing,you agree to accept our <br />
                   <a href="#">Privacy Policy</a>&amp;
                   <a href="#">Terms of Service</a>.

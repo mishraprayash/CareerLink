@@ -11,6 +11,7 @@ export async function POST(request) {
     try {
         await connectDB();
         const { email, password } = await request.json();
+        
         if (!email || !password) {
             return NextResponse.json({ msg: "Email or password missing" }, { status: 400 });
         }
