@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-import Card from "@/app/components/exploreCard.js";
+import Card from "@/app/components/exploreCard";
 import { InternshipContext } from "@/app/context/internshipcontext";
 
 function PendingAdmin() {
