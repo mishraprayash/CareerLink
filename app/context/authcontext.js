@@ -4,6 +4,7 @@ import { getReq } from "../hooks/service";
 import { useSession, signOut } from "next-auth/react";
 export const AuthContext = createContext();
 import Cookies from "js-cookie";
+import { ToastMessage } from "../components/ToastMessage";
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const { data: session } = useSession();
@@ -17,8 +18,10 @@ console.log(user)
      const response=await getReq('/api/common/logout')
      console.log(response)
      if(!response.error){
-
+      ToastMessage("Success",response.msg)
        setUser(null);
+     }else{
+      ToastMessage("Error",response.msg)
      }
     }
   }, [session]);

@@ -15,25 +15,6 @@ import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { InternshipContext } from '../context/internshipcontext';
 
-const overlayStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  zIndex: 9999,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
-const messageBoxStyle = {
-  backgroundColor: 'white',
-  padding: '20px',
-  borderRadius: '5px',
-};
-
 const exploreCard = ({ internship }) => {
 
   const router=useRouter()
@@ -221,14 +202,6 @@ const exploreCard = ({ internship }) => {
         </div>
       
       </div>
-       
-      {internshipApplyStatus && (
-        <div style={overlayStyle}>
-          <div style={messageBoxStyle}>
-            {internshipApplyStatus}
-          </div>
-        </div>
-      )}
     </div>
 
   )

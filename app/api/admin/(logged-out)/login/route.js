@@ -9,17 +9,17 @@ export async function POST(request) {
         const { username, password } = await request.json();
         console.log(username,password)
         if (!username || !password) {
-            return NextResponse.json({ msg: "Invalid Credentials" });
+            return NextResponse.json({ msg: "Invalid Credentials" }, { status: 400 });
         }
         const adminExist = await Admin.findOne({ $and: [{ username: username }, { state: "Approved" }] });
         if (!adminExist) {
-            return NextResponse.json({ msg: "Admin Doesnot Exist" });
+            return NextResponse.json({ msg: "Admin Doesnot Exist" }, { status: 400 });
         }
         // checking if password is macthed.
         const isPasswordMatched = await bcrypt.compare(password, adminExist.password);
         // console.log(isPasswordMatched)
         if (!isPasswordMatched) {
-            return NextResponse.json({ msg: "Invalid Login Creddentials" });
+            return NextResponse.json({ msg: "Invalid Login Creddentials" }, { status: 400 });
         }
         // creating a JWT 
         const token  = await adminExist.createJWT()
@@ -36,6 +36,6 @@ export async function POST(request) {
             return NextResponse.json({msg:"Invlaid JSON in the request body"});
         }
         console.log(error);
-        return NextResponse.json({ msg: "Error, check server for error logs" });
+        return NextResponse.json({ msg: "Error, check server for error logs" }, { status: 500 });
     }
 }

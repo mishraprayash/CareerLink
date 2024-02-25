@@ -2,7 +2,7 @@
 import { ToastMessage } from '@/app/components/ToastMessage';
 import { postReq } from '@/app/hooks/service';
 import React, { useState,  useContext } from 'react';
-
+import { useRouter } from 'next/navigation';
 
 const CreateInternship = () => {
  const [createinternship,setCreateInternship]=useState(null)
@@ -17,7 +17,7 @@ const CreateInternship = () => {
     description: "",
     responsibilities: "",
     requirements: "",
-    internshipType: "Paid",
+    internshipType: "",
     salary: 0,
     noofVacancy: 1,
   });
@@ -31,6 +31,8 @@ console.log(response)
 if(!response.error){
     // window.alert(response.msg)
     ToastMessage("Success",response.msg)
+    const router=useRouter()
+    router.push('/dashboard/company/internship')
 }
 else{
     console.log(response.error)
@@ -153,7 +155,7 @@ else{
             className="mt-1 p-2 border rounded-md w-full"
           >
             <option value="Paid">Paid</option>
-            <option value="Un-paid">Un-Paid</option>
+            <option value="Unpaid">Un-Paid</option>
             {/* Add more options based on your requirements */}
           </select>
         </div>
