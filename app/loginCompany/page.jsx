@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import "./loginCompany.css";
 import { useRouter } from 'next/navigation';
-
+import { ToastMessage } from "../components/ToastMessage";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +23,9 @@ console.log(email,password)
       if (response.ok) {
         const data = await response.json();
         console.log("Response:", data);
+       ToastMessage("Success", data.msg); 
         router.push('/dashboard')
+        router.revalidate()
     }
     else{
       const data = await response.json();
@@ -35,7 +36,6 @@ console.log(email,password)
     } catch (error) {
       // Handle errors, e.g., display an error message
       console.error("Error:", error);
-      setError("Invalid email or password");
     }
   };
 
@@ -109,7 +109,6 @@ console.log(email,password)
             </p>
           </section>
         </form>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>
   );

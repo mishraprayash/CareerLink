@@ -1,5 +1,6 @@
 'use client'
 
+import { ToastMessage } from '@/app/components/ToastMessage';
 import React, { useState } from 'react';
 
 const StudentForm = () => {
@@ -108,11 +109,18 @@ console.log(formData.socialmedia)
       });
       const data=await response.json()
       console.log(data)
+      if(!response.ok){
+        ToastMessage("Warning",data.msg)
+      }else{
+
+        ToastMessage("Success",data.msg)
+      }
       console.log(data.error);
-      window.alert(data.msg)
+      // window.alert(data.msg)
      
     } catch (error) {
       console.error('Error submitting form:', error);
+      ToastMessage("Error",error)
     }
   };
 

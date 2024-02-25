@@ -16,7 +16,7 @@ export const postReq=async(url,body)=>{
                 }else{
                     message =data
                 }
-                return{ error:true,message}
+                return{ error:true,msg:message}
             }
             return data;
         
@@ -34,7 +34,7 @@ export const getReq=async(url)=>{
                 }else{
                     message =data
                 }
-                return{ error:true,message}
+                return{ error:true,msg:message}
             }
             return data;
         
@@ -54,7 +54,7 @@ export const patchReq=async(url)=>{
                  }else{
                      message =data
                  }
-                 return{ error:true,message}
+                 return{ error:true,msg:message}
              }
              return data;
          

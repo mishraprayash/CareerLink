@@ -1,4 +1,5 @@
 'use client'
+import { ToastMessage } from '@/app/components/ToastMessage';
 import { postReq } from '@/app/hooks/service';
 import React, { useState,  useContext } from 'react';
 
@@ -28,11 +29,13 @@ const CreateInternship = () => {
 const response=await postReq("/api/company/createinternship",createinternship)
 console.log(response)
 if(!response.error){
-    window.alert(response.msg)
+    // window.alert(response.msg)
+    ToastMessage("Success",response.msg)
 }
 else{
     console.log(response.error)
-    window.alert(response.message)
+    ToastMessage("Error",response.msg)
+    // window.alert(response.message)
 }
 
   };

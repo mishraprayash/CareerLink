@@ -3,7 +3,8 @@ import { useState, createContext, useEffect,useCallback } from "react";
 import { getReq, patchReq ,postReq} from "../hooks/service";
 import { useContext } from "react";
 import { AuthContext } from "./authcontext";
-
+import { toast } from 'react-toastify';
+import { ToastMessage } from "../components/ToastMessage";
 export const InternshipContext = createContext();
 
 export const InternshipContextProvider = ({ children }) => {
@@ -90,6 +91,9 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setApplicants(response.applicants);
+         ToastMessage("Success", response.msg); 
+        }else{
+          ToastMessage("Error", response.msg); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -105,6 +109,9 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setInternshipApplyStatus(response.msg);
+         ToastMessage("Success", response.msg); 
+        }else{
+          ToastMessage("Error", response.msg); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -198,6 +205,9 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setAcceptedStatus(response.msg);
+          ToastMessage("Success", response.msg); 
+        }else{
+          ToastMessage("Error", response.msg); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -213,6 +223,9 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setRejectedStatus(response.msg);
+          ToastMessage("Success", response.msg); 
+        }else{
+          ToastMessage("Error", response.msg); 
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -230,6 +243,9 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setPasswordChangeStatus(response.msg);
+          ToastMessage("Success", response.msg); 
+        }else{
+          ToastMessage("Error", response.msg); 
         }
       }else{
         const response = await postReq(`/api/admin/changepassword`,{currentPassword, newPassword,confirmNewPassword});
@@ -237,6 +253,9 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setPasswordChangeStatus(response.msg);
+          ToastMessage("Success", response.msg); 
+        }else{
+          ToastMessage("Error", response.msg); 
         }
       }
       } catch (error) {

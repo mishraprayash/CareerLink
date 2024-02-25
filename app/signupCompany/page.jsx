@@ -4,6 +4,7 @@ import './signupCompany.css'
 import { postReq } from "../hooks/service";
 
 import { useRouter } from "next/navigation";
+import { ToastMessage } from "../components/ToastMessage";
 const page = () => {
   const [formData, setFormData] = useState({
     companyName: "",
@@ -20,21 +21,21 @@ const page = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if(!(formData.password===formData.confirmPassword)){
-      window.alert("Password and Confirm Password must be same")
+      ToastMessage("Warning","Password and Confirm Password must be same")
       return {msg:"Password and Confirm Password must be same"}
     }
     console.log(formData)
     const response = await postReq("/api/company/register", formData)
     console.log(response)
     if (!response.error) {
-      window.alert(response.msg)
       const router=useRouter()
+      ToastMessage("Success",response.msg)
       router.push('/loginCompany')
 
     }
     else {
       console.log(response.error)
-      window.alert(response.message)
+      ToastMessage("Error",response.msg)
 
     };
   }
