@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/authcontext";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 const StudentProfile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -59,9 +61,9 @@ const StudentProfile = () => {
             {profileData.about && (
 
               <div>
-              <p className="text-left text-2xl my-3">
-                <strong>About:</strong> </p><p className="text-lg align-middle">{profileData.about}
-              </p></div>
+                <p className="text-left text-2xl my-3">
+                  <strong>About:</strong> </p><p className="text-lg align-middle">{profileData.about}
+                </p></div>
             )}
           </div>
 
@@ -70,29 +72,43 @@ const StudentProfile = () => {
           <div>
             {profileData.bio && (
               <div>
-              <p className="text-left text-2xl my-3 align-middle">
-                <strong>Bio:</strong></p>
+                <p className="text-left text-2xl my-3 align-middle">
+                  <strong>Bio:</strong></p>
                 <p className="text-lg"> {profileData.bio}
-              </p></div>
+                </p></div>
             )}
           </div>
 
           <div className="border my-4"></div>
 
-          {/* <div>
+          <div>
             {profileData.socialmedia && (
               <p className="text-left">
                 <strong>Social Media:</strong>
                 <ul>
                   {profileData.socialmedia.map((social, index) => (
                     <li key={index}>
-                      {social.type}: <a href={social.link}>{social.link}</a>
+                      <a href={social.link}>
+
+                        <FontAwesomeIcon
+                          icon={
+                            social.type === "github" ? faGithub :
+                              (social.type === 'linkedin' ? faLinkedin :
+                                (social.type === "other" ? faUsers : null))
+                          }
+                          size="sm"
+                          className="h-12 p-2 text-[#0F1035]"
+                        />
+
+                      </a>
+                      {/*   
+                      {social.type==="github"}: <a href={social.link}>{social.link}</a> */}
                     </li>
                   ))}
                 </ul>
               </p>
             )}
-          </div> */}
+          </div>
 
           {/* </div> */}
 
@@ -101,16 +117,16 @@ const StudentProfile = () => {
               <strong>Certificates:</strong>
             </p>
             <div className="flex justify-center items-center">
-            {profileData.certificates &&
-              profileData.certificates.map((certificate, index) => (
-                <img
-                  key={index}
-                  src={certificate?.secure_url}
-                  alt={`Certificate ${index + 1}`}
-                  className=" flex-1 max-w-96  h-96 rounded mr-2 mt-2 bg-red-600 "
-                />
-              ))}
-              </div>
+              {profileData.certificates &&
+                profileData.certificates.map((certificate, index) => (
+                  <img
+                    key={index}
+                    src={certificate?.secure_url}
+                    alt={`Certificate ${index + 1}`}
+                    className=" flex-1 max-w-96  h-96 rounded mr-2 mt-2 bg-red-600 "
+                  />
+                ))}
+            </div>
           </div>
           <div className="border my-8"></div>
           {profileData.cv && (
@@ -119,14 +135,14 @@ const StudentProfile = () => {
                 <strong>Cv:</strong>
               </p>
               <div className="flex justify-center items-center">
-              <img
-                title="CV"
-                src={(profileData?.cv?.secure_url || "").replace(
-                  /\.pdf$/,
-                  ".jpg"
-                )}
-                style={{ border: "none", height: "500px", width: "500px",backgroundColor: "red"  }}
-              />
+                <img
+                  title="CV"
+                  src={(profileData?.cv?.secure_url || "").replace(
+                    /\.pdf$/,
+                    ".jpg"
+                  )}
+                  style={{ border: "none", height: "500px", width: "500px", backgroundColor: "red" }}
+                />
               </div>
             </div>
           )}
