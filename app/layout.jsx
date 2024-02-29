@@ -18,6 +18,8 @@ export const metadata = {
     icon: "/logo.png", // /public path
   },
 };
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RootLayout({ children }) {
   return (
@@ -28,6 +30,18 @@ export default function RootLayout({ children }) {
             <AuthContextProvider>
               <InternshipContextProvider>
                 <Navbar />
+                <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
                 {children}
                 <Footer />
               </InternshipContextProvider>

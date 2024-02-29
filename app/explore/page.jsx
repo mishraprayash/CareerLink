@@ -1,13 +1,11 @@
 "use client";
 import React, { useContext } from "react";
-import Search from "../components/search";
-import Card from "../components/exploreCard";
-import { ExploreContext } from "../context/explorecontext";
+import Search from "../components/search.jsx";
+import Card from "../components/exploreCard.jsx";
+import { ExploreContext } from "../context/explorecontext.js";
 
 const Explore = () => {
   const { internships, loading } = useContext(ExploreContext);
-  // console.log(internships);
-
   return (
     <>
       <Search />

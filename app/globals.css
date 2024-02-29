@@ -25,7 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
-Link{
-  text-decoration: none;
+  /* overflow-x: hidden; */
 }

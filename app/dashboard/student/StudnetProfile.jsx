@@ -1,10 +1,12 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/authcontext";
+'use client'
+import React, { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '@/app/context/authcontext';
+
 const StudentProfile = () => {
   const [profileData, setProfileData] = useState(null);
   const { user } = useContext(AuthContext);
+
   useEffect(() => {
     setProfileData(user?.student);
   }, [user]);
@@ -24,38 +26,51 @@ const StudentProfile = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p>
-                <strong>Email:</strong> {profileData.email}
-              </p>
-              <p>
-                <strong>Gender:</strong> {profileData.gender}
-              </p>
-              <p>
-                <strong>Age:</strong> {profileData.age}
-              </p>
-              <p>
-                <strong>About:</strong> {profileData.about}
-              </p>
-              <p>
-                <strong>Bio:</strong> {profileData.bio}
-              </p>
+              {profileData.email && (
+                <p>
+                  <strong>Email:</strong> {profileData.email}
+                </p>
+              )}
+              {profileData.gender && (
+                <p>
+                  <strong>Gender:</strong> {profileData.gender}
+                </p>
+              )}
+              {profileData.age && (
+                <p>
+                  <strong>Age:</strong> {profileData.age}
+                </p>
+              )}
+              {profileData.about && (
+                <p>
+                  <strong>About:</strong> {profileData.about}
+                </p>
+              )}
+              {profileData.bio && (
+                <p>
+                  <strong>Bio:</strong> {profileData.bio}
+                </p>
+              )}
             </div>
             <div>
-              <p>
-                <strong>Address:</strong>{" "}
-                {`${profileData?.address?.state}, ${profileData?.address?.district}, ${profileData?.address?.street}`}
-              </p>
-              <p>
-                <strong>Social Media:</strong>
-                <ul>
-                  {profileData?.socialmedia &&
-                    profileData?.socialmedia.map((social, index) => (
+              {profileData.address && (
+                <p>
+                  <strong>Address:</strong>{' '}
+                  {`${profileData?.address?.state}, ${profileData?.address?.district}, ${profileData?.address?.street}`}
+                </p>
+              )}
+              {profileData.socialmedia && (
+                <p>
+                  <strong>Social Media:</strong>
+                  <ul>
+                    {profileData.socialmedia.map((social, index) => (
                       <li key={index}>
                         {social.type}: <a href={social.link}>{social.link}</a>
                       </li>
                     ))}
-                </ul>
-              </p>
+                  </ul>
+                </p>
+              )}
             </div>
           </div>
 
@@ -73,20 +88,19 @@ const StudentProfile = () => {
                 />
               ))}
           </div>
-          <div>
-            <p>
-              <strong>Cv:</strong>
-            </p>
 
-            <img
-              title="CV"
-              src={(profileData?.cv?.secure_url || "").replace(
-                /\.pdf$/,
-                ".jpg"
-              )}
-              style={{ border: "none", height: "300px", width: "200px" }}
-            />
-          </div>
+          {profileData.cv && (
+            <div>
+              <p>
+                <strong>Cv:</strong>
+              </p>
+              <img
+                title="CV"
+                src={(profileData?.cv?.secure_url || '').replace(/\.pdf$/, '.jpg')}
+                style={{ border: 'none', height: '300px', width: '200px' }}
+              />
+            </div>
+          )}
         </>
       ) : (
         <p>Loading profile data...</p>

@@ -33,11 +33,11 @@ const studentSchema = new mongoose.Schema(
         cv:photoModel,
         certificates: [photoModel],
         
-        verified: {
-            type: Boolean,
-            required:true,
-            default: false
-        },
+        // verified: {
+        //     type: Boolean,
+        //     required:true,
+        //     default: false
+        // },
        
         gender:{
             type:String,
@@ -71,7 +71,12 @@ const studentSchema = new mongoose.Schema(
                 message: '{VALUE} isnot Supported.'
             },
             default: "Student",
-        }
+        },
+        profileStatus:{
+            type:String,
+            default:"Incomplete",
+            enum:["Complete","Incomplete","Inactive"]
+        },
     },
     {
         timestamps: true

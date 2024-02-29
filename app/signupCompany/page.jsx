@@ -5,7 +5,9 @@ import Link from "next/link";
 import { postReq } from "../hooks/service";
 import { useRouter } from "next/navigation";
 
+import { ToastMessage } from "../components/ToastMessage";
 const page = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
@@ -20,29 +22,23 @@ const page = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (
-      !formData.companyName ||
-      !formData.email ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-      window.alert("Please fill up all the fields before submitting");
+    if (!(formData.companyName && formData.email && formData.password && formData.confirmPassword)) {
+      ToastMessage("Warning", "Fill up all the fields before submitting");
       return;
     }
     if (!(formData.password === formData.confirmPassword)) {
-      window.alert("Password and Confirm Password must be same");
+      ToastMessage("Warning", "Password and Confirm Password must be same");
       return { msg: "Password and Confirm Password must be same" };
     }
     console.log(formData);
     const response = await postReq("/api/company/register", formData);
     console.log(response);
     if (!response.error) {
-      window.alert(response.msg);
-      const router = useRouter();
+      ToastMessage("Success", response.msg);
       router.push("/loginCompany");
     } else {
       console.log(response.error);
-      window.alert(response.message);
+      ToastMessage("Error", response.msg);
     }
   };
   return (

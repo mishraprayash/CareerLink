@@ -8,6 +8,7 @@ export const postReq = async (url, body) => {
         body: JSON.stringify(body),
     });
     const data = await response.json()
+
     if (!response.ok) {
         let message = 'An error occured....'
         if (data?.msg) {
@@ -15,11 +16,11 @@ export const postReq = async (url, body) => {
         } else {
             message = data
         }
-        return { error: true, message }
+        return { error: true, msg: message }
     }
-    console.log(data);
     return data;
 }
+
 export const getReq = async (url) => {
     const response = await fetch(url)
 
@@ -32,7 +33,7 @@ export const getReq = async (url) => {
         } else {
             message = data
         }
-        return { error: true, message }
+        return { error: true, msg: message }
     }
     return data;
 }
@@ -51,7 +52,7 @@ export const patchReq = async (url) => {
         } else {
             message = data
         }
-        return { error: true, message }
+        return { error: true, msg: message }
     }
     return data;
 }

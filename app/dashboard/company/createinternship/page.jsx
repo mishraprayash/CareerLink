@@ -1,7 +1,8 @@
 'use client'
+import { ToastMessage } from '@/app/components/ToastMessage';
 import { postReq } from '@/app/hooks/service';
 import React, { useState,  useContext } from 'react';
-
+import { useRouter } from 'next/navigation';
 
 const CreateInternship = () => {
  const [createinternship,setCreateInternship]=useState(null)
@@ -16,7 +17,7 @@ const CreateInternship = () => {
     description: "",
     responsibilities: "",
     requirements: "",
-    internshipType: "Paid",
+    internshipType: "",
     salary: 0,
     noofVacancy: 1,
   });
@@ -28,11 +29,15 @@ const CreateInternship = () => {
 const response=await postReq("/api/company/createinternship",createinternship)
 console.log(response)
 if(!response.error){
-    window.alert(response.msg)
+    // window.alert(response.msg)
+    ToastMessage("Success",response.msg)
+    const router=useRouter()
+    router.push('/dashboard/company/internship')
 }
 else{
     console.log(response.error)
-    window.alert(response.message)
+    ToastMessage("Error",response.msg)
+    // window.alert(response.message)
 }
 
   };
@@ -46,10 +51,11 @@ else{
   };
  
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto w-full">
+      <div className='text-4xl text-center  justify-center text-green-700'> Create internship opportunity</div>
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-        <div>
-          <label htmlFor="position" className="block text-sm font-medium text-gray-700">
+        <div className='w-1/2'>
+          <label htmlFor="position" className=" text-sm font-medium text-gray-700">
             Position
           </label>
           <input
@@ -62,8 +68,8 @@ else{
           />
         </div>
 
-        <div>
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+        <div  className='w-1/2 '> 
+          <label htmlFor="location" className=" text-sm font-medium text-gray-700">
             Location
           </label>
           <input
@@ -76,22 +82,10 @@ else{
           />
         </div>
 
-        <div>
-          <label htmlFor="isRemote" className="block text-sm font-medium text-gray-700">
-            Remote
-          </label>
-          <input
-            type="checkbox"
-            id="isRemote"
-            name="isRemote"
-            onChange={(event) => setFormData({ ...formData, [event.target.name]: event.target.checked })}
-        checked={formData.isRemote}
-            className="mt-1 p-2 border rounded-md"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="workTime" className="block text-sm font-medium text-gray-700">
+        
+<div className="flex flex-row items-center justify-center">
+        <div className='w-1/2'>
+          <label htmlFor="workTime" className=" text-sm font-medium text-gray-700">
             Work Time
           </label>
           <select
@@ -106,10 +100,25 @@ else{
           </select>
         </div>
 
-        <div>
-          <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
-            Start Date
+        <div className='w-1/2  flex flex-col items-center ml-2 '>
+          <label htmlFor="isRemote" className=" text-sm mx-2 font-medium text-gray-700">
+            Remote
           </label>
+          <input
+            type="checkbox"
+            id="isRemote"
+            name="isRemote"
+            onChange={(event) => setFormData({ ...formData, [event.target.name]: event.target.checked })}
+        checked={formData.isRemote}
+            className="mt-1 p-2 border rounded-md"
+          />
+        </div>
+        </div>
+          <div className='flex flex-row items-baseline justify-center '>
+        <div className='w-1/2 m-2'>
+          <label htmlFor="startDate" className=" text-sm font-medium text-gray-700">
+            Start Date
+          </label> 
           <input
             type="date"
             id="startDate"
@@ -120,8 +129,8 @@ else{
           />
         </div>
 
-        <div>
-          <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
+        <div className='w-1/2 '>
+          <label htmlFor="endDate" className=" text-sm font-medium text-gray-700">
             End Date
           </label>
           <input
@@ -133,8 +142,9 @@ else{
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
-        <div>
-          <label htmlFor="internshipType" className="block text-sm font-medium text-gray-700">
+        </div>
+        <div className='w-1/2'>
+          <label htmlFor="internshipType" className=" text-sm font-medium text-gray-700">
             Internship Type
           </label>
           <select
@@ -145,13 +155,13 @@ else{
             className="mt-1 p-2 border rounded-md w-full"
           >
             <option value="Paid">Paid</option>
-            <option value="Un-paid">Un-Paid</option>
+            <option value="Unpaid">Un-Paid</option>
             {/* Add more options based on your requirements */}
           </select>
         </div>
 
         {formData.internshipType === 'Paid' && (
-          <div>
+           <div className='w-1/2'>
             <label htmlFor="salary" className="block text-sm font-medium text-gray-700">
               Salary
             </label>
@@ -167,7 +177,7 @@ else{
         )}
 
         {formData.internshipType === 'Paid' && (
-          <div>
+         <div className='w-1/2'>
             <label htmlFor="noofVacancy" className="block text-sm font-medium text-gray-700">
               Number of Vacancies
             </label>
@@ -177,7 +187,7 @@ else{
               name="noofVacancy"
               onChange={handleChange}
               value={formData.noofVacancy}
-              className="mt"/>
+              className="w-full"/>
            </div>   
            )}
         <div>

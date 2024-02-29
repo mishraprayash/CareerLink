@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { postReq } from "@/app/hooks/service";
+import { ToastMessage } from "@/app/components/ToastMessage";
 
 const SignupCompany = () => {
   const router = useRouter();
@@ -122,15 +123,14 @@ const SignupCompany = () => {
         body: formDataObject,
       });
       const data = await response.json();
-      // console.log(data)
-      window.alert(data.msg);
       if (response.ok) {
         // Redirect to a success page or handle success as needed
+        ToastMessage("Success", data.msg);
         router.push("/dashboard");
       } else {
-        console.error(data.error);
+        console.error(data.msg);
         // Handle the error, show an alert, or redirect to an error page
-        window.alert(data.msg);
+        ToastMessage("Warning", data.msg);
       }
     } catch (error) {
       console.error("Error:", error);

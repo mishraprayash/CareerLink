@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 // import "./loginCompany.css";
 import { useRouter } from 'next/navigation';
+import { ToastMessage } from "@/app/components/ToastMessage";
 
 
 function Login() {
@@ -21,14 +22,13 @@ console.log(username,password)
         },
         body: JSON.stringify({ username, password }),
       });
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Response:", data);
-        router.push('/admin/dashboard')
-    }
-    else{
       const data = await response.json();
-      window.alert(data)
+      if (response.ok) {
+        console.log("Response:", data);
+        ToastMessage("Success",data.msg)
+        router.push('/admin/dashboard')
+    }else{
+      ToastMessage("Error",data.msg)
     }
      
       

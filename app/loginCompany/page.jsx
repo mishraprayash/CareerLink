@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import "./loginCompany.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ToastMessage } from "../components/ToastMessage";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -25,15 +25,16 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         console.log("Response:", data);
+        ToastMessage("Success", data.msg);
         router.push("/dashboard");
+        router.revalidate();
       } else {
         const data = await response.json();
-        window.alert(data);
+        ToastMessage("Error", data.msg);
       }
     } catch (error) {
       // Handle errors, e.g., display an error message
       console.error("Error:", error);
-      setError("Invalid email or password");
     }
   };
 
@@ -106,7 +107,6 @@ function Login() {
             </p>
           </section>
         </form>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>
   );

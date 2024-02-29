@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { postReq } from "@/app/hooks/service";
 
 import { useRouter } from "next/navigation";
+import { ToastMessage } from "@/app/components/ToastMessage";
 const page = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -20,21 +21,22 @@ const page = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if(!(formData.password===formData.confirmPassword)){
-      window.alert("Password and Confirm Password must be same")
+      ToastMessage("Warning","Password and Confirm Password must be same")
       return {msg:"Password and Confirm Password must be same"}
     }
     console.log(formData)
-    const response = await postReq("/api/company/register", formData)
+    const response = await postReq("/api/admin/register", formData)
     console.log(response)
     if (!response.error) {
-      window.alert(response.msg)
+      ToastMessage("Success",response.msg)
+
       const router=useRouter()
       router.push('/admin/login')
 
     }
     else {
       console.log(response.error)
-      window.alert(response.message)
+      ToastMessage("Error",response.msg)
 
     };
   }
