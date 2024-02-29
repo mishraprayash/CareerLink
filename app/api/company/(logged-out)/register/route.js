@@ -29,9 +29,8 @@ export async function POST(request) {
                 { status: 400 }
             );
         }
-        console.log(company)
-        // const emailResponse = await company.verifyEmail();
-        // console.log("MessageId for emailResponse", emailResponse.messageId);
+        await sendVerificationEmail(company);
+
         return NextResponse.json(
             { msg: "Company Applied for registration and verification link has been sent to the email" },
             { status: 201 }
@@ -40,5 +39,15 @@ export async function POST(request) {
     } catch (error) {
         console.log(error)
         return NextResponse.json({ msg: "Internal Server Error", error: error }, { status: 500 })
+    }
+}
+
+async function sendVerificationEmail(company){
+    try{
+        await company.verifyEmail();
+        console.log(`Verification Email Link Queued for ${company.companyName} at ${new Date()}}`);
+    }catch(error){
+        console.log("Company verification link couldnot be send");
+        console.log(error);
     }
 }
