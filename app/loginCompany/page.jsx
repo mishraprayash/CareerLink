@@ -29,7 +29,7 @@ console.log(email,password)
     }
     else{
       const data = await response.json();
-      window.alert(data)
+      ToastMessage("Error", data.msg); 
     }
      
       
