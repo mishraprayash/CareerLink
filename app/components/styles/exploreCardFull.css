@@ -3,20 +3,20 @@
    box-sizing:border-box;
 
 }
-  .main{
+  .CF_main{
    margin: 0;
    padding: 0;
    box-sizing:border-box;
    
   
  }
- .cname,h4{
+ .CF_cname,h4{
    color: brown;
    
    font-size: 28px;
  }
 
-  .aCard{
+  .CF_aCard{
    display: flex;
    flex-direction: row;
    margin: 40px 40px;
@@ -28,7 +28,7 @@ padding:20px  20px;
 border:solid 1px rgb(32, 32, 80);
 
 }
-.left{
+.CF_left{
   
    width: 690px;
    display: flex;
@@ -38,7 +38,7 @@ border:solid 1px rgb(32, 32, 80);
    /* align-items: center; */
    border-right: solid 1px rgb(32, 32, 80);
 }
-.Clogo,.cname{
+.CF_Clogo,.CF_cname{
  
    position: relative;
    margin: auto;
@@ -101,7 +101,7 @@ font-size: 18px;
   
    
 }
-.ALogo{
+.CF_ALogo{
    
    background-color: red;
 }

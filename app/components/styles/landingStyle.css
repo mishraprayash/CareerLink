@@ -31,7 +31,7 @@
   height: 400px;
   background: transparent;
 }
-.left{
+.lleft{
   flex:1;
   padding: 20px;
   background-color: #DBE7C9;
@@ -45,11 +45,11 @@
     color: #fffeff;
    padding: 4px 8px;
   }
-.header{
+.lheader{
   color: #108A00;
   font-size: large;
 }
-.right{
+.lright{
   position: relative;
   flex:1;
   padding: 20px;
@@ -72,7 +72,7 @@
     border-radius: 40px;
     margin-bottom: -100px;
   }
-.box{
+.lbox{
   height: 155px;
   width: 200px;
   background: #DCF2F1;

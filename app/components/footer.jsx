@@ -9,7 +9,7 @@ const Footer = () => {
    
        <div className="footerpart">
     <div className="footer1">
-      <h2 className="header">ABOUT US</h2>
+      <h2 className="fheader">ABOUT US</h2>
       <div className="college">
         <div className="">
           <Image className=" ml-12" src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/ej5izqga34pvxuisqy1j.png" width={260} height={130} alt="campus"/></div>

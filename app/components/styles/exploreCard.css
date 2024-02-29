@@ -6,11 +6,11 @@
   } 
   
   .internship-card{
-    margin-top: 100px;
+    margin: 20px auto;
   
-    width: 200px;
+    /* width: 200px; */
     width: 90%;
-    margin: auto;
+    /* margin: auto; */
     display: flex;
     flex-direction: column;
     background-color: #fff !important;
@@ -47,17 +47,17 @@
   
   }
   .internship-position {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 600;
   }
   .internship-name {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   
   .internship-card .middle {
     padding: 1rem 0;
   }
-  .internship-card .middle .internship-responsibility p:nth-child(1),
+  /* .internship-card .middle .internship-responsibility p:nth-child(1),
   .internship-card .middle .internship-qualification p:nth-child(1){
     font-size: 0.9rem;
     font-weight: 500;
@@ -67,7 +67,7 @@
     font-size: 0.9rem;
     line-height: 1.2;
   
-  }
+  } */
   
   
   
@@ -121,9 +121,9 @@
     flex-direction: row;
     align-items: center;
     align-content: center;
-    /* justify-content: space-between; */
-    justify-content: center;
- margin:20px 10px;
+    justify-content: space-between;
+    /* justify-content: center; */
+ margin:30px 10px 20px 10px;
    
     
  }
@@ -133,6 +133,8 @@
    flex:1;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
  }
  .sTitle{
  margin-left: 10px;
@@ -143,7 +145,10 @@
  margin-left: 5px;
  font-size: 18px;
  
- 
+ .internship-qualification{
+
+  margin: auto;
+ }
  
  }
   /* ============================================== */
@@ -154,12 +159,11 @@
   }
   .appy-btn {
     /* background-color: var(--main-light-color); */
-    background-color: #108A00;
+    background-color: rgb(95, 232, 95);
     padding: 0.4rem 1rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
     /* color: var(--main-dark-color); */
-    color: white;
     cursor: pointer;
   }
   .internship-bookmark {
@@ -167,11 +171,10 @@
     display: flex;
     align-items: center;
     padding: 0.4rem 1rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    background-color: rgb(95, 232, 95);
     /* background-color: var(--main-light-color); */
-    background-color: #108A00;
-    color: white;
   }
   .internship-bookmark:hover, .appy-btn:hover {
     transition: all 0.2s linear;

@@ -44,16 +44,16 @@ setProfileUrl(user?.student?StudentImageUrl:CompanyImageUrl)
         {
           user ? (
             <div className="flex gap-3">
-               <Link href='/' className="navbutton">
+               <Link href='/' className="navbutton flex justify-center items-center">
                 Home
               </Link>
-              <Link href='/explore' className="navbutton">
+              <Link href='/explore' className="navbutton flex justify-center items-center">
                 Explore
               </Link>
-              <Link href='/dashboard' className="navbutton">
+              <Link href='/dashboard' className="navbutton flex justify-center items-center">
                 Dashboard
               </Link>
-              <Link href='/careerguide' className="navbutton">
+              <Link href='/careerguide' className="navbutton flex justify-center items-center">
                 Training
               </Link>
               {/* <Link href='/profile'>

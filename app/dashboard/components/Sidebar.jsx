@@ -7,20 +7,22 @@ import { AuthContext } from '@/app/context/authcontext';
 const Sidebar = () => {
 const {user}=useContext(AuthContext)
   return (
-    <aside className="bg-gray-200 py-4 px-6">
-      <ul className="space-y-4">
-        <li>
+
+
+    <aside className="bg-gray-200 py-16 px-6 mt-14 sticky left-0 top-16">
+      <ul className="space-y-4 ">
+        <li className='h-28 hover:bg-gray-300 p-5 rounded'>
           <Link href="/dashboard" passHref>
-          <p className='flex'>
-              <FontAwesomeIcon icon={faHome} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}}/> Dashboard
+          <p className='flex flex-col'>
+              <FontAwesomeIcon icon={faHome} style={{ fontSize: '10px', marginRight: '0.5rem', height:"50px"}}/> Dashboard
             </p>
           </Link>
         </li>
-        <li>
+        <li className='h-28 hover:bg-gray-300 p-5 rounded'>
           <Link href="/dashboard/components/profile" passHref>
-            <p className='flex'>
+            <p className='flex flex-col'>
 
-              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}} /> Profile
+              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '3rem', marginRight: '0.5rem', height:"50px"}} /> Profile
           
             </p>
           </Link>
@@ -28,17 +30,17 @@ const {user}=useContext(AuthContext)
         {user ? (
   user.student ? (
     <div>
-      <li>
+      <li className='h-28 hover:bg-gray-300 p-5 rounded'>
           <Link href="/dashboard/student/updateprofile" passHref>
-          <p className='flex'>
-              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}}/> UpdateProfile
+          <p className='flex flex-col'>
+              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"50px"}}/> UpdateProfile
            </p>
           </Link>
         </li>
-    <li>
+    <li className='h-28 hover:bg-gray-300 p-5 rounded'>
       <Link href="/dashboard/student/application" passHref>
-        <p className='flex'>
-          <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height: '20px' }}/> Applications
+        <p className='flex flex-col'>
+          <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height: '50px' }}/> Applications
         </p>
       </Link>
     </li>
@@ -46,27 +48,27 @@ const {user}=useContext(AuthContext)
   ) : user.company ? (
     <div>
 
-    <li>
+    <li className='h-28 hover:bg-gray-300 p-5 rounded'>
       {/* Add your Link or other content for company here */}
       <Link href="/dashboard/company/internship" passHref>
-        <p className='flex'>
-          <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height: '20px' }}/> My Internships
+        <p className='flex flex-col'>
+          <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height: '50px' }}/> My Internships
         </p>
       </Link>
     </li>
     
-    <li>
+    <li className='h-28 hover:bg-gray-300 p-5 rounded'>
           <Link href="/dashboard/company/createinternship" passHref>
-          <p className='flex'>
-              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}}/> Create Internship
+          <p className='flex flex-col'>
+              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"50px"}}/> Create Internship
            </p>
           </Link>
         </li>
         
-        <li>
+        <li className='h-28 hover:bg-gray-300 p-5 rounded'>
           <Link href="/dashboard/company/updateprofile" passHref>
-          <p className='flex'>
-              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}}/> UpdateProfile
+          <p className='flex flex-col'>
+              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"50px"}}/> UpdateProfile
            </p>
           </Link>
         </li>
@@ -81,10 +83,10 @@ const {user}=useContext(AuthContext)
            </p>
           </Link>
         </li> */}
-        <li>
+        <li className='h-28 hover:bg-gray-300 p-5 rounded'>
           <Link href="/dashboard/components/settings" passHref>
-          <p className='flex'>
-              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}}/> Settings
+          <p className='flex flex-col'>
+              <FontAwesomeIcon icon={faBriefcase} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"50px"}}/> Settings
             </p>
           </Link>
         </li>
