@@ -5,7 +5,9 @@ import { useSession, signOut } from "next-auth/react";
 export const AuthContext = createContext();
 import Cookies from "js-cookie";
 import { ToastMessage } from "../components/ToastMessage";
+import { useRouter } from "next/navigation";
 export const AuthContextProvider = ({ children }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const { data: session } = useSession();
   // console.log(session)
@@ -19,6 +21,7 @@ export const AuthContextProvider = ({ children }) => {
      console.log(response)
      if(!response.error){
       ToastMessage("Success",response.msg)
+      router.push('/admin/login');
        setUser(null);
      }else{
       ToastMessage("Error",response.msg)
