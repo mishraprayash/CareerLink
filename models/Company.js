@@ -185,7 +185,7 @@ companySchema.methods.Rejected = async function () {
 
 companySchema.methods.Accepted = async function () {
     try {
-        console.log("Accepted Email to be sent to ", this.username);
+        console.log("Accepted Email to be sent to ", this.companyName);
         await sendEmail(this.email, "ACCEPTED", this._id.toString(), this.role);
     } catch (error) {
         console.log("Error while sending accepted link", error);
