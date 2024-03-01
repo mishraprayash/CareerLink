@@ -14,18 +14,18 @@ export const AuthContextProvider = ({ children }) => {
   console.log(user)
   const logoutUser = useCallback(async () => {
     if (session && session?.user) {
-        signOut()   
-        setUser(null)
-    }else{
-     const response=await getReq('/api/common/logout')
-     console.log(response)
-     if(!response.error){
-      ToastMessage("Success",response.msg)
-      router.push('/admin/login');
-       setUser(null);
-     }else{
-      ToastMessage("Error",response.msg)
-     }
+      signOut()
+      setUser(null)
+    } else {
+      const response = await getReq('/api/common/logout')
+      console.log(response)
+      if (!response.error) {
+        ToastMessage("Success", response.msg)
+        router.push('/');
+        setUser(null);
+      } else {
+        ToastMessage("Error", response.msg)
+      }
     }
   }, [session]);
 
