@@ -30,7 +30,6 @@ const industrySectors = [
     "Environmental Services, Sustainability",
     "Technology, Information Technology (IT), Software Development",
     "Healthcare, Biotechnology, Medical Devices",
-    "Construction and Infrastructure",
     "Mining, Resources",
     "Manufacturing",
     "Technology, Robotics, Automation",
