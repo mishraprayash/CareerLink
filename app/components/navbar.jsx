@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-// import "./styles/navstyle.css";1
 import { AuthContext } from "../context/authcontext";
 import AppHeaderDropdown from "./AppHeaderDropdown";
 
