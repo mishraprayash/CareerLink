@@ -32,8 +32,31 @@ export async function middleware(request) {
   const companyToken = !!request.cookies.get('token') && !!request.cookies.get('company');
   const nextAuthToken = !!request.cookies.get('next-auth.session-token');
 
+  console.log(adminToken, companyToken, nextAuthToken);
+
+  if (!adminToken && !companyToken && !nextAuthToken) {
+
+    // handling for client loggedIn routes in case no any cookies is there.
+    if (pathname.startsWith('/dashboard') || pathname.startsWith('/admin/dashboard')) {
+      return NextResponse.redirect(new URL('/', request.nextUrl.origin));
+    }
+    // if no any token no any loggedIn API routes/endpoints are allowed to accessed.
+    if (adminLoggedInAPIRoutes.includes(pathname) ||
+      companyLoggedInAPIRoutes.includes(pathname) ||
+      studentLoggedInAPIRoutes.includes(pathname)) {
+      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+    }
+    return NextResponse.next();
+  }
+
   if (nextAuthToken) {
-    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin')) {
+
+    // handling unauthorized api routes
+    if(pathname.startsWith('/api/admin') || pathname.startsWith('/api/company')){
+      return NextResponse.json({msg:"Unauthenticated User"},{status:403});
+    }
+    // handling client side routes
+    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin') || pathname.startsWith('/dashboard/company')) {
       return NextResponse.redirect(new URL('/dashboard', request.nextUrl.origin));
     }
     else {
@@ -41,7 +64,6 @@ export async function middleware(request) {
     }
   }
   else if (companyToken) {
-
     const decodedToken = await decodeJWTCompany(request);
     if (decodedToken != null) {
       if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin')) {
