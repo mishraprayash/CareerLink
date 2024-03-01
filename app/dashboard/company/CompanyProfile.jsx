@@ -31,15 +31,15 @@ const CompanyProfile = () => {
             <div>
               {company?.logo && (
                 <img
-                  src={company.logo.secure_url}
-                  alt={company.companyName}
+                  src={company?.logo.secure_url}
+                  alt={company?.companyName}
                   className="w-72 h-72 rounded-full"
                 />
               )}
             </div>
             <div className=" flex flex-col mb-10">
               <h2 className="text-5xl font-bold ">{company?.companyName}</h2>
-              <p className="text-gray-700">{company.companyDescription}</p>
+              <p className="text-gray-700">{company?.companydescription}</p>
             </div>
           </div>
 
@@ -48,10 +48,12 @@ const CompanyProfile = () => {
               Company Information
             </div>
             <div className="text-gray-700 row-start-2 col-start-2 col-span-3">
-              <strong>Industry:</strong> {company.companyInfo}
+              <strong >Industry:</strong> {company?.companyInfo?.industrySectors}
+              <br/>
+              <strong> Category:</strong> {company?.companyInfo?.category}
             </div>
             <div className="text-gray-700 row-start-3 col-start-2 col-span-3">
-              <strong>Founded Year:</strong> {company.foundYear}
+              <strong>Founded Year:</strong> {company?.foundYear}
             </div>
             {/* Add more details as needed */}
           </div>
@@ -61,10 +63,10 @@ const CompanyProfile = () => {
               Contact Information
             </div>
             <div className="text-gray-700 row-start-2 col-start-2 col-span-3">
-              <strong>Email:</strong> {company.email}
+              <strong>Email:</strong> {company?.email}
             </div>
             <div className="text-gray-700 row-start-3 col-start-2 col-span-3">
-              <strong>Phone Number:</strong> {company.phoneNO}
+              <strong>Phone Number:</strong> {company?.phoneNO}
             </div>
             {/* Add more contact details as needed */}
           </div>
@@ -74,13 +76,13 @@ const CompanyProfile = () => {
               Address
             </div>
             <div className="text-gray-700  row-start-2 col-start-2">
-              <strong>City:</strong> {company.address.city}
+              <strong>City:</strong> {company?.address?.city}
             </div>
             <div className="text-gray-700  row-start-3 col-start-2">
-              <strong>State:</strong> {company.address.state}
+              <strong>State:</strong> {company?.address?.state}
             </div>
             <div className="text-gray-700  row-start-4 col-start-2">
-              <strong>Zip Code:</strong> {company.address.zipCode}
+              <strong>Zip Code:</strong> {company?.address?.zipCode}
             </div>
           </div>
 
@@ -111,3 +113,7 @@ const CompanyProfile = () => {
 };
 
 export default CompanyProfile;
+
+
+
+
