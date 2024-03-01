@@ -1,4 +1,3 @@
-import { Cabin_Sketch } from "next/font/google";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -9,6 +8,8 @@ export async function GET(request) {
         }
         const response = NextResponse.json({ msg: "Logout Success", success: true, });
         response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+        response.cookies.set("company", "", { httpOnly: true, expires: new Date(0) });
+        response.cookies.set("admin", "", { httpOnly: true, expires: new Date(0) });
         return response;
     } catch (error) {
         console.log(error);
