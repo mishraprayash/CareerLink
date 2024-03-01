@@ -32,7 +32,7 @@ const adminLoggedOutAPIRoutes = [
     '/api/admin/login',
     '/api/admin/register',
     '/api/admin/resetpassword',
-    '/api/admin/verifyemail',
+    // '/api/admin/verifyemail', this route can be used in both case when logged out or not
 ];
 
 const companyLoggedInAPIRoutes = [
@@ -50,7 +50,7 @@ const companyLoggedOutAPIRoutes = [
     '/api/company/login',
     '/api/company/register',
     '/api/company/resetpassword',
-    '/api/company/verifyemail'
+    // '/api/company/verifyemail' this route can be used in both case when logged out or not
 ];
 
 
