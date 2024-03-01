@@ -10,10 +10,8 @@ const SignupCompany = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    companyInfo: {
-      category: "Civil Engineering",
-      industrySectors: "Construction and Infrastructure",
-    },
+    category: "",
+    industrySectors: "",
     city: "",
     state: "",
     zipCode: "",
@@ -52,7 +50,6 @@ const SignupCompany = () => {
     "Environmental Services, Sustainability",
     "Technology, Information Technology (IT), Software Development",
     "Healthcare, Biotechnology, Medical Devices",
-    "Construction and Infrastructure",
     "Mining, Resources",
     "Manufacturing",
     "Technology, Robotics, Automation",
@@ -62,9 +59,9 @@ const SignupCompany = () => {
     "Water Management, Environmental Services",
     "Energy, Nuclear Energy",
   ];
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     if (name.includes(".")) {
       const [mainKey, nestedKey] = name.split(".");
       setFormData({
@@ -94,10 +91,6 @@ const SignupCompany = () => {
       // Flatten the nested structure
       const flattenedFormData = {
         ...formData,
-        companyInfo: {
-          category: formData.companyInfo.category,
-          industrySectors: formData.companyInfo.industrySectors,
-        },
       };
 
       // Append each key-value pair to FormData
@@ -113,10 +106,11 @@ const SignupCompany = () => {
           );
         }
       }
-
       return formDataObject;
     };
+
     const formDataObject = convertToFormData();
+
     try {
       const response = await fetch("/api/company/updateprofile", {
         method: "PATCH",
@@ -151,11 +145,11 @@ const SignupCompany = () => {
             Company Category
           </label>
           <select
-            id="companyInfo.category"
-            name="companyInfo.category"
-            value={formData.companyInfo.category}
+            id="category"
+            name="category"
+            value={formData.category}
             onChange={handleChange}
-            className=""
+            className="category"
           >
             {engineeringCategories.map((category) => (
               <option key={category} value={category}>
@@ -173,9 +167,9 @@ const SignupCompany = () => {
             Industry Sectors
           </label>
           <select
-            id="companyInfo.industrySectors"
-            name="companyInfo.industrySectors"
-            value={formData.companyInfo.industrySectors}
+            id="industrySectors"
+            name="industrySectors"
+            value={formData.industrySectors}
             onChange={handleChange}
             className="w-[300px]"
           >
