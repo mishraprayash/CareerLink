@@ -52,8 +52,8 @@ export async function middleware(request) {
   if (nextAuthToken) {
 
     // handling unauthorized api routes
-    if(pathname.startsWith('/api/admin') || pathname.startsWith('/api/company')){
-      return NextResponse.json({msg:"Unauthenticated User"},{status:403});
+    if (pathname.startsWith('/api/admin') || pathname.startsWith('/api/company')) {
+      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
     }
     // handling client side routes
     if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin') || pathname.startsWith('/dashboard/company')) {
@@ -65,41 +65,32 @@ export async function middleware(request) {
   }
   else if (companyToken) {
     const decodedToken = await decodeJWTCompany(request);
-    if (decodedToken != null) {
-      if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin')) {
-        return NextResponse.redirect(new URL('/dashboard', request.nextUrl.origin));
-      }
-      if (companyLoggedOutAPIRoutes.includes(pathname)) {
-        return NextResponse.json({ msg: "Not Allowed while logged In" }, { status: 403 });
-      }
-      return NextResponse.next();
-    }
-    else {
+    if (decodedToken === null) {
       return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
     }
+    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin') || pathname.startsWith('/profile')) {
+      return NextResponse.redirect(new URL('/dashboard', request.nextUrl.origin));
+    }
+    if (companyLoggedOutAPIRoutes.includes(pathname)) {
+      return NextResponse.json({ msg: "Not Allowed while logged In" }, { status: 403 });
+    }
+    return NextResponse.next();
   }
-
   else if (adminToken) {
-
     const decodedToken = await decodeJWTAdmin(request);
-    if (decodedToken != null) {
-      if (loggedOutOnlyClientRoutes.includes(pathname) || !pathname.startsWith('/admin')) {
-        return NextResponse.redirect(new URL('/admin/dashboard', request.nextUrl.origin));
-      }
-      if (adminLoggedOutAPIRoutes.includes(pathname)) {
-        return NextResponse.json({ msg: "Not allowed while logged in" }, { status: 403 });
-      }
-      return NextResponse.next();
-    }
-    else {
+    if (decodedToken === null) {
       return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+    }
+    // not allowed routes while logged in
+    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
+      return NextResponse.redirect(new URL('/admin/dashboard', request.nextUrl.origin));
     }
   }
   else {
     return NextResponse.next();
   }
-
 }
+
 
 
 
