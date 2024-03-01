@@ -49,14 +49,17 @@ export async function PATCH(request){
     // Destructure the non-file entries
     const nonFileData = Object.fromEntries(nonFileEntries);
     // console.log(nonFileData)
-    const {companyInfo,city,state,zipCode,foundYear,companyDescription,phoneNO} = nonFileData
-    if (!companyInfo || !city || !state||!zipCode ||!foundYear || !companyDescription || !phoneNO) {
+    const {companyInfo,city,state,zipCode,foundYear,companyDescription,phoneNO,category,industrySectors} = nonFileData
+    if (!category || !industrySectors || !city || !state||!zipCode ||!foundYear || !companyDescription || !phoneNO) {
       return NextResponse.json({ msg: "Missing Fields" }, { status: 400 });
   }
   const company = await Company.findOneAndUpdate(
     { _id:decodedToken.id },
     {
-        companyInfo,
+        companyInfo:{
+          category,
+          industrySectors
+        },
         foundYear,
         description:companyDescription,
         phoneNO,

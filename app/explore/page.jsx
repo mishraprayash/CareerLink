@@ -6,7 +6,7 @@ import Card from "../components/exploreCard.jsx"
 import { ExploreContext } from "../context/explorecontext.js";
 
 const Explore = () => {
-  const { internships, loading } = useContext(ExploreContext);
+  const { internships,setInternships, loading } = useContext(ExploreContext);
   // console.log(internships);
 
   return (
@@ -19,7 +19,7 @@ const Explore = () => {
 
 //  */}
 
-      <Search />
+      <Search  internships={internships} setInternships={setInternships} />
      
       <div className="border ">
 

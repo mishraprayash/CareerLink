@@ -39,14 +39,17 @@ const CompanyProfile = () => {
                         )}</div>
                         <div className=" flex flex-col mb-10">
                          <h2 className="text-5xl font-bold ">{company?.companyName}</h2>
-                         <p className="text-gray-700">{company.companyDescription}</p>
+                         <p className="text-gray-700">{company.description}</p>
                     </div>
                     </div>
 
                     <div className="mt-10 grid grid-cols-10 grid-rows-3  ">
                         <div className="text-2xl font-semibold mb-2 col-start-1 col-span-5">Company Information</div>
                         <div className="text-gray-700 row-start-2 col-start-2 col-span-3">
-                           <strong>Industry:</strong> {company.companyInfo}
+                           <strong>Industry Sector:</strong>
+                           {company.companyInfo.industrySectors}
+                           <strong> Category:
+                            </strong> {company.companyInfo?.category}
                         </div>
                         <div className="text-gray-700 row-start-3 col-start-2 col-span-3">
                             <strong>Founded Year:</strong> {company.foundYear}

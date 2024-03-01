@@ -361,8 +361,8 @@ const StudentForm = () => {
         ToastMessage("Warning", data.msg)
       } else {
 
-        ToastMessage("Success", data.msg)
         router.push('/dashboard/components/profile');
+        ToastMessage("Success", data.msg)
       }
       console.log(data.error);
       // window.alert(data.msg)
