@@ -36,12 +36,13 @@ const Navbar = () => {
     : "/Image/Companylogo.jpg";
 
   //  console.log(CompanyImageUrl)
+
   useEffect(() => {
     setProfileUrl(user?.student ? StudentImageUrl : CompanyImageUrl);
   }, [user]);
 
   return (
-    <div className="flex flex-row justify-between bg-[#DBE7C9]">
+    <div className="flex flex-row justify-between bg-[#CCD3CA]">
       <div className="flex gap-5">
         <Link className="no-underline p-3 ml-5" href="/">
           <Image

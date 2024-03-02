@@ -8,7 +8,7 @@ const LandingPage = () => {
     <div className="lpage">
       <div className="content">
         <div className="singlecontent">
-          <div className="flex flex-col flex-1 p-5 bg-[#DBE7C9] rounded-[0.5rem] items-center">
+          <div className="flex flex-col flex-1 p-5 bg-[#CCD3CA] rounded-[0.5rem] items-center">
             <h1 className="header">CareerForge Nexus</h1>
             <p className="font-serif">
               "Dive into opportunities, unleash potential, and illuminate your

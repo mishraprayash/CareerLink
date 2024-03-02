@@ -20,41 +20,57 @@ function MyInternship() {
     router.push(`/dashboard/company/internship/${internshipId}/applicants`); // Navigate to applicants route
   };
 
-  return (
+  return loading ? (
+    <div className="text-center p-4 m-2 shadow-xl">Loading Internships</div>
+  ) : (
     <>
-      <div>Running Internships</div>
-      {runningInternships &&
-        runningInternships.map((internship) => (
-          <div className="border border-blue-900" key={internship._id}>
+      <div className="text-center p-4 m-2 shadow-sm shadow-black bg-slate-300 font-bold">
+        Running Internships
+      </div>
+      {runningInternships != null && runningInternships != undefined ? (
+        runningInternships?.map((internship) => (
+          <div className="m-2 p-2" key={internship._id}>
             <Card internship={internship} />
-            <div className="flex justify-center space-x-4">
-              <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600">
+            <div className="flex justify-center space-x-4 m-5 rounded p-3 shadow-black shadow-sm bg-slate-100">
+              <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600 hover:bg-green-600">
                 Update
               </button>
               <button
                 onClick={(e) => handleSeeApplicants(e, internship._id)}
-                className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-green active:bg-green-600"
+                className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-green active:bg-green-600 hover:bg-green-600"
               >
                 See Applicants
               </button>
             </div>
           </div>
-        ))}
-      <div>Pending Internships</div>
-      {pendingInternships &&
-        pendingInternships.map((internship) => (
-          <div className="border border-blue-900" key={internship._id}>
+        ))
+      ) : (
+        <div className="p-4 m-2 text-center bg-blue-300 shadow-sm shadow-black font-thin">
+          No any applied internships to show
+        </div>
+      )}
+      <div className="text-center p-4 m-2 shadow-sm shadow-black bg-slate-300 font-bold">
+        Pending Internships
+      </div>
+      {pendingInternships !== null && pendingInternships !== undefined ? (
+        pendingInternships?.map((internship) => (
+          <div className="m-2 p-2" key={internship._id}>
             <Card internship={internship} />
-            <div className="flex justify-center space-x-4">
-              <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600">
+            <div className="flex justify-center space-x-4 m-5 rounded p-3 shadow-black shadow-sm bg-slate-100">
+              <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600 hover:bg-green-600">
                 Update
               </button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-green active:bg-green-600">
+              <button className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-green active:bg-green-600 hover:bg-green-600">
                 Delete
               </button>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div className="p-4 m-2 text-center bg-blue-300 shadow-sm shadow-black font-thin">
+          No any internship running at the momoment
+        </div>
+      )}
     </>
   );
 }

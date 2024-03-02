@@ -5,7 +5,7 @@ import LandingPage from "./components/landingpage";
 export default function Home() {
   return (
     <main>
-      <div className="text-center"></div>
+      <div className="text-cente"></div>
       <LandingPage />
     </main>
   );

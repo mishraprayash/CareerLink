@@ -1,10 +1,11 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faClock, faCoins, faBriefcase, faArrowLeft, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { InternshipContext } from '../context/internshipcontext';
+import Image from "next/image";
 
 const ExploreCardFull = ({ internship }) => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const ExploreCardFull = ({ internship }) => {
       <div className='flex flex-row border border-gray-200 rounded p-4 mt-4'>
         <div className='flex flex-col items-center w-1/4'>
           <div className='mb-4'>
-            <img className="w-24 h-24 rounded-full" src={internship.companyLogo?.secure_url} alt='Company Logo' />
+            <Image className="w-24 h-24 rounded-full" src={internship.companyLogo?.secure_url} alt='Company Logo' width={50} height={50}/>
           </div>
           <div className='text-lg font-bold'>{internship.companyName}</div>
           <div className="flex flex-col mt-4">
@@ -62,7 +63,7 @@ const ExploreCardFull = ({ internship }) => {
         <div className='ml-8 w-3/4'>
           <div className='mb-4'>
             <h4 className="text-lg font-bold text-black">Job Description</h4>
-            <p>{internship.description}</p>
+            <div classname="bg-red-200">{internship.description}</div>
           </div>
           <div className='mb-4'>
             <h4 className="text-lg font-bold text-black">Responsibilities of Candidates</h4>
@@ -79,7 +80,7 @@ const ExploreCardFull = ({ internship }) => {
           <div className="internship-skills">
             {internship.skillsRequired && internship.skillsRequired.length > 0 && (
               <>
-                <p className="font-semibold">Skills Required:</p>
+                <div className="font-semibold">Skills Required:</div>
                 <ul className="list-disc pl-4">
                   {/* Iterate over skills required and display them */}
                   {internship.skillsRequired.map((skill, index) => (

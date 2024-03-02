@@ -38,7 +38,7 @@ export async function middleware(request) {
 
     // handling for client loggedIn routes in case no any cookies is there.
     if (pathname.startsWith('/dashboard') || pathname.startsWith('/admin/dashboard')) {
-      return NextResponse.redirect(new URL('/', request.nextUrl.origin));
+      return NextResponse.redirect(new URL('/loginCompany', request.nextUrl.origin));
     }
     // if no any token no any loggedIn API routes/endpoints are allowed to accessed.
     if (adminLoggedInAPIRoutes.includes(pathname) ||
@@ -65,8 +65,8 @@ export async function middleware(request) {
   }
   else if (companyToken) {
     const decodedToken = await decodeJWTCompany(request);
-    if (decodedToken === null) {
-      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+    if (decodedToken === null){
+      return NextResponse.json({msg:"Unauthenticated User"},{status:403});
     }
     if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin') || pathname.startsWith('/profile')) {
       return NextResponse.redirect(new URL('/dashboard', request.nextUrl.origin));
@@ -76,6 +76,7 @@ export async function middleware(request) {
     }
     return NextResponse.next();
   }
+
   else if (adminToken) {
     const decodedToken = await decodeJWTAdmin(request);
     if (decodedToken === null) {

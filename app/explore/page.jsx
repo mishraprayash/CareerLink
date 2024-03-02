@@ -9,10 +9,12 @@ const Explore = () => {
   return (
     <>
       <Search />
-      <div className="border ">
+      <div className="border m-5 rounded-lg p-5">
         {internships &&
           internships.map((internship) => (
-            <Card key={internship._id} internship={internship} />
+            <div className="mb-5 p-3">
+            <Card key={internship._id} internship={internship}/>
+            </div>
           ))}
       </div>
     </>

@@ -10,8 +10,6 @@ export const AuthContextProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const { data: session } = useSession();
-  // console.log(session)
-  console.log(user)
   const logoutUser = useCallback(async () => {
     if (session && session?.user) {
       signOut()
@@ -35,7 +33,6 @@ export const AuthContextProvider = ({ children }) => {
     const fetchProfile = async () => {
       if (session && session?.user) {
         const response = await getReq('/api/student/profile')
-        // console.log(response)\
         setUser(response);
       } else if (adminsession) {
         const response = await getReq('/api/admin/getprofile')
