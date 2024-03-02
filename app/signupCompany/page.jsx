@@ -1,16 +1,18 @@
-'use client'
+"use client";
 import React, { useState } from "react";
-import './signupCompany.css'
+import "./signupCompany.css";
+import Link from "next/link";
 import { postReq } from "../hooks/service";
-
 import { useRouter } from "next/navigation";
+
 import { ToastMessage } from "../components/ToastMessage";
 const page = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
     password: "",
-    confirmPassword:""
+    confirmPassword: "",
   });
 
   const handleChange = (event) => {
@@ -20,48 +22,46 @@ const page = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(!(formData.password===formData.confirmPassword)){
-      ToastMessage("Warning","Password and Confirm Password must be same")
-      return {msg:"Password and Confirm Password must be same"}
+    if (!(formData.companyName && formData.email && formData.password && formData.confirmPassword)) {
+      ToastMessage("Warning", "Fill up all the fields before submitting");
+      return;
     }
-    console.log(formData)
-    const response = await postReq("/api/company/register", formData)
-    console.log(response)
+    if (!(formData.password === formData.confirmPassword)) {
+      ToastMessage("Warning", "Password and Confirm Password must be same");
+      return { msg: "Password and Confirm Password must be same" };
+    }
+    console.log(formData);
+    const response = await postReq("/api/company/register", formData);
+    console.log(response);
     if (!response.error) {
-      const router=useRouter()
-      ToastMessage("Success",response.msg)
-      router.push('/loginCompany')
-
+      ToastMessage("Success", response.msg);
+      router.push("/loginCompany");
+    } else {
+      console.log(response.error);
+      ToastMessage("Error", response.msg);
     }
-    else {
-      console.log(response.error)
-      ToastMessage("Error",response.msg)
-
-    };
-  }
+  };
   return (
-    <div class="body">
-      <div class="split-screen">
-        <div class="left">
+    <div className="body">
+      <div className="split-screen">
+        <div className="left">
           <div className="makecenter">
-
-            <section class="copy">
+            <section className="copy">
               <h1>Welcome To</h1>
               <p>CareerLink</p>
             </section>
           </div>
         </div>
-        <div class="right">
+        <div className="right">
           <form onSubmit={handleSubmit}>
-            <section class="copy">
-
-              <div class="login-container">
+            <section className="copy">
+              <div className="login-container">
                 <h2>Create an account. It's fast & easy.</h2>
                 <p>
                   Already have an account?{" "}
-                  <a href="#">
+                  <Link href="/loginCompany">
                     <strong>Log In</strong>
-                  </a>
+                  </Link>
                 </p>
               </div>
             </section>
@@ -115,15 +115,15 @@ const page = () => {
               />
             </div>
 
-            <button class="signup-btn" type="submit">
+            <button className="signup-btn" type="submit">
               Affiliate
             </button>
-            <section class="copy legal">
+            <section className="copy legal">
               <p>
-                <span class="small">
+                <span className="small">
                   By continuing,you agree to accept our <br />
-                  <a href="#">Privacy Policy</a>&amp;
-                  <a href="#">Terms of Service</a>.
+                  <Link href="#">Privacy Policy</Link>&amp;
+                  <Link href="#">Terms of Service</Link>.
                 </span>
               </p>
             </section>

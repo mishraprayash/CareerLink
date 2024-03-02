@@ -1,76 +1,67 @@
-*{
+* {
   margin: 0;
   padding: 0;
-  box-sizing:border-box;
-  
-  }
-  .logoimg{
-    height: 90px;
-    width:90px;
-    border-radius: 50%;
-    align-self: flex-end;
-    padding: 2px;
-    
-  }
-  .nav{
-    width: 100%;
-     /* background-color: #7FC7D9; */
-    /* background-image: linear-gradient(90deg, #7FC7D9, #365486 );  */
-    background-color: #DBE7C9;
-    display: grid;
-    grid-template-columns:100px minmax(250px,1fr) 730px;
-    padding: 10px 25px;
-    
-    /* border: solid 1px #789461; */
-  }
-  .name{
-    color: #108A00;
-    font-weight: 800;
-    font-size: 30px;
-    font-family:Arial, Helvetica, sans-serif;
-    align-self: center;
-   
-  }
-  button{
-   padding: 8px 20px;
-    border-radius: 15px;
-    size: 25px;
-    font-size: 14px;
-     /* background-color:  #789461;
-    color:#8c52ff;  */
-    margin-left: 5px;
-    
-  }
-  .forbutton{
-    
-    align-self: center;
-  }
-  .loginbtn, .registerbtn{
-    padding: 8px 14px;
-    border-radius: 15px;
-  
-    font-size: 16px;
-     background-color:   #F2F4F7;
-    /* color:#8c52ff;  */
-    color: #108A00;
-    margin-left: 5px;
-  }
-  
-  .navbutton{
-    /* padding: 14px 30px; */
-    width: 150px;
-   height: 50px;
-    border-radius: 15px;
-   
-    font-size: 20px;
-     background-color:   #F2F4F7;
-    /* color:#8c52ff;  */
-    color: #108A00;
-    margin-left: 5px;
-    
-  }
-  .navbutton:hover, .loginbtn:hover,.registerbtn:hover{
-    transition: all 0.2s linear;
-    background-color: #ff74a5;
-    color: white;
-  }
+  box-sizing: border-box;
+
+}
+
+.logoimg {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  align-self: flex-end;
+  padding: 5px;
+
+}
+
+.nav {
+  width: 100%;
+  background-color: #DBE7C9;
+  display: grid;
+  grid-template-columns: 100px minmax(250px, 1fr) 600px;
+  padding: 10px 25px;
+
+}
+
+.name {
+  color: #108A00;
+  font-weight: 800;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  align-self: center;
+
+}
+
+button {
+  padding: 8px 20px;
+  border-radius: 15px;
+  size: 25px;
+  font-size: 14px;
+  margin-left: 5px;
+
+}
+
+.forbutton {
+  align-self: center;
+}
+
+.loginbtn,
+.registerbtn{
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: #F2F4F7;
+  color: #108A00;
+  font-size: clamp(0.5rem,2vw,1rem);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navbutton{
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  width: 300px;
+  background-color: #F2F4F7;
+  color: #108A00;
+} 
+
+

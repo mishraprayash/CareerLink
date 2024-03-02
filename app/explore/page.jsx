@@ -7,17 +7,9 @@ import { ExploreContext } from "../context/explorecontext.js";
 
 const Explore = () => {
   const { internships,setInternships, loading } = useContext(ExploreContext);
-  // console.log(internships);
 
   return (
     <>
-{/* <<<<<<< HEAD */}
-{/*     
-//  <Search/>
-//  <Card/> 
-
-
-//  */}
 
       <Search  internships={internships} setInternships={setInternships} />
      

@@ -1,9 +1,8 @@
 "use client"
-import { useState, createContext, useEffect,useCallback } from "react";
-import { getReq, patchReq ,postReq} from "../hooks/service";
+import { useState, createContext, useEffect, useCallback } from "react";
+import { getReq, patchReq, postReq } from "../hooks/service";
 import { useContext } from "react";
 import { AuthContext } from "./authcontext";
-import { toast } from 'react-toastify';
 import { ToastMessage } from "../components/ToastMessage";
 export const InternshipContext = createContext();
 
@@ -50,7 +49,7 @@ export const InternshipContextProvider = ({ children }) => {
       try {
         const response = await getReq('/api/company/runninginternships');
         console.log("Running Internships", response);
-        
+
         if (!response.error) {
           setRunningInternships(response.data);
         }
@@ -65,20 +64,20 @@ export const InternshipContextProvider = ({ children }) => {
     }
   },[user?.company])
 
-  useEffect(()=>{
-    const pendinginternships=async()=>{
-        try {
-          const response = await getReq('/api/company/pendinginternships');
-          console.log("pending Internships", response);
-          
-          if (!response.error) {
-            setPendingInternships(response.data);
-          }
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setLoading(false);
+  useEffect(() => {
+    const pendinginternships = async () => {
+      try {
+        const response = await getReq('/api/company/pendinginternships');
+        console.log("pending Internships", response);
+
+        if (!response.error) {
+          setPendingInternships(response.data);
         }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
     if (user?.company) {
     pendinginternships()
@@ -120,20 +119,20 @@ export const InternshipContextProvider = ({ children }) => {
       }
    },[user?.student])
 
-   useEffect(()=>{
-    const pendinginternships=async()=>{
-        try {
-          const response = await getReq('/api/admin/pendinginternships');
-          console.log("pending Internships", response);
-          
-          if (!response.error) {
-            setPendingInternshipsAdmin(response.data);
-          }
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setLoading(false);
+  useEffect(() => {
+    const pendinginternships = async () => {
+      try {
+        const response = await getReq('/api/admin/pendinginternships');
+        console.log("pending Internships", response);
+
+        if (!response.error) {
+          setPendingInternshipsAdmin(response.data);
         }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
     if (user?.admin) {
     pendinginternships()
@@ -178,20 +177,20 @@ export const InternshipContextProvider = ({ children }) => {
     }
   },[user?.admin])
   //dashboard info
-  useEffect(()=>{
-    const dashboardInfo=async()=>{
-        try {
-          const response = await getReq('/api/admin/allinformations');
-          console.log("pending Internships", response);
-          
-          if (!response.error) {
-            setAdminDashboardInfo(response.dashboardInfo);
-          }
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setLoading(false);
+  useEffect(() => {
+    const dashboardInfo = async () => {
+      try {
+        const response = await getReq('/api/admin/allinformations');
+        console.log("pending Internships", response);
+
+        if (!response.error) {
+          setAdminDashboardInfo(response.dashboardInfo);
         }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
     if (user?.admin) {
     dashboardInfo()
@@ -235,22 +234,22 @@ export const InternshipContextProvider = ({ children }) => {
    },[user?.admin])
 
 
-   const changepassword=useCallback(async(currentPassword, newPassword,confirmNewPassword)=>{
+  const changepassword = useCallback(async (currentPassword, newPassword, confirmNewPassword) => {
     try {
-      if(user?.company){
-        const response = await postReq(`/api/company/changepassword`,{currentPassword, newPassword,confirmNewPassword});
+      if (user?.company) {
+        const response = await postReq(`/api/company/changepassword`, { currentPassword, newPassword, confirmNewPassword });
         console.log("company passwordchangeStatus", response);
-        
+
         if (!response.error) {
           setPasswordChangeStatus(response.msg);
           ToastMessage("Success", response.msg); 
         }else{
           ToastMessage("Error", response.msg); 
         }
-      }else{
-        const response = await postReq(`/api/admin/changepassword`,{currentPassword, newPassword,confirmNewPassword});
+      } else {
+        const response = await postReq(`/api/admin/changepassword`, { currentPassword, newPassword, confirmNewPassword });
         console.log("admin passwordchangeStatus:", response);
-        
+
         if (!response.error) {
           setPasswordChangeStatus(response.msg);
           ToastMessage("Success", response.msg); 
@@ -270,5 +269,4 @@ export const InternshipContextProvider = ({ children }) => {
         </InternshipContext.Provider>
       );
     };
-
 

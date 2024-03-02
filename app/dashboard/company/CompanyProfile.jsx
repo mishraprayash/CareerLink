@@ -1,27 +1,27 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '@/app/context/authcontext';
+"use client";
+import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/authcontext";
 const CompanyProfile = () => {
-    const [company, setCompany] = useState(null)
-    const { user } = useContext(AuthContext)
-    useEffect(() => {
-        if (user && user.company) {
-            setCompany(user?.company);
-        }
-    }, [user]);
-
-    // console.log(user, company)
-
-    if (!user) {
-        // Handle the case when user data is not available yet
-        return <div>Loading user data...</div>;
+  const [company, setCompany] = useState(null);
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    if (user && user.company) {
+      setCompany(user?.company);
     }
+  }, [user]);
 
-    if (!user.company) {
-        // Handle the case when the user is not a company
-        return <div>You are not a company</div>;
-    }
+  // console.log(user, company)
+
+  if (!user) {
+    // Handle the case when user data is not available yet
+    return <div>Loading user data...</div>;
+  }
+
+  if (!user.company) {
+    // Handle the case when the user is not a company
+    return <div>You are not a company</div>;
+  }
 
     return (
 
@@ -102,6 +102,5 @@ const CompanyProfile = () => {
         </div>
     );
 };
-
 
 export default CompanyProfile;

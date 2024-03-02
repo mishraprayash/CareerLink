@@ -10,9 +10,9 @@ const Profile = () => {
   return (
     <>
       {user ? (
-        user.student ? (
+        user?.student ? (
           <StudentProfile />
-        ) : user.company ? (
+        ) : user?.company ? (
           <CompanyProfile />
         ) : (
           <div>Loading data...</div>
