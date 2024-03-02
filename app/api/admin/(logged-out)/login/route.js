@@ -23,12 +23,11 @@ export async function POST(request) {
         }
         // creating a JWT 
         const token  = await adminExist.createJWT()
-        console.log(token);
         const response = NextResponse.json({ msg: "Successful Login", success: true, token: token }, { status: 200 });
 
         // setting jwt token in cookies and sending in response object
         response.cookies.set("token", token, { httpOnly: true, secure: true });
-        response.cookies.set("admin", "12ffhhforjbjbbbjbadminjbjjgyjgyulogin",);
+        response.cookies.set("admin", "12ffhhforjbjbbbjbadminjbjjgyjgyulogin");
         return response;
 
     } catch (error) {

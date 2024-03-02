@@ -11,7 +11,7 @@ export async function POST(request) {
     try {
         await connectDB();
         const { email, password } = await request.json();
-        
+
         if (!email || !password) {
             return NextResponse.json({ msg: "Email or password missing" }, { status: 400 });
         }
@@ -26,11 +26,11 @@ export async function POST(request) {
             return NextResponse.json({ msg: "Invalid Creddentials" });
         }
 
-        const token =await companyExist.createJWT();
+        const token = await companyExist.createJWT();
         const response = NextResponse.json({ msg: "Successful Login" }, { status: 200 });
         // setting jwt token in cookies
         response.cookies.set("token", token, { httpOnly: true, secure: true });
-        response.cookies.set("company", "12ffhhfodrjbjbbbjbcomddpaddnyjbjjgyjgyulddogdin",);
+        response.cookies.set("company", "12ffhhfodrjbjbbbjbcomddpaddnyjbjjgyjgyulddogdin");
 
         return response;
     } catch (error) {
