@@ -6,8 +6,11 @@ import { useContext, useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { AuthContext } from "../context/authcontext";
 import AppHeaderDropdown from "./AppHeaderDropdown";
+import { useRouter } from "next/navigation";
+import { ToastMessage } from './ToastMessage';
 
 const Navbar = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const { user, logoutUser } = useContext(AuthContext);
   const [providers, setProviders] = useState(null);
@@ -110,8 +113,9 @@ const Navbar = () => {
                         callbackUrl: "/explore", // Set the custom redirect URL here
                       });
                     } catch (error) {
+                      ToastMessage('Error',"Invalid Email Address");
+                      router.push('/');
                       console.error("Error during sign-in:", error);
-                      window.confirm("Error during sign-in: ");
                     }
                   }}
                   className="bg-white rounded-lg px-3 py-1"

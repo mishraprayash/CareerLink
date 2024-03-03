@@ -27,7 +27,7 @@ export async function GET(request) {
         // db query
         const filteredInternships = await Internship.find(searchObj);
         if (!filteredInternships) {
-            return NextResponse.json({ msg: "No Internship available" }, { status: 200 })
+            return NextResponse.json({ msg: "No Internship available" }, { status: 400 })
         }
         return NextResponse.json({ data: filteredInternships }, { status: 200 })
 

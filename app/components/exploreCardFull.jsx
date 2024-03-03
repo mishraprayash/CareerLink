@@ -29,7 +29,7 @@ const ExploreCardFull = ({ internship }) => {
       <div className='flex flex-row border border-gray-200 rounded p-4 mt-4'>
         <div className='flex flex-col items-center w-1/4'>
           <div className='mb-4'>
-            <Image className="w-24 h-24 rounded-full" src={internship.companyLogo?.secure_url} alt='Company Logo' width={50} height={50}/>
+            <Image className="rounded-full" src={internship.companyLogo?.secure_url} alt='Company Logo' width={50} height={50}/>
           </div>
           <div className='text-lg font-bold'>{internship.companyName}</div>
           <div className="flex flex-col mt-4">
@@ -63,7 +63,7 @@ const ExploreCardFull = ({ internship }) => {
         <div className='ml-8 w-3/4'>
           <div className='mb-4'>
             <h4 className="text-lg font-bold text-black">Job Description</h4>
-            <div classname="bg-red-200">{internship.description}</div>
+            <div>{internship.description}</div>
           </div>
           <div className='mb-4'>
             <h4 className="text-lg font-bold text-black">Responsibilities of Candidates</h4>

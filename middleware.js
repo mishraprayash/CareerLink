@@ -20,7 +20,6 @@ import {
 export async function middleware(request) {
 
   const { pathname } = request.nextUrl;
-  console.log("Pathname:", pathname);
 
   // const rateLimiterResponse = await rateLimiter(request);
   // if (typeof rateLimiterResponse !== Boolean && rateLimiterResponse !== true) {
@@ -32,7 +31,14 @@ export async function middleware(request) {
   const companyToken = !!request.cookies.get('token') && !!request.cookies.get('company');
   const nextAuthToken = !!request.cookies.get('next-auth.session-token');
 
-  console.log(adminToken, companyToken, nextAuthToken);
+
+  if (pathname.startsWith('/_next/static')) {
+    return NextResponse.next();
+  }
+
+  if (pathname.startsWith("/api/auth/error")) {
+    return NextResponse.json({ msg: "Invalid email Address" }, { status: 403 });
+  }
 
   if (!adminToken && !companyToken && !nextAuthToken) {
 
@@ -65,8 +71,8 @@ export async function middleware(request) {
   }
   else if (companyToken) {
     const decodedToken = await decodeJWTCompany(request);
-    if (decodedToken === null){
-      return NextResponse.json({msg:"Unauthenticated User"},{status:403});
+    if (decodedToken === null) {
+      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
     }
     if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin') || pathname.startsWith('/profile')) {
       return NextResponse.redirect(new URL('/dashboard', request.nextUrl.origin));

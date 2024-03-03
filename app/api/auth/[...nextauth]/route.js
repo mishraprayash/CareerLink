@@ -16,30 +16,27 @@ const handleAuth = NextAuth({
             try {
                 await connectDB()
                 if (account.provider === 'google' && profile.email.endsWith('@wrc.edu.np')) {
-                    const existingStudent = await Student.findOne({ email: profile.email })
+                    const existingStudent = await Student.findOne({ email: profile.email, verified:true })
                     if (!existingStudent) {
                         const newStudent = await Student.create({
                             email: profile.email,
                             name: profile.name,
                             profilePicture:{
                                 secure_url:profile.picture,
-                            }
+                            },
                         });
                         await newStudent.save();
                     }
                     return Promise.resolve({
-                        ...user,
-                        isEmailValid: true,
+                        ...user
                     });
                 } else {
                     throw new Error('Invalid email domain. Sign in with an @wrc.edu.np email.');
-
                 }
             } catch (error) {
                 console.error('Error during sign-in:', error);
                 throw new Error(error)
             }
-
         },
         async session({ session,token,user }) {
             try {

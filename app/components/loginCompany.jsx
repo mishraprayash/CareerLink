@@ -36,9 +36,6 @@ function Login() {
               </p>
             </div>
           </section>
-
-         
-
           <div classname="input-container email">
             <label for="email">Email</label>
             <input
@@ -57,8 +54,6 @@ function Login() {
               placeholder="Enter Password"
             />
           </div>
-
-     
           <div classname="forget">
             Forget password?
             <a href="#">

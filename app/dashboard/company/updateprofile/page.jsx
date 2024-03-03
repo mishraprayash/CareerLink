@@ -110,7 +110,6 @@ const SignupCompany = () => {
     };
 
     const formDataObject = convertToFormData();
-
     try {
       const response = await fetch("/api/company/updateprofile", {
         method: "PATCH",
@@ -119,9 +118,10 @@ const SignupCompany = () => {
       const data = await response.json();
       if (response.ok) {
         // Redirect to a success page or handle success as needed
-        ToastMessage("Success", data.msg);
         router.push("/dashboard");
+        ToastMessage("Success", data.msg);
       } else {
+        console.error(data.msg);
         console.error(data.msg);
         // Handle the error, show an alert, or redirect to an error page
         ToastMessage("Warning", data.msg);
@@ -172,6 +172,40 @@ const SignupCompany = () => {
             value={formData.industrySectors}
             onChange={handleChange}
             className="w-[300px]"
+          >
+            {industrySectors.map((industry) => (
+              <option key={industry} value={industry}>
+                {industry}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="input-container company-info-category">
+          <label htmlFor="companyInfo.category">Company Category</label>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="category"
+          >
+            {engineeringCategories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="input-container company-info-industry">
+          <label htmlFor="industrySectors">Industry Sectors</label>
+          <select
+            id="industrySectors"
+            name="industrySectors"
+            value={formData.industrySectors}
+            onChange={handleChange}
+            className="industrySectors"
           >
             {industrySectors.map((industry) => (
               <option key={industry} value={industry}>

@@ -42,7 +42,7 @@ export const ExploreContextProvider = ({ children }) => {
    
   
    return (
-    <ExploreContext.Provider value={{ internships,singleInternship,singleInternshipFetch, loading }}>
+    <ExploreContext.Provider value={{ internships,setInternships,singleInternship,singleInternshipFetch, loading }}>
       {children}
     </ExploreContext.Provider>
   );

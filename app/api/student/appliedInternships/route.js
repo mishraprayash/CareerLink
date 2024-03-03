@@ -8,16 +8,16 @@ import connectDB from "@/config/dbconfig/database";
 export async function GET(request) {
     try {
         await connectDB()
-
-        const session = await getServerSession(handleAuth)
-        if (!session) {
-            return NextResponse.json({
-                msg: "You must be signed in to view interships on this page.",
-            }, { status: 401 })
-        }
-        const studentEmail = session.user.email;
-        const student = await Student.findOne({ email: studentEmail })
-        const studentId = student._id;
+       
+    const session = await getServerSession(handleAuth)
+    if(!session){
+     return NextResponse.json({
+       msg: "You must be signed in to view interships on this page.",
+     },{status:401})
+   }
+   const studentEmail=session.user.email;
+   const student=await Student.findOne({email:studentEmail})
+   const studentId=student._id;
         const Internships = await Internship.find({
             applicants: { $in: [studentId] },
             state: "Approved"

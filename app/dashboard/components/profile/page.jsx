@@ -1,8 +1,8 @@
-'use client'
-import React, { useContext } from 'react';
-import { AuthContext } from '@/app/context/authcontext';
-import StudentProfile from '../../student/StudentProfile';
-import CompanyProfile from '../../company/CompanyProfile';
+"use client";
+import React, { useContext } from "react";
+import { AuthContext } from "@/app/context/authcontext";
+import StudentProfile from "@/app/dashboard/student/StudnetProfile";
+import CompanyProfile from "@/app/dashboard/company/CompanyProfile";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);

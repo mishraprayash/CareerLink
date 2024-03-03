@@ -15,8 +15,8 @@ function PendingAdmin() {
   return (
     <div>
       <div>Pending Admins</div>
-      {acceptedStatus && window.alert(acceptedStatus)}
-      {rejectedStatus && window.alert(rejectedStatus)}
+      {/* {acceptedStatus && window.alert(acceptedStatus)}
+      {rejectedStatus && window.alert(rejectedStatus)} */}
       {pendingAdmin &&
         pendingAdmin.map((admin) => (
           <div className="border border-blue-900 ">
