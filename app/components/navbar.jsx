@@ -42,8 +42,8 @@ const Navbar = () => {
   }, [user]);
 
   return (
-    <div className="flex flex-row justify-between bg-[#DBE7C9]">
-      <div className="flex gap-5">
+    <div className="flex flex-row justify-around bg-[#DBE7C9]">
+      <div className="flex gap-5 w-1/3">
         <Link className="no-underline p-3 ml-5" href="/">
           <Image
             className="  rounded-full"
@@ -60,32 +60,21 @@ const Navbar = () => {
           CareerLink
         </Link>
       </div>
-      <div className="forbutton flex items-center p-5">
+      <div className=" flex items-center p-5 w-2/3 justify-center">
+
         {user ? (
           <div className="flex flex-row gap-5 items-center">
             <Link
               href="/"
               className="navbutton no-underline bg-white rounded-lg px-3 py-1"
             >
-              <button>Home</button>
+              <button>HOME</button>
             </Link>
             <Link
-              href="/explore"
+              href={user?.admin?"/admin/dashboard":"/dashboard"}
               className="navbutton no-underline bg-white rounded-lg px-3 py-1"
             >
-              <button>Explore</button>
-            </Link>
-            <Link
-              href="/dashboard"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
-            >
-              <button>Dashboard</button>
-            </Link>
-            <Link
-              href="/careerguide"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
-            >
-              <button>Career Guide</button>
+              <button>DASHBOARD</button>
             </Link>
             {/* <Link href='/profile'>
                
@@ -100,6 +89,19 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex flex-row gap-5 items-center">
+              <Link
+              href="/explore"
+              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
+            >
+              <button>EXPLORE</button>
+            </Link>
+             <Link
+              href="/careerguide"
+              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
+            >
+              <button>CAREER GUIDE</button>
+            </Link>
+
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -124,7 +126,7 @@ const Navbar = () => {
                 COMPANY REGISTER
               </button>
             </Link>
-
+            
             <Link href="/loginCompany" className="no-underline">
               <button className="loginbtn bg-white rounded-lg px-3 py-1">
                 COMPANY LOGIN
