@@ -1,10 +1,8 @@
-"use client";
-
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-// import "./styles/navstyle.css";1
 import { AuthContext } from "../context/authcontext";
 import AppHeaderDropdown from "./AppHeaderDropdown";
 
@@ -36,72 +34,113 @@ const Navbar = () => {
     ? user.company.logo.secure_url
     : "/Image/Companylogo.jpg";
 
-  //  console.log(CompanyImageUrl)
   useEffect(() => {
     setProfileUrl(user?.student ? StudentImageUrl : CompanyImageUrl);
   }, [user]);
 
   return (
-    <div className="flex flex-row justify-around bg-[#DBE7C9]">
-      <div className="flex gap-5 w-1/3">
-        <Link className="no-underline p-3 ml-5" href="/">
-          <Image
-            className="  rounded-full"
-            src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/pvqct2blfs7ntb4hdtmt"
-            width={40}
-            height={40}
-            alt="logo"
-          />
-        </Link>
-        <Link
-          className="font-bold text-[#108A00] text-[30px] no-underline py-3"
-          href="/"
+    <div className="flex flex-col md:flex-row md:justify-around bg-[#DBE7C9]">
+      <div className="flex justify-between items-center w-full md:w-1/3 px-4 md:py-0">
+        <div className="flex items-center">
+          <Link className="no-underline px-3 ml-5" href="/">
+            <Image
+              src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/pvqct2blfs7ntb4hdtmt"
+              width={40}
+              height={40}
+              alt="logo"
+              className="  rounded-full"
+            />
+          </Link>
+          <Link href="/">
+            <span className="font-bold text-[#108A00] text-2xl py-3">
+              CareerLink
+            </span>
+          </Link>
+        </div>
+        <button
+          onClick={() => setToggleDropdown(!toggleDropdown)}
+          className="md:hidden focus:outline-none"
         >
-          CareerLink
-        </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
       </div>
-      <div className=" flex items-center p-5 w-2/3 justify-center">
-
+      {toggleDropdown && (
+        <div className="md:hidden px-4 py-2 w-full">
+          <div className="flex flex-col gap-2">
+            <Link href="/explore">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                EXPLORE
+              </button>
+            </Link>
+            <Link href="/">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                HOME
+              </button>
+            </Link>
+            <Link href={user?.admin ? "/admin/dashboard" : "/dashboard"}>
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                DASHBOARD
+              </button>
+            </Link>
+            <Link href="/careerguide">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                CAREER GUIDE
+              </button>
+            </Link>
+            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser} />
+          </div>
+        </div>
+      )}
+      <div className="hidden md:flex items-center p-5 w-full md:w-2/3 justify-end">
         {user ? (
-          <div className="flex flex-row gap-5 items-center">
-            <Link
-              href="/"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
-            >
-              <button>HOME</button>
+          <div className="flex gap-5 items-center">
+            <Link href="/explore">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                EXPLORE
+              </button>
             </Link>
-            <Link
-              href={user?.admin?"/admin/dashboard":"/dashboard"}
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
-            >
-              <button>DASHBOARD</button>
+            <Link href="/">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                HOME
+              </button>
             </Link>
-            {/* <Link href='/profile'>
-               
-                <Image src={user?.student?StudentImageUrl:CompanyImageUrl}
-                  alt="profile"
-                  height={30}
-                  width={30}
-                  className='mx-4 rounded-lg'
-                />
-              </Link> */}
+            <Link href={user?.admin ? "/admin/dashboard" : "/dashboard"}>
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                DASHBOARD
+              </button>
+            </Link>
+            <Link href="/careerguide">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                CAREER GUIDE
+              </button>
+            </Link>
             <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser} />
           </div>
         ) : (
-          <div className="flex flex-row gap-5 items-center">
-              <Link
-              href="/explore"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
-            >
-              <button>EXPLORE</button>
+          <div className="flex gap-5 items-center">
+            <Link href="/explore">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                EXPLORE
+              </button>
             </Link>
-             <Link
-              href="/careerguide"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
-            >
-              <button>CAREER GUIDE</button>
+            <Link href="/careerguide">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                CAREER GUIDE
+              </button>
             </Link>
-
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -116,18 +155,17 @@ const Navbar = () => {
                       window.confirm("Error during sign-in: ");
                     }
                   }}
-                  className="bg-white rounded-lg px-3 py-1"
+                  className="navbutton bg-white rounded-lg px-3 py-1"
                 >
                   STUDENT LOGIN
                 </button>
               ))}
-            <Link href="/signupCompany" className="no-underline">
+            <Link href="/signupCompany">
               <button className="registerbtn bg-white rounded-lg px-3 py-1">
                 COMPANY REGISTER
               </button>
             </Link>
-            
-            <Link href="/loginCompany" className="no-underline">
+            <Link href="/loginCompany">
               <button className="loginbtn bg-white rounded-lg px-3 py-1">
                 COMPANY LOGIN
               </button>
