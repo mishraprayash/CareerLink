@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-// import "./loginCompany.css";
+import "@/app/loginCompany/loginCompany.css"
 import { useRouter } from 'next/navigation';
 import { ToastMessage } from "@/app/components/ToastMessage";
 
@@ -67,9 +67,9 @@ console.log(username,password)
           <div className="input-container email">
             <label htmlFor="username">username</label>
             <input
-              type="username"
-              id="username"
-              className="email"
+               type="email"
+               id="email"
+               className="email"
               placeholder="admin1"
               value={username}
               onChange={(e) => setUsername(e.target.value)}

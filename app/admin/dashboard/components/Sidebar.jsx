@@ -9,8 +9,8 @@ const Sidebar = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <aside className="bg-gray-200 py-4 px-6">
-      <ul className="space-y-6"> {/* Increased space-y value for more vertical spacing */}
+    <aside className="bg-gray-200 py-16 px-6 mt-14 sticky left-0 top-16">
+      <ul className="space-y-4"> {/* Increased space-y value for more vertical spacing */}
         {user ? (
           user.admin ? (
             <div className='my-2'>
@@ -35,11 +35,14 @@ const Sidebar = () => {
 
 const SidebarLink = ({ href, icon, label }) => {
   return (
-    <li className='my-2'>
+    <li className='h-28 hover:bg-gray-300 p-5 rounded'>
       <Link href={href} passHref>
-        <p className="flex items-center cursor-pointer hover:text-blue-500">
-          <FontAwesomeIcon icon={icon} style={{ fontSize: '1rem', marginRight: '0.5rem', height: '20px' }} />
+        <p className="flex flex-col">
+          <FontAwesomeIcon icon={icon} style={{ fontSize: '1rem', marginRight: '0.5rem', height: '50px' }} />
+          <p className='text-2xl font-mono'>
+
           {label}
+          </p>
         </p>
       </Link>
     </li>

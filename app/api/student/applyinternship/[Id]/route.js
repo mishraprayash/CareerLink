@@ -30,7 +30,7 @@ const internship=await Internship.findById(params.Id)
     
     const student =await Student.findOne({email:studentEmail ,profileStatus:"Complete"})
     if(!student){
-        return NextResponse.json({ msg: "Verify your email." }, { status: 400 });
+        return NextResponse.json({ msg: "Complete your profile!" }, { status: 400 });
     
     }
       // Check if the student has already applied to this internship

@@ -64,7 +64,7 @@ a:hover {
   height: 70%;
   width: 70%;
   border-radius: 12px;
-  background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/logo.png");
+  background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/careerlink.png");
   background-size: cover;
   
 }

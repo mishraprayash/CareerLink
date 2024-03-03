@@ -52,7 +52,7 @@ else{
  
   return (
     <div className="container mx-auto w-full">
-      <div className='text-4xl text-center  justify-center text-green-700'> Create internship opportunity</div>
+      <div className='text-4xl text-center  justify-center text-[#108A00]'> Create internship opportunity</div>
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
         <div className='w-1/2'>
           <label htmlFor="position" className=" text-sm font-medium text-gray-700">

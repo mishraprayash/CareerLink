@@ -9,14 +9,14 @@ const LandingPage = () => {
       <div className="content">
         <div className="singlecontent">
           <div className="flex flex-col flex-1 p-5 bg-[#DBE7C9] rounded-[0.5rem] items-center">
-            <h1 className="header">CareerForge Nexus</h1>
+            <h1 className="header py-4">CareerForge Nexus</h1>
             <p className="font-serif">
               "Dive into opportunities, unleash potential, and illuminate your
               journey with best provided internships, practical hands on
               experience in the real world problems and with the best mentorship
               and career guides."
             </p>
-            <Link className="forexplorebtn" href="/explore">
+            <Link className="forexplorebtn py-4" href="/explore">
               <button>EXPLORE OPPORTUNITIES</button>
             </Link>
           </div>
@@ -31,7 +31,7 @@ const LandingPage = () => {
               <p className="boxp font-serif">Training from Experts</p>
             </div>
             <Image
-              src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/tuzqbpgoquw2pg6ytgon.png"
+              src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/bh9oahvhzvavkgcoofm0"
               alt="logo"
               className="firstimg"
               width={400}
@@ -51,7 +51,7 @@ const LandingPage = () => {
             />
           </div>
           <div className="flex flex-col flex-1 p-5 bg-[#DBE7C9] rounded-[0.5rem] items-center">
-            <h1 className="header font-bold">
+            <h1 className="header font-bold py-4">
               Be a Trailblazing Affiliated Partner
             </h1>
             <p className="font-serif">
@@ -59,15 +59,15 @@ const LandingPage = () => {
               program. Seamlessly offer internships, cutting-edge training, and
               mentorship. Let's shape success together!"
             </p>
-            <Link className="forexplorebtn" href="/signupCompany">
+            <Link className="forexplorebtn py-4" href="/signupCompany">
               <button>JOIN OUR PLATFORM</button>
             </Link>
           </div>
         </div>
 
-        <div className="singlecontent">
+        <div className="singlecontent mb-4">
           <div className="flex flex-col flex-1 p-5 bg-[#DBE7C9] rounded-[0.5rem] items-center g-10">
-            <h1 className="header font-bold">Trusted Affiliation</h1>
+            <h1 className="header font-bold py-4">Trusted Affiliation</h1>
             <p className="font-serif">
               "At CareerLink, we stand among the best, backed by partnerships
               with industry giants like [Notable Company 1], [Notable Company
@@ -95,7 +95,7 @@ const LandingPage = () => {
 
         <div className="singlecontent">
           <div className="flex flex-col flex-1 p-5 bg-[#DBE7C9] rounded-[0.5rem] items-center">
-            <h1 className="header font-bold">Partners</h1>
+            <h1 className="header font-bold py-4">Partners</h1>
             <p className="font-serif">
               {" "}
               "Their unwavering commitment to our mission amplifies our
@@ -104,7 +104,7 @@ const LandingPage = () => {
               students with an even greater array of transformative experiences,
               ensuring a future rich with possibilities."
             </p>
-            <Link className="forexplorebtn" href="/signupCompany">
+            <Link className="forexplorebtn py-4" href="/signupCompany">
               <button>BECOME OUR PARTNER</button>
             </Link>
           </div>

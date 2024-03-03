@@ -47,8 +47,8 @@ const page = () => {
         <div className="left">
           <div className="makecenter">
             <section className="copy">
-              <h1>Welcome To</h1>
-              <p>CareerLink</p>
+              {/* <h1 className="mb-24">Welcome To</h1>
+              <p className="text-4xl ">Career<br></br>Link</p> */}
             </section>
           </div>
         </div>

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-// import './signupCompany.css'
+import '@/app/signupCompany/signupCompany.css'
 import { postReq } from "@/app/hooks/service";
 
 import { useRouter } from "next/navigation";
@@ -48,7 +48,7 @@ const page = () => {
 
             <section className="copy">
               <h1>Welcome To</h1>
-              <p>CareerLink</p>
+              {/* <p>CareerLink</p> */}
             </section>
           </div>
         </div>

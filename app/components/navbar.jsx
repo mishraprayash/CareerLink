@@ -46,15 +46,15 @@ const Navbar = () => {
       <div className="flex gap-5">
         <Link className="no-underline p-3 ml-5" href="/">
           <Image
-            className=" h-[40px] w-[40px] rounded-full"
-            src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/tuzqbpgoquw2pg6ytgon.png"
+            className="  rounded-full"
+            src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/pvqct2blfs7ntb4hdtmt"
             width={40}
             height={40}
             alt="logo"
           />
         </Link>
         <Link
-          className="font-bold text-[#108A00] text-[30px] no-underline p-3"
+          className="font-bold text-[#108A00] text-[30px] no-underline py-3"
           href="/"
         >
           CareerLink
@@ -85,7 +85,7 @@ const Navbar = () => {
               href="/careerguide"
               className="navbutton no-underline bg-white rounded-lg px-3 py-1"
             >
-              <button>Training</button>
+              <button>Career Guide</button>
             </Link>
             {/* <Link href='/profile'>
                
