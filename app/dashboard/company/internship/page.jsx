@@ -21,7 +21,7 @@ function MyInternship() {
   };
 
   return loading ? (
-    <div className="text-center p-4 m-2 shadow-xl">Loading Internships....</div>
+    <div className="text-center p-4 m-2 shadow-xl h-[90vh]">Loading Internships....</div>
   ) : (
     <>
       <div className="text-center p-4 m-2 shadow-sm shadow-black bg-slate-300 font-bold">
