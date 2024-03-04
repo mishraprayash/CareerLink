@@ -133,13 +133,6 @@ const Sidebar = () => {
           ) : null
         ) : null}
 
-        {/* <li>
-          <Link href="/dashboard/components/recentactivities" passHref>
-          <p className='flex'>
-              <FontAwesomeIcon icon={faClock} style={{ fontSize: '1rem', marginRight: '0.5rem', height:"20px"}}/> Recent Activities
-           </p>
-          </Link>
-        </li> */}
         <li className="h-28 hover:bg-gray-300 p-6 rounded">
           <Link href="/dashboard/components/settings" passHref>
             <p className="flex flex-col">
