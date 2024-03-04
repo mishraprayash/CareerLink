@@ -16,7 +16,7 @@ const handleAuth = NextAuth({
             try {
                 await connectDB()
                 if (account.provider === 'google' && profile.email.endsWith('@wrc.edu.np')) {
-                    const existingStudent = await Student.findOne({ email: profile.email, verified:true })
+                    const existingStudent = await Student.findOne({ email: profile.email })
                     if (!existingStudent) {
                         const newStudent = await Student.create({
                             email: profile.email,
