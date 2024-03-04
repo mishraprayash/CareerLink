@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { ToastMessage } from "@/app/components/ToastMessage";
 
 const SignupCompany = () => {
- 
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     category: "",
     industrySectors: "",
@@ -58,9 +58,9 @@ const SignupCompany = () => {
     "Water Management, Environmental Services",
     "Energy, Nuclear Energy",
   ];
-
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     if (name.includes(".")) {
       const [mainKey, nestedKey] = name.split(".");
       setFormData({
@@ -105,10 +105,11 @@ const SignupCompany = () => {
           );
         }
       }
+
       return formDataObject;
     };
-
     const formDataObject = convertToFormData();
+    console.log(formDataObject);
     try {
       const response = await fetch("/api/company/updateprofile", {
         method: "PATCH",
@@ -121,7 +122,6 @@ const SignupCompany = () => {
         ToastMessage("Success", data.msg);
       } else {
         console.error(data.msg);
-        console.error(data.msg);
         // Handle the error, show an alert, or redirect to an error page
         ToastMessage("Warning", data.msg);
       }
@@ -131,16 +131,13 @@ const SignupCompany = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-5 shadow-lg justify-center"
-      >
-        <div className="flex justify-between">
-          <label
-            htmlFor="companyInfo.category"
-            className="p-3 m-2 text-gray-600 font-bold"
-          >
+    <div className="  mt-10 text-2xl m-10 px-20 py-8 shadow-2xl border-solid ">
+      <div className="font-bold text-4xl flex justify-center items-center mb-20">
+        Update Profile
+      </div>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="h-14 flex items-center">
+          <label htmlFor="companyInfo.category" className="font-bold mr-7 w-72">
             Company Category
           </label>
           <select
@@ -148,7 +145,7 @@ const SignupCompany = () => {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="category"
+            className="category rounded p-3 flex-1"
           >
             {engineeringCategories.map((category) => (
               <option key={category} value={category}>
@@ -158,11 +155,8 @@ const SignupCompany = () => {
           </select>
         </div>
 
-        <div className="input-container company-info-industry flex justify-between m-3">
-          <label
-            htmlFor="companyInfo.industrySectors"
-            className=" p-2 text-gray-600 font-bold"
-          >
+        <div className="h-14 flex items-center">
+          <label htmlFor="industrySectors" className="font-bold mr-7 w-72">
             Industry Sectors
           </label>
           <select
@@ -170,7 +164,7 @@ const SignupCompany = () => {
             name="industrySectors"
             value={formData.industrySectors}
             onChange={handleChange}
-            className="w-[300px]"
+            className="industrySectors rounded p-3"
           >
             {industrySectors.map((industry) => (
               <option key={industry} value={industry}>
@@ -180,42 +174,8 @@ const SignupCompany = () => {
           </select>
         </div>
 
-        <div className="input-container company-info-category">
-          <label htmlFor="companyInfo.category">Company Category</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="category"
-          >
-            {engineeringCategories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="input-container company-info-industry">
-          <label htmlFor="industrySectors">Industry Sectors</label>
-          <select
-            id="industrySectors"
-            name="industrySectors"
-            value={formData.industrySectors}
-            onChange={handleChange}
-            className="industrySectors"
-          >
-            {industrySectors.map((industry) => (
-              <option key={industry} value={industry}>
-                {industry}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="input-container city">
-          <label htmlFor="city" className="p-3 m-2 text-gray-600 font-bold">
+        <div className="h-14 flex items-center">
+          <label htmlFor="city" className="font-bold mr-7 w-72">
             City
           </label>
           <input
@@ -224,13 +184,13 @@ const SignupCompany = () => {
             name="city"
             value={formData.city}
             onChange={handleChange}
-            className="city"
-            placeholder="pokhara"
+            className="flex-1 text-2xl p-2  shadow-lg hover:text-green-400"
+            placeholder="Pokhara"
           />
         </div>
 
-        <div className="input-container state">
-          <label htmlFor="state" className="p-3 m-2 text-gray-600 font-bold">
+        <div className="h-14 flex items-center">
+          <label htmlFor="state" className="font-bold mr-7 w-72">
             State
           </label>
           <input
@@ -239,13 +199,13 @@ const SignupCompany = () => {
             name="state"
             value={formData.state}
             onChange={handleChange}
-            className="state"
+            className="flex-1 text-2xl p-2  shadow-lg hover:text-green-400"
             placeholder="gandaki"
           />
         </div>
 
-        <div className="input-container zip-code">
-          <label htmlFor="zipCode" className="p-3 m-2 text-gray-600 font-bold">
+        <div className="h-14 flex items-center">
+          <label htmlFor="zipCode" className="font-bold mr-7 w-72">
             Zip Code
           </label>
           <input
@@ -254,16 +214,13 @@ const SignupCompany = () => {
             name="zipCode"
             value={formData.zipCode}
             onChange={handleChange}
-            className="zipCode"
+            className="flex-1 text-2xl p-2  shadow-lg hover:text-green-400"
             placeholder="112"
           />
         </div>
 
-        <div className="input-container found-year">
-          <label
-            htmlFor="foundYear"
-            className="p-3 m-2 text-gray-600 font-bold"
-          >
+        <div className="h-14 flex items-center">
+          <label htmlFor="foundYear" className="font-bold mr-7 w-72">
             Found Year
           </label>
           <input
@@ -272,13 +229,13 @@ const SignupCompany = () => {
             name="foundYear"
             value={formData.foundYear}
             onChange={handleChange}
-            className="foundYear"
+            className="flex-1 text-2xl p-2  shadow-lg hover:text-green-400"
             placeholder="2000"
           />
         </div>
 
-        <div className="input-container phone">
-          <label htmlFor="phoneNO" className="p-3 m-2 text-gray-600 font-bold">
+        <div className="h-14 flex items-center">
+          <label htmlFor="phoneNO" className="font-bold mr-7 w-72">
             Phone Number
           </label>
           <input
@@ -287,17 +244,14 @@ const SignupCompany = () => {
             name="phoneNO"
             value={formData.phoneNO}
             onChange={handleChange}
-            className="phoneNO"
+            className="flex-1 text-2xl p-2  shadow-lg hover:text-green-400"
             placeholder="+061-123456"
             pattern="+[0-9]-[0-9]{6}"
           />
         </div>
 
-        <div className="input-container description flex flex-col justify-center">
-          <label
-            htmlFor="companyDescription"
-            className="p-3 m-2 text-gray-600 font-bold"
-          >
+        <div className="h-14  flex items-center">
+          <label htmlFor="companyDescription" className="font-bold mr-7 w-72">
             Company Description
           </label>
           <textarea
@@ -305,13 +259,13 @@ const SignupCompany = () => {
             name="companyDescription"
             value={formData.companyDescription}
             onChange={handleChange}
-            className="p-3 mx-2 my-1 bg-gray-200"
+            className="flex-1 text-2xl p-2  shadow-lg hover:text-green-400"
             placeholder="Words to describe the company..."
           ></textarea>
         </div>
 
-        <div className="input-container logo">
-          <label htmlFor="logo" className="p-3 m-2 text-gray-600 font-bold">
+        <div className="h-14  flex items-center">
+          <label htmlFor="logo" className="font-bold mr-7 w-72">
             Company Logo
           </label>
           <input
@@ -319,15 +273,12 @@ const SignupCompany = () => {
             id="logo"
             name="logo"
             onChange={handleFileChange}
-            className="logo"
+            className="flex-1 text-2xl p-2  shadow-lg"
           />
         </div>
 
-        <div className="input-container registration-file">
-          <label
-            htmlFor="registrationFile"
-            className="p-3 m-2 text-gray-600 font-bold"
-          >
+        <div className="h-14  flex items-center">
+          <label htmlFor="registrationFile" className="font-bold mr-7 w-72">
             Registration File
           </label>
           <input
@@ -335,12 +286,12 @@ const SignupCompany = () => {
             id="registrationFile"
             name="registrationFile"
             onChange={handleFileChange}
-            className="registrationFile"
+            className="flex-1 text-2xl p-2  shadow-lg "
           />
         </div>
 
         <button
-          className="bg-green-400 rounded px-3 py-2 mt-2 font-medium"
+          className=" mt-10 w-full text-2xl block bg-blue-500 text-white p-2 rounded transition:1s hover:bg-pink-400 hover:-translate-y-1 hover:scale-105 duration-1000"
           type="submit"
         >
           Update Profile
