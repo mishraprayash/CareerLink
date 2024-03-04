@@ -3,7 +3,7 @@ import Image from "next/image";
 function CareerGuide() {
     return ( 
         <div className="container mx-auto px-4">
-            <h1 className="text-2xl font-bold my-8">Explore Articles</h1>
+            <h1 className="text-2xl font-bold my-10 text-center ">Explore Articles</h1>
             <div className="flex justify-around">
                 <div className="border rounded-lg overflow-hidden w-72 hover:shadow-md hover:scale-105 transition-all">
                     <Image src='/image/resume_article.avif' width={400} height={400} />

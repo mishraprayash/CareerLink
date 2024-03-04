@@ -258,7 +258,7 @@ const ExploreCard = ({ internship }) => {
   }, [internshipApplyStatus]);
 
   return (
-    <div className="bg-[rgba(200,200,200,0.8)] shadow-sm rounded-lg overflow-hidden shadow-black">
+    <div className="bg-[rgba(241,241,241,0.8)] shadow-sm rounded-lg overflow-hidden shadow-black">
       <div className="p-6 flex items-center justify-between">
         <div className="flex gap-2 w-full justify-center">
           <div>
@@ -266,12 +266,12 @@ const ExploreCard = ({ internship }) => {
               <img
                 src={internship.companyLogo.secure_url}
                 alt={internship.companyName}
-                className="w-16 h-16 rounded-full"
+                className="w-16 h-16 rounded-full border-2 border-red-300"
               />
             )}
           </div>
           <div className="ml-5">
-            <div className="text-xl font-semibold">{internship.position.toUpperCase()}</div>
+            <div className="text-xl font-bold">{internship.position.toUpperCase()}</div>
             <div className="text-gray-500">{internship.companyName}</div>
             <div className="text-gray-500">{internship.location.toUpperCase()}</div>
           </div>
@@ -283,50 +283,50 @@ const ExploreCard = ({ internship }) => {
             <FontAwesomeIcon
               icon={faLocationDot}
               size="lg"
-              className="text-gray-400 mr-2"
+              className="text-black mr-2"
             />
             <div>
-              <div className="text-sm font-medium">Location</div>
-              <div className="text-gray-500">{internship.location}</div>
+              <div className="text-sm font-semibold">Location</div>
+              <div className="text-gray-500">{internship.location.toUpperCase()}</div>
             </div>
           </div>
           <div className="flex items-center">
             <FontAwesomeIcon
               icon={faClock}
               size="lg"
-              className="text-gray-400 mr-2"
+              className="text-black mr-2"
             />
             <div>
-              <div className="text-sm font-medium">Time</div>
-              <div className="text-gray-500">{internship.workTime}</div>
+              <div className="text-sm font-semibold">Time</div>
+              <div className="text-black">{internship.workTime}</div>
             </div>
           </div>
           <div className="flex items-center">
             <FontAwesomeIcon
               icon={faUser}
               size="lg"
-              className="text-gray-400 mr-2"
+              className="text-black mr-2"
             />
             <div>
-              <div className="text-sm font-medium">Openings</div>
-              <div className="text-gray-500 text-center">{internship.noofVacancy}</div>
+              <div className="text-sm font-semibold">Openings</div>
+              <div className="text-black text-center">{internship.noofVacancy}</div>
             </div>
           </div>
           <div className="flex items-center">
             <FontAwesomeIcon
               icon={faCoins}
               size="lg"
-              className="text-gray-400 mr-2"
+              className="text-black mr-2"
             />
             <div>
-              <div className="text-sm font-medium">Salary</div>
+              <div className="text-sm font-semibold">Salary</div>
               <div className="text-gray-500">{internship.salary} per Month</div>
             </div>
           </div>
         </div>
         <div>
-          <div className="text-lg font-semibold text-center">Required Qualifications:</div>
-          <div className="p-3 m-2">{internship.requirements}</div>
+          <div className="text-[1.2rem] font-semibold text-center">Required Qualifications</div>
+          <div className="p-3 m-2 font-mono font-semibold">{internship.requirements}</div>
         </div>
       </div>
       <div className="p-6 flex justify-center">
