@@ -29,7 +29,7 @@ const Settings = () => {
 
   return (
     <>
-      {user?.admin ? (
+      {user?.admin && (
         <div>
           {passwordChangeStatus ? (
             <div>Password Changed successfully!</div>
@@ -101,10 +101,6 @@ const Settings = () => {
               </div>
             </div>
           )}
-        </div>
-      ) : (
-        <div className="text-center font-semibold h-[90vh] p-5 m-5">
-          No additional setting available for now
         </div>
       )}
     </>
