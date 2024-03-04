@@ -1,34 +1,55 @@
-
 "use client";
 import React, { useEffect, useState } from "react";
 import "./styles/exploreCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
 import {
+  faCoins,
+  faFilter,
+  faSearch,
+  fas,
   faLocationDot,
   faClock,
+  faBriefcase,
   faUser,
-  faCoins,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitter,
+  faFontAwesome,
+} from "@fortawesome/free-brands-svg-icons";
+library.add(
+  fas,
+  faTwitter,
+  faFontAwesome,
+  faFilter,
+  faSearch,
+  faLocationDot,
+  faCoins,
+  faBriefcase
+);
 import { useRouter } from "next/navigation";
 
-{
-  /* <FontAwesomeIcon  icon={faFilter}  className="  nine h-12 p-2  "/ >*/
-}
+
 import { useContext } from "react";
-import { InternshipContext} from "../context/internshipcontext";
+import { InternshipContext } from "../context/internshipcontext";
 
 const exploreCard = ({ internship }) => {
-  const {appliedInternships}=useContext(InternshipContext)
-  const [isApplied,setIsApplied]=useState(false)
-useEffect(()=>{
-setIsApplied(appliedInternships&&appliedInternships.some(applied => applied._id === internship._id))
-},[appliedInternships])
   const router = useRouter();
+  const { appliedInternships } = useContext(InternshipContext);
+  const [isApplied, setIsApplied] = useState(false);
   const {
     applyforInternship,
     internshipApplyStatus,
     setInternshipApplyStatus,
   } = useContext(InternshipContext);
+
+  useEffect(() => {
+    setIsApplied(
+      appliedInternships &&
+        appliedInternships.some((applied) => applied._id === internship._id)
+    );
+  }, [appliedInternships]);
 
   useEffect(() => {
     if (internshipApplyStatus) {
@@ -41,68 +62,141 @@ setIsApplied(appliedInternships&&appliedInternships.some(applied => applied._id 
   }, [internshipApplyStatus]);
 
   return (
-    <div className="bg-[rgba(241,241,241,0.8)] shadow-sm rounded-lg overflow-hidden shadow-black">
-      <div className="p-6 flex items-center justify-between">
-        <div className="flex gap-2 w-full justify-center">
-          <div>
+    <div className="internship-card">
+      <div className="top">
+        <div className="internship-position">
+          <p>
+            {internship?.position}
+          </p>
+        </div>
+        <div className="internship-name">
+          <p>
             {internship?.companyLogo && (
               <img
-                src={internship?.companyLogo.secure_url}
-                alt={internship?.companyName}
-                className="w-16 h-16 rounded-full border-2 border-red-300"
+                src={internship.companyLogo.secure_url}
+                alt={internship.companyName}
+                className="w-16 h-16  rounded-full"
+                height={400}
+                width={400}
               />
             )}
+            {internship.companyName}
+          </p>
+        </div>
+        <div className="internship-location">
+
+          <p>
+            {internship.location.toUpperCase()}
+            {/* Pokhara */}
+          </p>
+        </div>
+        <div className="listOfSymbol">
+          <div className="onesymbol">
+            <div>
+              {" "}
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                size="2x"
+                className=" Alogo "
+              />
+            </div>
+            <div>
+              <div className="sTitle">Location</div>
+              <div className="sValue">{internship.location.toUpperCase()}</div>
+            </div>
           </div>
-          <div className="ml-5">
-            <div className="text-xl font-bold">{internship?.position.toUpperCase()}</div>
-            <div className="text-gray-500">{internship?.companyName}</div>
-            <div className="text-gray-500">{internship?.location.toUpperCase()}</div>
+          <div className="onesymbol">
+            <div>
+              <FontAwesomeIcon icon={faClock} size="2x" className=" Alogo " />
+            </div>
+            <div>
+              <div className="sTitle">Time</div>
+              <div className="sValue">{internship.workTime}</div>
+            </div>
+          </div>
+          <div className="onesymbol">
+            <div>
+              <FontAwesomeIcon icon={faUser} size="2x" className=" Alogo " />
+            </div>
+            <div>
+              <div className="sTitle">Openings</div>
+              <div className="sValue text-center">{internship.noofVacancy}</div>
+            </div>
+          </div>
+          <div className="onesymbol">
+            <div className=" Alogo ">
+              <FontAwesomeIcon icon={faCoins} size="2x" className=" Alogo " />
+            </div>
+            <div>
+              <div className="sTitle">Salary</div>
+              <div className="sValue">{internship.salary} per Month</div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="p-6">
-        <div className="flex justify-between mb-4">
-          <div className="flex items-center">
-            <FontAwesomeIcon
-              icon={faLocationDot}
-              size="lg"
-              className="text-black mr-2"
-            />
-            <div>
-              <div className="text-sm font-semibold">Location</div>
-              <div className="text-gray-500">{internship?.location.toUpperCase()}</div>
+      <div className="middle">
+        <div className="flex flex-col gap-3">
+          <p className="text-center text-[1.2rem] font-semibold">
+            Required Qualifications
+          </p>
+          <p className="font-mono">
+            {internship.requirements}
+          </p>
+        </div>
+      </div>
+      <div className="bottom">
+        <div className="left">
+          <div className="internship-compensation">
+            <p>
+              {/* {internship.compensation} */}
+              view about company
+            </p>
+          </div>
+          <div className="internship-working">
+            <p>
+              {/* {internship.working} */}
+              internshop working{" "}
+            </p>
+          </div>
+          <div className="internship-skills">
+            {internship.skillsRequired &&
+              internship.skillsRequired.length > 0 && (
+                <>
+                  <p className="font-semibold">Skills Required:</p>
+                  <ul className="list-disc pl-4">
+                    {/* Iterate over skills required and display them */}
+                    {internship.skillsRequired.map((skill, index) => (
+                      <li key={index}>{skill}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+          </div>
+        </div>
+        <div className="right">
+          <div className="internship-btn">
+            <div
+              className="internship-bookmark "
+              onClick={() => {
+                router.push(`/explore/${internship._id}`);
+              }}
+            >
+              View More
             </div>
 
             <div className="appy-btn">
-              {/* <a href="/" target="_blank">
-                Apply
-                </a> */}
               {isApplied ? (
-              <button disabled>Applied</button>
-            ) : (
-              <button onClick={() => applyforInternship(internship?._id.toString())}>Apply</button>
-            )}
+                <button disabled>Applied</button>
+              ) : (
+                <button
+                  onClick={() => applyforInternship(internship._id.toString())}
+                >
+                  Apply
+                </button>
+              )}
             </div>
           </div>
         </div>
-        <div>
-          <div className="text-[1.2rem] font-semibold text-center">Required Qualifications</div>
-          <div className="p-3 m-2 font-mono font-semibold">{internship?.requirements}</div>
-        </div>
-      </div>
-      <div className="p-6 flex justify-center">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
-          onClick={() => router.push(`/explore/${internship?._id}`)}
-        >
-          View More
-        </button>
-        <button
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          onClick={() => applyforInternship(internship?._id.toString())}
-        >
-          Apply
-        </button>
       </div>
     </div>
   );
