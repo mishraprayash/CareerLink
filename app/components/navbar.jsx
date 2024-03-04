@@ -54,10 +54,10 @@ const Navbar = () => {
               className="rounded-full"
             />
           </Link>
-          <Link href="/">
-            <span className="font-bold text-[#108A00] text-2xl py-3">
+          <Link href="/" className="hover:no-underline">
+            <div className="font-bold text-[#108A00] text-2xl py-3">
               CareerLink
-            </span>
+            </div>
           </Link>
         </div>
         <button
