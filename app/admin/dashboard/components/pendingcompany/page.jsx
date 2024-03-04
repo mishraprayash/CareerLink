@@ -30,7 +30,7 @@ function PendingCompany() {
                         <div>
                             <span className="font-semibold">Email:</span> {company.email}
                         </div>
-                        <p className="text-gray-700">{company.companyDescription}</p>
+                        <p className="text-gray-700">{company.description}</p>
                     </div>
                     <div>
                         <h3 className="text-lg font-semibold mb-2">Company Information</h3>

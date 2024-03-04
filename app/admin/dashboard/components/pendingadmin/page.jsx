@@ -19,7 +19,7 @@ function PendingAdmin() {
       {rejectedStatus && window.alert(rejectedStatus)} */}
       {pendingAdmin &&
         pendingAdmin.map((admin) => (
-          <div className="border border-blue-900 ">
+          <div key={admin._id} className="border border-blue-900 ">
             <div>
               <div className="p-4 bg-gray-200 rounded shadow-md">
                 <div className="font-bold text-lg mb-2">Admin Profile</div>

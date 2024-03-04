@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/exploreCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -42,9 +42,14 @@ import { useRouter } from "next/navigation";
   /* <FontAwesomeIcon  icon={faFilter}  className="  nine h-12 p-2  "/ >*/
 }
 import { useContext } from "react";
-import { InternshipContext } from "../context/internshipcontext";
+import { InternshipContext} from "../context/internshipcontext";
 
 const exploreCard = ({ internship }) => {
+  const {appliedInternships}=useContext(InternshipContext)
+  const [isApplied,setIsApplied]=useState(false)
+useEffect(()=>{
+setIsApplied(appliedInternships&&appliedInternships.some(applied => applied._id === internship._id))
+},[appliedInternships])
   const router = useRouter();
   const {
     applyforInternship,
@@ -211,11 +216,11 @@ const exploreCard = ({ internship }) => {
               {/* <a href="/" target="_blank">
                 Apply
                 </a> */}
-              <button
-                onClick={() => applyforInternship(internship._id.toString())}
-              >
-                Apply
-              </button>{" "}
+              {isApplied ? (
+              <button disabled>Applied</button>
+            ) : (
+              <button onClick={() => applyforInternship(internship._id.toString())}>Apply</button>
+            )}
             </div>
           </div>
         </div>

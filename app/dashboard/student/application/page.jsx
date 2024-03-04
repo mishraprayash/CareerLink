@@ -16,7 +16,7 @@ const Application = () => {
           <h2 className="text-2xl font-bold mb-4">Applications</h2>
           <div className="grid grid-cols-1 ">
             {appliedInternships && appliedInternships.map((internship) => (
-              <div className="s mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-4 w-full">
+              <div key={internship._id} className="s mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-4 w-full">
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">{internship.position}</h2>
                 <p className="text-gray-700 mb-2">Company: {internship.companyName}</p>

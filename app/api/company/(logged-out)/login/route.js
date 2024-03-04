@@ -15,7 +15,8 @@ export async function POST(request) {
         if (!email || !password) {
             return NextResponse.json({ msg: "Email or password missing" }, { status: 400 });
         }
-        const companyExist = await Company.findOne({ $and: [{ email: email }, { state: "Approved" }] })
+        const companyExist = await Company.findOne({ email: email } )
+        // const companyExist = await Company.findOne({ $and: [{ email: email }, { state: "Approved" }] })
         if (!companyExist) {
             return NextResponse.json({ msg: "Company doesnot exist" }, { status: 400 });
         }
