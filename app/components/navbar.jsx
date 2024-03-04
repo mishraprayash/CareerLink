@@ -113,13 +113,13 @@ const Navbar = () => {
                 </button>
               ))}
             <Link href="/signupCompany" className="no-underline">
-              <button className="registerbtn bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
+              <button className="registerbtn bg-white rounded-full px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
                 COMPANY REGISTER
               </button>
             </Link>
 
             <Link href="/loginCompany" className="no-underline">
-              <button className="loginbtn bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
+              <button className="loginbtn bg-white rounded-full px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
                 COMPANY LOGIN
               </button>
             </Link>
