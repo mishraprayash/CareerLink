@@ -6,7 +6,7 @@ export async function GET(request) {
     try {
         await connectDB();
         // returns an arrray
-        const pendingCompanies = await Company.find({ state: "Pending", verified: true });
+        const pendingCompanies = await Company.find({ state: "Pending"});
         if (pendingCompanies.length === 0) {
             return NextResponse.json({ msg: "No any companies" }, { status: 404 });
         }
