@@ -18,7 +18,7 @@ const Profile = () => {
           <div>Loading data...</div>
         )
       ) : (
-        <div>You must be logged in</div>
+        <div className="text-center p-5 m-3">Loading...</div>
       )}
     </>
   );
