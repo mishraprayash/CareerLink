@@ -29,7 +29,7 @@ const CreateInternship = () => {
 const response=await postReq("/api/company/createinternship",createinternship)
 console.log(response)
 if(!response.error){
-    // window.alert(response.msg)
+
     ToastMessage("Success",response.msg)
     const router=useRouter()
     router.push('/dashboard/company/internship')
@@ -37,7 +37,7 @@ if(!response.error){
 else{
     console.log(response.error)
     ToastMessage("Error",response.msg)
-    // window.alert(response.message)
+
 }
 
   };
@@ -51,8 +51,8 @@ else{
   };
  
   return (
-    <div className="container mx-auto w-full">
-      <div className='text-4xl text-center  justify-center text-[#108A00]'> Create internship opportunity</div>
+    <div className=" mx-auto w-[80%] p-5 my-5">
+      <div className='text-3xl text-center  text-[#108A00]'> Create New Internship </div>
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
         <div className='w-1/2'>
           <label htmlFor="position" className=" text-sm font-medium text-gray-700">
@@ -115,7 +115,7 @@ else{
         </div>
         </div>
           <div className='flex flex-row items-baseline justify-center '>
-        <div className='w-1/2 m-2'>
+        <div className='w-1/2'>
           <label htmlFor="startDate" className=" text-sm font-medium text-gray-700">
             Start Date
           </label> 
@@ -228,11 +228,12 @@ else{
             className="mt-1 p-2 border rounded-md w-full"
           />
         </div>
-
-
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+         <div className="flex justify-center">
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md text-center flex items-center">
           Create Internship
         </button>
+        </div>
+       
       </form>
     </div>
   );
