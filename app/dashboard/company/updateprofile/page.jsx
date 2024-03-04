@@ -291,7 +291,7 @@ const SignupCompany = () => {
         </div>
 
         <button
-          className=" mt-10 w-full text-2xl block bg-blue-500 text-white p-2 rounded transition:1s hover:bg-pink-400 hover:-translate-y-1 hover:scale-105 duration-1000"
+          className=" mt-10 w-full text-2xl block bg-blue-500 text-white p-2 rounded transition:1s hover:bg-pink-400 hover:-translate-y-1 hover:scale-105 duration-500"
           type="submit"
         >
           Update Profile
