@@ -47,12 +47,12 @@ const CompanyProfile = () => {
                         <div className="text-2xl font-semibold mb-2 col-start-1 col-span-5">Company Information</div>
                         <div className="text-gray-700 row-start-2 col-start-2 col-span-3">
                            <strong>Industry Sector:</strong>
-                           {company.companyInfo.industrySectors}
+                           {company.companyInfo?.industrySectors}
                            <strong> Category:
                             </strong> {company.companyInfo?.category}
                         </div>
                         <div className="text-gray-700 row-start-3 col-start-2 col-span-3">
-                            <strong>Founded Year:</strong> {company.foundYear}
+                            <strong>Founded Year:</strong> {company?.foundYear}
                         </div>
                         {/* Add more details as needed */}
                     </div>
@@ -71,13 +71,13 @@ const CompanyProfile = () => {
                     <div className="mt-6  grid grid-cols-10 grid-rows-4">
                         <div className="text-2xl  font-semibold mb-2 col-start-1 col-span-3">Address</div>
                         <div className="text-gray-700  row-start-2 col-start-2">
-                            <strong>City:</strong> {company.address.city}
+                            <strong>City:</strong> {company.address?.city}
                         </div>
                         <div className="text-gray-700  row-start-3 col-start-2">
-                            <strong>State:</strong> {company.address.state}
+                            <strong>State:</strong> {company.address?.state}
                         </div>
                         <div className="text-gray-700  row-start-4 col-start-2">
-                            <strong>Zip Code:</strong> {company.address.zipCode}
+                            <strong>Zip Code:</strong> {company.address?.zipCode}
                         </div>
                     </div>
 

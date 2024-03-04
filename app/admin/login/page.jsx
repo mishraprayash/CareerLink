@@ -27,6 +27,7 @@ console.log(username,password)
         console.log("Response:", data);
         ToastMessage("Success",data.msg)
         router.push('/admin/dashboard')
+        window.location.reload();
     }else{
       ToastMessage("Error",data.msg)
     }

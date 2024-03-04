@@ -23,7 +23,7 @@ function MyInternship() {
   return (
     <>
       <div className="text-4xl mt-4 text-mono ml-8">Running Internships</div>
-      {runningInternships &&
+      {runningInternships ?(
         runningInternships.map((internship) => (
           <div className="" key={internship._id}>
             <Card internship={internship} />
@@ -39,9 +39,10 @@ function MyInternship() {
               </button>
             </div>
           </div>
-        ))}
-      <div className="text-4xl mt-4 text-mono ml-12">Pending Internships</div>
-      {pendingInternships &&
+        ))):(<div className="text-mono ml-12">No Running internship to show </div>)}
+        <br></br>
+      <div className="text-4xl mt-4 text-mono ml-12 ">Pending Internships</div>
+      {pendingInternships ?(
         pendingInternships.map((internship) => (
           <div className="" key={internship._id}>
             <Card internship={internship} />
@@ -54,7 +55,7 @@ function MyInternship() {
               </button>
             </div>
           </div>
-        ))}
+        ))):(<div className="text-mono ml-12">No Pending internship to show.</div>)}
     </>
   );
 }

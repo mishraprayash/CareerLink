@@ -54,9 +54,9 @@ a:hover {
   justify-content: center;
   align-items: center;
   height: 70%;
-  width: 70%;
+  width: 80%;
   border-radius: 12px;
-  background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/careerlink.png");
+  background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/vvsfg1lzcbnk81seicf2");
   background-size: cover;
 }
 .left .makecenter .copy {

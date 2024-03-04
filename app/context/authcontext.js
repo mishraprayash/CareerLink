@@ -5,11 +5,15 @@ import { useSession, signOut } from "next-auth/react";
 export const AuthContext = createContext();
 import Cookies from "js-cookie";
 import { ToastMessage } from "../components/ToastMessage";
+import { useRouter } from "next/router";
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const { data: session } = useSession();
   // console.log(session)
   console.log(user)
+  const adminsession = Cookies.get('admin')
+  const companysession = Cookies.get('company')
+
   const logoutUser = useCallback(async () => {
     if (session && session?.user) {
         signOut()   
@@ -17,17 +21,24 @@ export const AuthContextProvider = ({ children }) => {
     }else{
      const response=await getReq('/api/common/logout')
      console.log(response)
+     if(companysession){
+
+       Cookies.remove('company');
+     }else if(adminsession){
+      Cookies.remove("admin")
+     }
      if(!response.error){
       ToastMessage("Success",response.msg)
        setUser(null);
      }else{
       ToastMessage("Error",response.msg)
      }
+    const router= useRouter()
+    router.push("/")
     }
   }, [session]);
 
-  const adminsession = Cookies.get('admin')
-  const companysession = Cookies.get('company')
+
   useEffect(() => {
     const fetchProfile = async () => {
       if (session && session?.user) {
