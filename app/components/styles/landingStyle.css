@@ -15,7 +15,7 @@
 }
 
 .lpage {
-  background-image:linear-gradient(to right, rgba(173, 216, 230, 0.675), rgba(0, 168, 198, 0.474),rgba(211, 211, 211, 0.678));
+  background-color: #F2F4F7;
   color: black;
   padding: 4rem 3rem 4rem 3rem;
 }
