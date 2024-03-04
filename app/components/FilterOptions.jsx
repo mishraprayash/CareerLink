@@ -23,11 +23,11 @@ const FilterOptions = ({ applyFilters }) => {
     };
 
     return (
-        <div className="fixed left-0 top-24 bg-white p-4 shadow-md z-50">
+        <div className="fixed left-0 top-24 bg-slate-100 p-4 shadow-md z-50 rounded-lg">
             <h2 className="text-lg font-bold mb-4">Filters</h2>
             <div className="flex flex-col space-y-4">
-                <div className="flex items-center my-4">
-                    <label htmlFor="position" className="block mb-1">Position</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="position" className="block my-1 mx-2">Position</label>
                     <input
                         type="text"
                         id="position"
@@ -38,8 +38,8 @@ const FilterOptions = ({ applyFilters }) => {
                         className="border rounded-md p-2"
                     />
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="companyName" className="block mb-1">Company</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="companyName" className="block my-1 mx-2">Company</label>
                     <input
                         type="text"
                         id="companyName"
@@ -50,8 +50,8 @@ const FilterOptions = ({ applyFilters }) => {
                         className="border rounded-md p-2"
                     />
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="location" className="block mb-1">Location</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="location" className="block my-1 mx-2">Location</label>
                     <input
                         type="text"
                         id="location"
@@ -62,8 +62,8 @@ const FilterOptions = ({ applyFilters }) => {
                         className="border rounded-md p-2"
                     />
                 </div>
-                <div className=" items-center my-4">
-                    <label htmlFor="noofVacancy" className="block mb-1">Number of Vacancies</label>
+                <div className=" items-center my-4 mx-2">
+                    <label htmlFor="noofVacancy" className="block my-1 mx-2">Number of Vacancies</label>
                     <input
                         type="number"
                         id="noofVacancy"
@@ -74,24 +74,24 @@ const FilterOptions = ({ applyFilters }) => {
                         className="border rounded-md p-2"
                     />
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="remote" className="block mb-1">Remote</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="remote" className="block my-1 mx-2">Remote</label>
                     <select id="remote" name="remote" value={filterOptions.remote} onChange={handleInputChange} className="border rounded-md p-2">
                         <option value="">Remote</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </select>
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="paid" className="block mb-1">Paid</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="paid" className="block my-1 mx-2">Paid</label>
                     <select id="paid" name="paid" value={filterOptions.paid} onChange={handleInputChange} className="border rounded-md p-2">
                         <option value="">Paid</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </select>
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="workTime" className="block mb-1">Work Time</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="workTime" className="block my-1 mx-2">Work Time</label>
                     <select id="workTime" name="workTime" value={filterOptions.workTime} onChange={handleInputChange} className="border rounded-md p-2">
                         <option value="">Select Work Time</option>
                         <option value="Full-Time">Full-Time</option>
@@ -99,8 +99,8 @@ const FilterOptions = ({ applyFilters }) => {
                         <option value="Hybrid">Hybrid</option>
                     </select>
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="minSalary" className="block mb-1">Min Salary</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="minSalary" className="block my-1 mx-2">Min Salary</label>
                     <input
                         type="number"
                         id="minSalary"
@@ -111,8 +111,8 @@ const FilterOptions = ({ applyFilters }) => {
                         className="border rounded-md p-2"
                     />
                 </div>
-                <div className="flex items-center my-4">
-                    <label htmlFor="maxSalary" className="block mb-1">Max Salary</label>
+                <div className="flex items-center my-4 mx-2">
+                    <label htmlFor="maxSalary" className="block my-1 mx-2">Max Salary</label>
                     <input
                         type="number"
                         id="maxSalary"
@@ -124,7 +124,9 @@ const FilterOptions = ({ applyFilters }) => {
                     />
                 </div>
             </div>
-            <button onClick={handleApplyFilters} className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-blue-600 transition-colors">Apply Filters</button>
+            <div className="flex justify-center">
+                <button onClick={handleApplyFilters} className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-blue-600 transition-colors">Apply Filters</button>
+            </div>
         </div>
     );
 };
