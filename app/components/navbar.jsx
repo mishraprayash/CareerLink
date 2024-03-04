@@ -90,7 +90,7 @@ const Navbar = () => {
             >
               <button>Career Guide</button>
             </Link>
-            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUse}/>
+            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser}/>
           </div>
         ) : (
           <div className="flex flex-row gap-5 items-center ">
