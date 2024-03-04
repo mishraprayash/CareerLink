@@ -1,9 +1,8 @@
 "use client";
-// pages/signupCompany.js
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { postReq } from "@/app/hooks/service";
+
 import { ToastMessage } from "@/app/components/ToastMessage";
 
 const SignupCompany = () => {

@@ -108,7 +108,10 @@ export const InternshipContextProvider = ({ children }) => {
         
         if (!response.error) {
           setInternshipApplyStatus(response.msg);
-         ToastMessage("Success", response.msg); 
+         ToastMessage("Success", response.msg);
+         setTimeout(() => {
+           window.location.reload(); 
+        }, 2000);
         }else{
           ToastMessage("Error", response.msg); 
         }

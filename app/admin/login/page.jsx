@@ -24,11 +24,14 @@ function Login() {
       const data = await response.json();
       if (response.ok) {
         console.log("Response:", data);
-        ToastMessage("Success", data.msg);
-        router.push("/admin/dashboard");
-      } else {
-        ToastMessage("Error", data.msg);
-      }
+        ToastMessage("Success",data.msg)
+        router.push('/admin/dashboard')
+        window.location.reload();
+    }else{
+      ToastMessage("Error",data.msg)
+    }
+     
+      
     } catch (error) {
       // Handle errors, e.g., display an error message
       console.error("Error:", error);

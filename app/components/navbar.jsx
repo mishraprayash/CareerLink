@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
@@ -7,7 +6,7 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { AuthContext } from "../context/authcontext";
 import AppHeaderDropdown from "./AppHeaderDropdown";
 import { useRouter } from "next/navigation";
-import { ToastMessage } from './ToastMessage';
+import { ToastMessage } from "./ToastMessage";
 
 const Navbar = () => {
   const router = useRouter();
@@ -38,62 +37,113 @@ const Navbar = () => {
     ? user.company.logo.secure_url
     : "/Image/Companylogo.jpg";
 
-  //  console.log(CompanyImageUrl)
-
   useEffect(() => {
     setProfileUrl(user?.student ? StudentImageUrl : CompanyImageUrl);
   }, [user]);
 
   return (
-    <div className="flex flex-row justify-between bg-[#CCD3CA]">
-      <div className="flex gap-5">
-        <Link className="no-underline p-3 ml-5" href="/">
-          <Image
-            className="rounded-full hover:scale-105 transition-all"
-            src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/pvqct2blfs7ntb4hdtmt"
-            width={40}
-            height={40}
-            alt="logo"
-          />
-        </Link>
-        <Link
-          className="font-bold text-[#108A00] text-[30px] py-3 hover:no-underline"
-          href="/"
+    <div className="flex flex-col md:flex-row md:justify-around bg-[#DBE7C9]">
+      <div className="flex justify-between items-center w-full md:w-1/3 px-4 md:py-0">
+        <div className="flex items-center">
+          <Link className="no-underline px-3 ml-5" href="/">
+            <Image
+              src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/pvqct2blfs7ntb4hdtmt"
+              width={40}
+              height={40}
+              alt="logo"
+              className="  rounded-full"
+            />
+          </Link>
+          <Link href="/">
+            <span className="font-bold text-[#108A00] text-2xl py-3">
+              CareerLink
+            </span>
+          </Link>
+        </div>
+        <button
+          onClick={() => setToggleDropdown(!toggleDropdown)}
+          className="md:hidden focus:outline-none"
         >
-          CareerLink
-        </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
       </div>
-      <div className="forbutton flex items-center p-5">
+      {toggleDropdown && (
+        <div className="md:hidden px-4 py-2 w-full">
+          <div className="flex flex-col gap-2">
+            <Link href="/explore">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                EXPLORE
+              </button>
+            </Link>
+            <Link href="/">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                HOME
+              </button>
+            </Link>
+            <Link href={user?.admin ? "/admin/dashboard" : "/dashboard"}>
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                DASHBOARD
+              </button>
+            </Link>
+            <Link href="/careerguide">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                CAREER GUIDE
+              </button>
+            </Link>
+            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser} />
+          </div>
+        </div>
+      )}
+      <div className="hidden md:flex items-center p-5 w-full md:w-2/3 justify-end">
         {user ? (
-          <div className="flex flex-row gap-5 items-center">
-            <Link
-              href="/"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
-            >
-              <button>Home</button>
+          <div className="flex gap-5 items-center">
+            <Link href="/explore">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                EXPLORE
+              </button>
             </Link>
-            <Link
-              href="/explore"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
-            >
-              <button>Explore</button>
+            <Link href="/">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                HOME
+              </button>
             </Link>
-            <Link
-              href="/dashboard"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
-            >
-              <button>Dashboard</button>
+            <Link href={user?.admin ? "/admin/dashboard" : "/dashboard"}>
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                DASHBOARD
+              </button>
             </Link>
-            <Link
-              href="/careerguide"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
-            >
-              <button>Career Guide</button>
+            <Link href="/careerguide">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                CAREER GUIDE
+              </button>
             </Link>
-            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser}/>
+            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser} />
           </div>
         ) : (
-          <div className="flex flex-row gap-5 items-center ">
+          <div className="flex gap-5 items-center">
+            <Link href="/explore">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                EXPLORE
+              </button>
+            </Link>
+            <Link href="/careerguide">
+              <button className="navbutton bg-white rounded-lg px-3 py-1">
+                CAREER GUIDE
+              </button>
+            </Link>
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -107,19 +157,18 @@ const Navbar = () => {
                       console.error("Error during sign-in:", error);
                     }
                   }}
-                  className="bg-white rounded-full px-3 py-1  hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
+                  className="navbutton bg-white rounded-lg px-3 py-1"
                 >
                   STUDENT LOGIN
                 </button>
               ))}
-            <Link href="/signupCompany" className="no-underline">
-              <button className="registerbtn bg-white rounded-full px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
+            <Link href="/signupCompany">
+              <button className="registerbtn bg-white rounded-lg px-3 py-1">
                 COMPANY REGISTER
               </button>
             </Link>
-
-            <Link href="/loginCompany" className="no-underline">
-              <button className="loginbtn bg-white rounded-full px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
+            <Link href="/loginCompany">
+              <button className="loginbtn bg-white rounded-lg px-3 py-1">
                 COMPANY LOGIN
               </button>
             </Link>

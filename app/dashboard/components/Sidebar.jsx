@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faBriefcase,
+  faUser,
+  faCog,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
@@ -11,9 +13,9 @@ import { AuthContext } from "@/app/context/authcontext";
 const Sidebar = () => {
   const { user } = useContext(AuthContext);
   return (
-    <aside className="bg-gray-200 p-6 sticky left-0 top-1">
+    <aside className="bg-gray-200 px-6 sticky left-0 h-full">
       <ul className="space-y-4 ">
-        <li className="h-28 hover:bg-gray-300 p-5 rounded">
+        <li className="h-28 hover:bg-gray-300 p-6 rounded">
           <Link href="/dashboard" passHref>
             <p className="flex flex-col">
               <FontAwesomeIcon
@@ -28,11 +30,11 @@ const Sidebar = () => {
             </p>
           </Link>
         </li>
-        <li className="h-28 hover:bg-gray-300 p-5 rounded">
+        <li className="h-28 hover:bg-gray-300 p-6 rounded">
           <Link href="/dashboard/components/profile" passHref>
             <p className="flex flex-col">
               <FontAwesomeIcon
-                icon={faBriefcase}
+                icon={faUser}
                 style={{
                   fontSize: "3rem",
                   marginRight: "0.5rem",
@@ -46,7 +48,7 @@ const Sidebar = () => {
         {user ? (
           user.student ? (
             <div>
-              <li className="h-28 hover:bg-gray-300 p-5 rounded">
+              <li className="h-28 hover:bg-gray-300 p-6 rounded">
                 <Link href="/dashboard/student/updateprofile" passHref>
                   <p className="flex flex-col">
                     <FontAwesomeIcon
@@ -61,7 +63,7 @@ const Sidebar = () => {
                   </p>
                 </Link>
               </li>
-              <li className="h-28 hover:bg-gray-300 p-5 rounded">
+              <li className="h-28 hover:bg-gray-300 p-6 rounded">
                 <Link href="/dashboard/student/application" passHref>
                   <p className="flex flex-col">
                     <FontAwesomeIcon
@@ -79,7 +81,7 @@ const Sidebar = () => {
             </div>
           ) : user.company ? (
             <div>
-              <li className="h-28 hover:bg-gray-300 p-5 rounded">
+              <li className="h-28 hover:bg-gray-300 p-6 rounded">
                 {/* Add your Link or other content for company here */}
                 <Link href="/dashboard/company/internship" passHref>
                   <p className="flex flex-col">
@@ -96,7 +98,7 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-              <li className="h-28 hover:bg-gray-300 p-5 rounded">
+              <li className="h-28 hover:bg-gray-300 p-6 rounded">
                 <Link href="/dashboard/company/createinternship" passHref>
                   <p className="flex flex-col">
                     <FontAwesomeIcon
@@ -112,7 +114,7 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-              <li className="h-28 hover:bg-gray-300 p-5 rounded">
+              <li className="h-28 hover:bg-gray-300 p-6 rounded">
                 <Link href="/dashboard/company/updateprofile" passHref>
                   <p className="flex flex-col">
                     <FontAwesomeIcon
@@ -138,11 +140,11 @@ const Sidebar = () => {
            </p>
           </Link>
         </li> */}
-        <li className="h-28 hover:bg-gray-300 p-5 rounded">
+        <li className="h-28 hover:bg-gray-300 p-6 rounded">
           <Link href="/dashboard/components/settings" passHref>
             <p className="flex flex-col">
               <FontAwesomeIcon
-                icon={faBriefcase}
+                icon={faCog}
                 style={{
                   fontSize: "1rem",
                   marginRight: "0.5rem",

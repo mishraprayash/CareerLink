@@ -3,7 +3,6 @@
 import { NextResponse } from 'next/server';
 import { decodeJWTCompany, decodeJWTAdmin } from './helpers/validateToken';
 
-// import { rateLimiter } from './helpers/rateLimiter';
 import {
   loggedOutOnlyClientRoutes,
   adminLoggedInAPIRoutes,
@@ -16,16 +15,9 @@ import {
   studentLoggedInAPIRoutes,
 } from './routes'
 
-
 export async function middleware(request) {
 
   const { pathname } = request.nextUrl;
-  console.log(pathname);
-
-  // const rateLimiterResponse = await rateLimiter(request);
-  // if (typeof rateLimiterResponse !== Boolean && rateLimiterResponse !== true) {
-  //   return rateLimiterResponse;
-  // }
 
   const adminToken = !!request.cookies.get('token') && !!request.cookies.get('admin');
   const companyToken = !!request.cookies.get('token') && !!request.cookies.get('company');

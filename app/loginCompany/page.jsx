@@ -27,7 +27,7 @@ function Login() {
         console.log("Response:", data);
         ToastMessage("Success", data.msg);
         router.push("/dashboard");
-        router.revalidate();
+        window.location.reload();
       } else {
         const data = await response.json();
         ToastMessage("Error", data.msg);
