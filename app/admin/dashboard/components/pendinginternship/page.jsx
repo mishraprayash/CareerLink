@@ -10,7 +10,7 @@ function PendingInternship() {
         <div>
              {pendingInternshipsAdmin && pendingInternshipsAdmin.map((internship) => (
              <div className=" ">
-             <div className="text-3xl p-5 m-5 text-center font-mono">Pending Internships</div>
+             <div className="text-[1.5rem] p-5 m-5 text-center font-mono font-semibold">Pending Internships</div>
                 <Card key={internship._id} internship={internship} />
                 <div className="flex justify-center space-x-4">
                     <button onClick={()=>accept(internship._id,internship.role)} className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600 hover:bg-green-600">

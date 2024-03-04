@@ -10,7 +10,7 @@ function PendingCompany() {
         <div>
             {pendingCompany && (
                 <div>
-                    <div className="text-center text-[1.5rem] m-5 p-5 font-semibold">Pending Companies</div>
+                    <div className="text-center text-[1.5rem] m-5 p-5 font-semibold font-mono">Pending Companies</div>
                     {pendingCompany.map((company) => (
                         <div key={company._id} className="border p-6 my-8 bg-white shadow-md rounded-lg">
                             <div className="flex items-center justify-between mb-4">
