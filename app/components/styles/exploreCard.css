@@ -103,8 +103,8 @@
   }
   .right{
     display: flex;
-    justify-content:end;
-   
+   width: 50%;
+   justify-content:space-around;
   }
   
   .icons{
@@ -207,7 +207,7 @@ border:solid 1px rgb(32, 32, 80);
 }
 .left{
 
-   width: 600px;
+   width: 50%;
    display: flex;
    flex-direction: column;
 }

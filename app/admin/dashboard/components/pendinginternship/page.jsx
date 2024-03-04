@@ -8,13 +8,13 @@ function PendingInternship() {
     console.log(pendingInternshipsAdmin);
     return ( 
         <div>
-             <div>Pending Internships</div>
-             {
+             <div className="text-4xl mt-4 ml-12">Pending Internships</div>
+             {/* {
                 acceptedStatus&&(window.alert(acceptedStatus))
             } {
                 rejectedStatus&&(window.alert(rejectedStatus))
-            }
-             {pendingInternshipsAdmin && pendingInternshipsAdmin.map((internship) => (<div className="border border-blue-900 ">
+            } */}
+             {pendingInternshipsAdmin && pendingInternshipsAdmin.map((internship) => (<div className=" ">
                 <Card key={internship._id} internship={internship} />
                 <div className="flex justify-center space-x-4">
                     <button onClick={()=>accept(internship._id,internship.role)}className="bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-blue active:bg-green-600">

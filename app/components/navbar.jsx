@@ -49,15 +49,15 @@ const Navbar = () => {
       <div className="flex gap-5">
         <Link className="no-underline p-3 ml-5" href="/">
           <Image
-            className=" h-[40px] w-[40px] rounded-full"
-            src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/tuzqbpgoquw2pg6ytgon.png"
+            className="rounded-full hover:scale-105 transition-all"
+            src="https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/pvqct2blfs7ntb4hdtmt"
             width={40}
             height={40}
             alt="logo"
           />
         </Link>
         <Link
-          className="font-bold text-[#108A00] text-[30px] no-underline p-3"
+          className="font-bold text-[#108A00] text-[30px] py-3 hover:no-underline"
           href="/"
         >
           CareerLink
@@ -68,41 +68,32 @@ const Navbar = () => {
           <div className="flex flex-row gap-5 items-center">
             <Link
               href="/"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
+              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
             >
               <button>Home</button>
             </Link>
             <Link
               href="/explore"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
+              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
             >
               <button>Explore</button>
             </Link>
             <Link
               href="/dashboard"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
+              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
             >
               <button>Dashboard</button>
             </Link>
             <Link
               href="/careerguide"
-              className="navbutton no-underline bg-white rounded-lg px-3 py-1"
+              className="navbutton no-underline bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
             >
-              <button>Training</button>
+              <button>Career Guide</button>
             </Link>
-            {/* <Link href='/profile'>
-               
-                <Image src={user?.student?StudentImageUrl:CompanyImageUrl}
-                  alt="profile"
-                  height={30}
-                  width={30}
-                  className='mx-4 rounded-lg'
-                />
-              </Link> */}
-            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUser} />
+            <AppHeaderDropdown imgUrl={profileUrl} logoutUser={logoutUse}/>
           </div>
         ) : (
-          <div className="flex flex-row gap-5 items-center">
+          <div className="flex flex-row gap-5 items-center ">
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -113,24 +104,22 @@ const Navbar = () => {
                         callbackUrl: "/explore", // Set the custom redirect URL here
                       });
                     } catch (error) {
-                      ToastMessage('Error',"Invalid Email Address");
-                      router.push('/');
                       console.error("Error during sign-in:", error);
                     }
                   }}
-                  className="bg-white rounded-lg px-3 py-1"
+                  className="bg-white rounded-full px-3 py-1  hover:bg-pink-500 hover:text-white hover:scale-105 transition-all"
                 >
                   STUDENT LOGIN
                 </button>
               ))}
             <Link href="/signupCompany" className="no-underline">
-              <button className="registerbtn bg-white rounded-lg px-3 py-1">
+              <button className="registerbtn bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
                 COMPANY REGISTER
               </button>
             </Link>
 
             <Link href="/loginCompany" className="no-underline">
-              <button className="loginbtn bg-white rounded-lg px-3 py-1">
+              <button className="loginbtn bg-white rounded-lg px-3 py-1 hover:bg-pink-500 hover:text-white hover:scale-105 transition-all">
                 COMPANY LOGIN
               </button>
             </Link>

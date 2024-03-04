@@ -43,8 +43,8 @@ function Login() {
       <div className="left">
         <div className="makecenter">
           <section className="copy">
-            <h1>Welcome Back To</h1>
-            <p>CareerLink</p>
+            {/* <h1 className="mb-24">Welcome Back To</h1>
+            <p className="text-4xl">CareerLink</p> */}
           </section>
         </div>
       </div>

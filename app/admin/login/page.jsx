@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-// import "./loginCompany.css";
-import { useRouter } from 'next/navigation';
+import "@/app/loginCompany/loginCompany.css";
+import { useRouter } from "next/navigation";
 import { ToastMessage } from "@/app/components/ToastMessage";
-
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -12,7 +11,7 @@ function Login() {
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
-console.log(username,password)
+    console.log(username, password);
     try {
       // Make a POST request to your server
       const response = await fetch("/api/admin/login", {
@@ -25,13 +24,11 @@ console.log(username,password)
       const data = await response.json();
       if (response.ok) {
         console.log("Response:", data);
-        ToastMessage("Success",data.msg)
-        router.push('/admin/dashboard')
-    }else{
-      ToastMessage("Error",data.msg)
-    }
-     
-      
+        ToastMessage("Success", data.msg);
+        router.push("/admin/dashboard");
+      } else {
+        ToastMessage("Error", data.msg);
+      }
     } catch (error) {
       // Handle errors, e.g., display an error message
       console.error("Error:", error);
@@ -42,12 +39,7 @@ console.log(username,password)
   return (
     <div className="split-screen">
       <div className="left">
-        <div className="makecenter">
-          <section className="copy">
-            <h1>Welcome Back To</h1>
-            <p>CareerLink</p>
-          </section>
-        </div>
+        <div className="makecenter"></div>
       </div>
 
       <div className="right">
@@ -57,7 +49,7 @@ console.log(username,password)
             <div className="login-container">
               <p>
                 Don't have an admin account?
-                <a href="#">
+                <a href="/admin/register">
                   <strong>Register Now</strong>
                 </a>
               </p>
@@ -65,10 +57,10 @@ console.log(username,password)
           </section>
 
           <div className="input-container email">
-            <label htmlFor="username">username</label>
+            <label htmlFor="username">Username</label>
             <input
-              type="username"
-              id="username"
+              type="email"
+              id="email"
               className="email"
               placeholder="admin1"
               value={username}
@@ -95,10 +87,9 @@ console.log(username,password)
             </a>
           </div>
 
-            <button className="signup-btn" type="submit" onClick={handleSubmit}>
-              Login
-            </button>
-         
+          <button className="signup-btn" type="submit" onClick={handleSubmit}>
+            Login
+          </button>
 
           <section className="copy legal">
             <p>

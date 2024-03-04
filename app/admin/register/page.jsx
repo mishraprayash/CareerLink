@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-// import './signupCompany.css'
+import '@/app/signupCompany/signupCompany.css'
 import { postReq } from "@/app/hooks/service";
 
 import { useRouter } from "next/navigation";
@@ -44,15 +44,9 @@ const page = () => {
     <div className="body">
       <div className="split-screen">
         <div className="left">
-          <div className="makecenter">
-
-            <section className="copy">
-              <h1>Welcome To</h1>
-              <p>CareerLink</p>
-            </section>
-          </div>
+          <div className="makecenter"></div>
         </div>
-        <div className="right">
+        <div className="right p-5">
           <form onSubmit={handleSubmit}>
             <section className="copy">
 

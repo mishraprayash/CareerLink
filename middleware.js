@@ -37,7 +37,7 @@ export async function middleware(request) {
   }
 
   if (pathname.startsWith("/api/auth/error")) {
-    return NextResponse.json({ msg: "Invalid email Address" }, { status: 403 });
+    return NextResponse.json({ msg: "Invalid email Address or Duplicate Email Address" }, { status: 403 });
   }
 
   if (!adminToken && !companyToken && !nextAuthToken) {

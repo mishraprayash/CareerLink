@@ -7,12 +7,12 @@ function PendingCompany() {
 
     return (
         <div>
-            {
+            {/* {
                 acceptedStatus&&(window.alert(acceptedStatus))
             }
             {
                 rejectedStatus&&(window.alert(rejectedStatus))
-            }
+            } */}
             <h1 className="text-3xl font-bold mb-6">Pending Companies</h1>
             {pendingCompany && pendingCompany.map((company) => (
                 <div key={company._id} className="border p-6 mb-8 bg-white shadow-md rounded-lg">
