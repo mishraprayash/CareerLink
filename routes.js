@@ -25,6 +25,8 @@ const adminLoggedInAPIRoutes = [
     '/api/admin/pendinginternships',
     '/api/admin/changepassword',
     '/api/admin/sendverificationlink',
+    '/api/admin/allinformations',
+    '/api/admin/getprofile'
 ];
 
 const adminLoggedOutAPIRoutes = [
@@ -59,8 +61,7 @@ const companyLoggedInClientRoutes = [
     '/dashboard',
     '/dashboard/company/createinternship',
     '/dashboard/company/internship',
-    '/dashboard/company/updateprofile',
-    '/'
+    '/dashboard/company/updateprofile'
 
 ]
 // remaining for handling student route
