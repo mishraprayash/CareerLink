@@ -21,13 +21,13 @@ function MyInternship() {
   };
 
   return loading ? (
-    <div className="text-center p-4 m-2 shadow-xl">Loading Internships</div>
+    <div className="text-center p-4 m-2 shadow-xl">Loading Internships....</div>
   ) : (
     <>
       <div className="text-center p-4 m-2 shadow-sm shadow-black bg-slate-300 font-bold">
         Running Internships
       </div>
-      {runningInternships != null && runningInternships != undefined ? (
+      {runningInternships !== null && runningInternships !== undefined ? (
         runningInternships?.map((internship) => (
           <div className="m-2 p-2" key={internship._id}>
             <Card internship={internship} />
