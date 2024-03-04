@@ -71,8 +71,6 @@ if(!response.ok){
     
     
   ):null) : null}
-       
-          <Settings />
         </main>
       </div>
     </div>

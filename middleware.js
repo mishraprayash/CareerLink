@@ -15,6 +15,7 @@ import {
   companyLoggedOutAPIRoutes,
   studentLoggedInAPIRoutes,
 } from './routes'
+import Cookies from 'js-cookie';
 
 
 export async function middleware(request) {
