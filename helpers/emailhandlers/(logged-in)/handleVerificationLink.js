@@ -13,10 +13,12 @@ export async function handleVerificationLink(Model, token) {
         if (user.verified) {
             return NextResponse.json({ msg: "User already verified" }, { status: 400 });
         }
+
         // checking if user is approved or not
-        if (user.state != "Approved") {
-            return NextResponse.json({ msg: `${Model} must be approved by admin first` }, { status: 400 });
-        }
+        // if (user.state != "Approved") {
+        //     return NextResponse.json({ msg: `${user.companyName} must be approved by admin first` }, { status: 400 });
+        // }
+
         // sending verification link
         await handleSendingEmail(user);
 
