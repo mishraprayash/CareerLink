@@ -42,6 +42,7 @@ const companyLoggedInAPIRoutes = [
     '/api/company/sendverificationlink',
     '/api/company/updateprofile',
     '/api/company/changepassword',
+    '/api/company/getprofile'
     // email verification needed for this
 ];
 

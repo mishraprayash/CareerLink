@@ -7,8 +7,8 @@ import { postReq } from "@/app/hooks/service";
 import { ToastMessage } from "@/app/components/ToastMessage";
 
 const SignupCompany = () => {
+ 
   const router = useRouter();
-
   const [formData, setFormData] = useState({
     category: "",
     industrySectors: "",

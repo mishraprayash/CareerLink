@@ -5,15 +5,17 @@ import { ExploreContext } from "@/app/context/explorecontext";
 
 function SingleInternship({ params }) {
     const internshipID = params.Id;
-    const { singleInternship, singleInternshipFetch } = useContext(ExploreContext);
+    const { singleInternship, singleInternshipFetch ,loading } = useContext(ExploreContext);
 
     useEffect(() => {
         singleInternshipFetch(internshipID);
     }, []);
 
     return (
-        <div>
-            {singleInternship && <ExploreCardFull internship={singleInternship} />}
+        <div className="text-center">
+            {loading?<div className="h-[80vh] text-center font-semibold p-5 m-5">Loading.....</div>:(
+                <ExploreCardFull internship={singleInternship} />
+            )}
         </div>
     );
 }

@@ -68,7 +68,7 @@ function MyInternship() {
         ))
       ) : (
         <div className="p-4 m-2 text-center bg-blue-300 shadow-sm shadow-black font-thin">
-          No any internship running at the momoment
+          No any internship pending at the moment
         </div>
       )}
     </>

@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/authcontext";
+import {useRouter} from "next/navigation";
 const CompanyProfile = () => {
+  const router = useRouter();
   const [company, setCompany] = useState(null);
   const { user } = useContext(AuthContext);
   useEffect(() => {
@@ -14,8 +16,7 @@ const CompanyProfile = () => {
   // console.log(user, company)
 
   if (!user) {
-    // Handle the case when user data is not available yet
-    return <div>Loading user data...</div>;
+    router.push('/loginCompany');
   }
 
   if (!user.company) {
@@ -27,16 +28,14 @@ const CompanyProfile = () => {
     <div className=" mx-10 mt-8 px-14 py-8 my-8 bg-white shadow-md rounded-md">
       {company ? (
         <>
-          <div className="flex  mb-10  items-end">
-            <div>
+          <div className="flex items-end">
               {company?.logo && (
                 <img
                   src={company?.logo.secure_url}
                   alt={company?.companyName}
-                  className="w-72 h-72 rounded-full"
+                  className="w-[50px] h-[50px] rounded-full"
                 />
               )}
-            </div>
             <div className=" flex flex-col mb-10">
               <h2 className="text-5xl font-bold ">{company?.companyName}</h2>
               <p className="text-gray-700">{company?.companydescription}</p>

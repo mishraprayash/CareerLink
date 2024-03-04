@@ -18,7 +18,7 @@ const Profile = () => {
           <div>Loading data...</div>
         )
       ) : (
-        <div className="text-center p-5 m-3">Loading...</div>
+        <div className="text-center p-5 m-3 font-semibold h-[90vh]">Loading...</div>
       )}
     </>
   );

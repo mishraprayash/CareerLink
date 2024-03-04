@@ -20,24 +20,27 @@ import {
 export async function middleware(request) {
 
   const { pathname } = request.nextUrl;
+  console.log(pathname);
 
   // const rateLimiterResponse = await rateLimiter(request);
   // if (typeof rateLimiterResponse !== Boolean && rateLimiterResponse !== true) {
   //   return rateLimiterResponse;
   // }
 
-
   const adminToken = !!request.cookies.get('token') && !!request.cookies.get('admin');
   const companyToken = !!request.cookies.get('token') && !!request.cookies.get('company');
   const nextAuthToken = !!request.cookies.get('next-auth.session-token');
 
 
+  // filtering unnecessary routes
   if (pathname.startsWith('/_next/static')) {
     return NextResponse.next();
   }
 
   if (pathname.startsWith("/api/auth/error")) {
-    return NextResponse.json({ msg: "Invalid email Address or Duplicate Email Address" }, { status: 403 });
+    // this error mainly occurs when student try to login with invalid email id so redirecting to loginCompany in that case.
+    const response = NextResponse.redirect(new URL('/loginCompany', request.nextUrl.origin));
+    return response;
   }
 
   if (!adminToken && !companyToken && !nextAuthToken) {
@@ -71,10 +74,14 @@ export async function middleware(request) {
   }
   else if (companyToken) {
     const decodedToken = await decodeJWTCompany(request);
+    // if token expired or validation error then redirecting to '/' and set cookies empty
     if (decodedToken === null) {
-      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+      const response = NextResponse.redirect(new URL('/', request.nextUrl.origin));
+      response.cookies.delete('token');
+      response.cookies.delete('company');
+      return response;
     }
-    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin') || pathname.startsWith('/profile')) {
+    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/admin')) {
       return NextResponse.redirect(new URL('/dashboard', request.nextUrl.origin));
     }
     if (companyLoggedOutAPIRoutes.includes(pathname)) {
@@ -85,13 +92,19 @@ export async function middleware(request) {
 
   else if (adminToken) {
     const decodedToken = await decodeJWTAdmin(request);
+    // if token expired or validation error then redirecting to '/' and set cookies empty
+
     if (decodedToken === null) {
-      return NextResponse.json({ msg: "Unauthenticated User" }, { status: 403 });
+      const response = NextResponse.redirect(new URL('/', request.nextUrl.origin));
+      response.cookies.delete('token');
+      response.cookies.delete('company');
+      return response;
     }
     // not allowed routes while logged in
-    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
+    if (loggedOutOnlyClientRoutes.includes(pathname) || pathname.startsWith('/dashboard')) {
       return NextResponse.redirect(new URL('/admin/dashboard', request.nextUrl.origin));
     }
+    return NextResponse.next();
   }
   else {
     return NextResponse.next();

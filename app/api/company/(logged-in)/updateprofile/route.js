@@ -50,9 +50,9 @@ export async function PATCH(request) {
     const nonFileData = Object.fromEntries(nonFileEntries);
     // console.log(nonFileData)
     const { city, state, zipCode, foundYear, companyDescription, phoneNO, category, industrySectors } = nonFileData
-    if (!category || !industrySectors || !city || !state || !zipCode || !foundYear || !companyDescription || !phoneNO) {
-      return NextResponse.json({ msg: "Missing Fields" }, { status: 400 });
-    }
+    // if (!category || !industrySectors || !city || !state || !zipCode || !foundYear || !companyDescription || !phoneNO) {
+    //   return NextResponse.json({ msg: "Missing Fields" }, { status: 400 });
+    // }
     const company = await Company.findOneAndUpdate(
       { _id: decodedToken.id },
       {
@@ -128,3 +128,6 @@ export async function PATCH(request) {
     }, { status: 400 });
   }
 }
+
+
+

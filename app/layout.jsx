@@ -24,7 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <ExploreContextProvider>
           <Provider>
             <AuthContextProvider>

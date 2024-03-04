@@ -18,7 +18,8 @@ const engineeringCategories = [
     "Telecommunications Engineering",
     "Transportation Engineering",
     "Water Resources Engineering",
-    "Nuclear Engineering"
+    "Nuclear Engineering",
+    ''
 ];
 
 const industrySectors = [
@@ -37,7 +38,8 @@ const industrySectors = [
     "Telecommunications, Technology",
     "Transportation, Logistics, Urban Planning",
     "Water Management, Environmental Services",
-    "Energy, Nuclear Energy"
+    "Energy, Nuclear Energy",
+    ''
 ];
 
 const photoModel=new mongoose.Schema({
@@ -78,7 +80,7 @@ const companySchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            minLength: ["50", "Please provide some description about your Company"],
+            minLength: ["20", "Please provide some description about your Company"],
             maxLength: ["500", "Description shouldnot exceed more than 500 characters"],
         },
         logo: photoModel,

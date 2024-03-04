@@ -52,8 +52,8 @@ export async function POST(request) {
       const formData = await request.formData();
       // Check if the form data contains specific fields
       const hasGeneralInfo = formData.get('name')!='' && formData.get('gender')!='' && formData.get('age')!=null && formData.get('about')!='' && formData.get('bio')!='' && formData.get('state')!="" && formData.get('district')!='' && formData.get('street')!='';
-      const hasProfilePicture = formData.get('profilePicture')instanceof File;
-      const hasCV = formData.get('cv')instanceof File;
+      const hasProfilePicture = formData.get('profilePicture') instanceof File;
+      const hasCV = formData.get('cv') instanceof File;
       const hasCertificates = formData.has('certificates');
       const hasSocialMedia = JSON.parse(formData.get('socialmedia')).some(item => item.link !== '');
   // console.log(hasGeneralInfo,hasProfilePicture,hasCV,hasCertificates,hasSocialMedia)
