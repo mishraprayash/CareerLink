@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBuilding, faUsers, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 import Overview from './components/overview/page';
-import Settings from './components/settings/page';
 import { AuthContext } from '@/app/context/authcontext';
 import { InternshipContext } from '@/app/context/internshipcontext';
 
@@ -13,13 +12,13 @@ const Dashboard = () => {
   const { adminDashboardInfo } = useContext(InternshipContext);
 
   return (
-    <div className="container mx-auto p-4 min-h-screen">
+    <div className="mx-auto p-4">
       <div className="grid grid-cols-12 md:grid-cols-3 gap-4">
         <main className="col-span-9">
           {user && user.admin && (
             <div>
               <Overview userData={user?.admin.username} />
-              {adminDashboardInfo && (
+              {adminDashboardInfo? (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                   {Object.keys(adminDashboardInfo).map((key) => (
                     <div key={key} className="bg-white rounded-md shadow-md p-4 flex flex-col justify-center items-center">
@@ -35,8 +34,10 @@ const Dashboard = () => {
                     </div>
                   ))}
                 </div>
-              )}
-              {/* <Settings /> */}
+              ):(
+                <div className="text-center font-semibold m-5 p-5 text-[1.2rem]">Loading......</div>
+              )
+            }
             </div>
           )}
         </main>
