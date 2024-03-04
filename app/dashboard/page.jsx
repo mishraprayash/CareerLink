@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import Link from "next/link";
 import Overview from "./components/overview/page";
 import Applications from "./student/application/page";
@@ -10,12 +10,11 @@ import { getReq } from "../hooks/service";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-  const handleEmailVerify = (e) => {
+  const handleEmailVerify = async (e) => {
     e.preventDefault();
-    const response = getReq("/api/company/sendverificationlink");
+    const response = await getReq("/api/company/sendverificationlink");
     if (!response.ok) {
       ToastMessage("Error", response.msg);
-      // ToastMessage("Error",response.msg?response.msg:"Error occured while sending verification Link" )
     } else {
       ToastMessage("Success", "Verification Link send successfully!");
     }
@@ -23,7 +22,7 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto p-4 min-h-lvh">
       <div className="grid grid-cols-12 md:grid-cols-3 gap-4">
-        <main className="col-span-9">
+          <main className="col-span-9">
           {user ? (
             user.student ? (
               <div>
@@ -32,7 +31,7 @@ const Dashboard = () => {
               </div>
             ) : user.company ? (
               <div>
-                {!user.company?.isEmailVerified ? (
+                {!user.company?.verified ? (
                   <>
                     {/* {ToastMessage("Warning", "Please verify your email to create an internship.")} */}
                     <div
@@ -60,8 +59,7 @@ const Dashboard = () => {
                       role="alert"
                     >
                       <span className="block sm:inline">
-                        Please update your profile to create an internship,
-                        which will be verified by the admin.
+                        Please update your profile to create an internship,which will be verified by the admin.
                       </span>
                       <div className="flex items-center">
                         <Link
