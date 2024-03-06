@@ -1,0 +1,118 @@
+*{
+   
+   box-sizing:border-box;
+
+}
+  .CF_main{
+   margin: 0;
+   padding: 0;
+   box-sizing:border-box;
+   
+  
+ }
+ .CF_cname,h4{
+   color: brown;
+   
+   font-size: 28px;
+ }
+
+  .CF_aCard{
+   display: flex;
+   flex-direction: row;
+   margin: 40px 40px;
+   height: 500px;
+/* width: auto; */
+
+padding:20px  20px;
+
+border:solid 1px rgb(32, 32, 80);
+
+}
+.CF_left{
+  
+   width: 690px;
+   display: flex;
+   flex-direction: column;
+   margin:  0px auto;
+   /* justify-content: center; */
+   /* align-items: center; */
+   border-right: solid 1px rgb(32, 32, 80);
+}
+.CF_Clogo,.CF_cname{
+ 
+   position: relative;
+   margin: auto;
+}
+.listOfSymbol{
+   display: flex;
+   flex-direction: row;
+   align-items: start;
+   justify-content: space-between;
+margin:20px 10px;
+  
+   
+}
+.onesymbol{
+  
+  flex:1;
+   display: flex;
+   flex-direction: row;
+}
+.sTitle{
+margin-left: 10px;
+font-size: 13px;
+color: grey;
+}
+.sValue{
+margin-left: 5px;
+font-size: 18px;
+
+
+
+}
+.right{
+   flex: 1;
+   margin: 10px;
+   position: relative;
+   margin-left: 50px;
+}
+
+.aboutCompany{
+   text-align: center;
+   margin-top:20px;
+}
+.buttons{
+   position: absolute;
+ 
+
+   bottom: 10px;
+   left: 60%;
+ 
+}
+.button2{
+  padding: 10px 100px;
+ box-shadow: azure;
+    background-color: rgb(145, 70, 9);
+     border-radius: 10px;
+     font-size: 18px;
+     border: none;
+     color: white;
+     margin: auto;
+  
+   
+}
+.CF_ALogo{
+   
+   background-color: red;
+}
+.button1{
+   padding: 10px 10px;
+   box-shadow: azure;
+      background-color: green;
+       border-radius: 10px;
+       font-size: 18px;
+       border: none;
+       color: white;
+       margin: 50px auto 2px 50px;
+      
+}

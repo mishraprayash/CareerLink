@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+
+:root {
+  --primary-blue: #233975;
+}
+body {
+  padding: 0;
+  /* margin-top: 70px; */
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+ 
+}
+h1 {
+  font-size: 3rem;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+a {
+  text-decoration: none;
+  color: var(--primary-blue);
+}
+a:hover {
+  text-decoration: underline;
+}
+.small {
+  font-size: 80%;
+  text-align: center;
+}
+.split-screen {
+  display: flex;
+  flex-direction: column;
+  background-color: #F2F4F7;
+}
+.left {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #7FC7D9; */
+}
+.left,
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #7FC7D9; */
+}
+.left div.makecenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 80%;
+  border-radius: 12px;
+  background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("https://res.cloudinary.com/dkracb8u5/image/upload/v1706380270/Careerlink/Public/vvsfg1lzcbnk81seicf2");
+  background-size: cover;
+}
+.left .makecenter .copy {
+  text-align: center;
+  --webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.left p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.right .copy {
+  color: black;
+  text-align: center;
+}
+.right .copy p {
+  margin: 1.5em;
+  font-size: 1rem;
+}
+.right form {
+  width: 70%;
+  background-color: #DCF2F1;
+  padding: 8px;
+  border-radius: 12px;
+}
+form input[type="email"],
+form input[type="password"] {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  padding: 1em;
+  margin-bottom: 1.3rem;
+  font-size: 1rem;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+/* .checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 0 1.2rem 0;
+}
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--primary-blue);
+  border: px solid var(--primary-blue);
+}
+.checkmark {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+  top: -4px;
+  left: 0;
+}
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.checkbox-container .checkmark::after {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  width: 5px;
+  height: 10px;
+  left: 8px;
+  top: 4px;
+  transform: rotate(45deg);
+} */
+.signup-btn {
+  display: block;
+  width: 100%;
+  background: var(--primary-blue);
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.signup-btn:hover {
+  background: #4f6ec2;
+  cursor: pointer;
+}
+.forget{
+    text-align: right;
+    color: green;
+    margin-bottom: 12px;
+}
+.forget a {
+    color: green;
+}
+.login-container p{
+    white-space: nowrap;
+}
+@media screen and (min-width: 900px) {
+  .split-screen {
+    flex-direction: row;
+    height: 100vh;
+    background-color: #F2F4F7;
+  }
+  h1 {
+    color: aliceblue;
+  }
+  .left,
+  .right {
+    display: flex;
+    width: 50%;
+    height: auto;
+    /* background-image: linear-gradient(90deg,  #7FC7D9,#365486 );   */
+  }.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #7FC7D9; */
+    /* background-image: linear-gradient(90deg,  #365486 ,#7FC7D9);   */
+  }
+  .left .makecenter{
+    background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.884)), url("/image/logo.png");
+  }
+  .left p,.left h1 {
+    color: #0F1035;
+  }
+}
