@@ -1,6 +1,7 @@
 import connectDB from "@/config/dbconfig/database";
 import { NextResponse } from "next/server";
 import { validateModel } from "../validateModel";
+import Company from "@/models/Company";
 
 /*for passing role use the useState hook in the client side to update the state
 id for one(admin or internship or company) that needs to be accepted. 
@@ -21,18 +22,25 @@ export async function POST(request) {
         }
         // const decodedToken = 
         const Model = validateModel(role);
-        const admin = await Model.findById(id);
+        const user = await Model.findById(id);
 
-        if (!admin) {
+        if (!user) {
             return NextResponse.json({ msg: `${role} doesnot exist` }, { status: 400 });
         }
-        if (admin.state === "Approved") {
+        if (user.state === "Approved") {
             return NextResponse.json({ msg: `${role} already approved` }, { status: 200 });
         }
-        admin.state = "Approved";
-        await admin.save();
-
-        await sendAcceptedEmail(admin);
+        user.state = "Approved";
+        await user.save();
+        
+        // if (user.role === "Internship") {
+        //     const companyId = user.company;
+        //     const company = await Company.findById(companyId);
+        //     await sendAcceptedEmail(company);
+        // }
+        // else {
+        //     await sendAcceptedEmail(user);
+        // }
         return NextResponse.json({ msg: `${role} Approved` }, { status: 200 });
 
     } catch (error) {
@@ -44,7 +52,7 @@ export async function POST(request) {
     }
 }
 
-async function sendAcceptedEmail(admin) {
+async function sendAcceptedEmail(user) {
     try {
         await admin.Accepted();
     } catch (error) {

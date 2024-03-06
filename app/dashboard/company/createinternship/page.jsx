@@ -5,8 +5,8 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 
 const CreateInternship = () => {
+  const router = useRouter();
   const [createinternship, setCreateInternship] = useState(null);
-
   const [formData, setFormData] = useState({
     position: "",
     location: "",
@@ -24,6 +24,10 @@ const CreateInternship = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!position || !location || !isRemote || !workTime || !startDate || !endDate || !description || !responsibilities || !requirements || !internshipType || !salary || !noofVacancy){
+      ToastMessage("Error","Please fill all the fields before creating internships");
+      return;
+    }
     setCreateInternship(formData);
     console.log(createinternship);
     const response = await postReq(
@@ -33,7 +37,6 @@ const CreateInternship = () => {
     console.log(response);
     if (!response.error) {
       ToastMessage("Success", response.msg);
-      const router = useRouter();
       router.push("/dashboard/company/internship");
     } else {
       console.log(response.error);

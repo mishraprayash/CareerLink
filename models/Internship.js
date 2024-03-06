@@ -90,7 +90,6 @@ const internshipSchema = new mongoose.Schema(
 
         isCompleted: {
             type: Boolean,
-            // required: true,
             // defining a getter function
             get: function () {
                 return new Date() > this.endDate ? true : false;

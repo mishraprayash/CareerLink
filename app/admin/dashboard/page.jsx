@@ -26,10 +26,10 @@ const Dashboard = () => {
                       <h2 className="text-2xl font-semibold mb-2 capitalize font-mono">{key}</h2>
                       <p>Total: {adminDashboardInfo[key].total}</p>
                       <p>
-                        <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" /> Approved: {adminDashboardInfo[key].approved}
+                        <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" /> Approved: {key==='admins'?adminDashboardInfo[key].active:adminDashboardInfo[key].approved}
                       </p>
                       <p>
-                        <FontAwesomeIcon icon={faExclamationCircle} className={key === 'admins' ? 'text-red-500' : 'text-yellow-500'} /> {key === 'admins' ? 'Inactive' : 'Pending'}: {adminDashboardInfo[key].pending}
+                        <FontAwesomeIcon icon={faExclamationCircle} className={key === 'admins' ? 'text-red-500' : 'text-yellow-500'} /> {key === 'admins' ? 'Inactive' : 'Pending'}: {key==='admins'?adminDashboardInfo[key].inactive:adminDashboardInfo[key].pending}
                       </p>
                     </div>
                   ))}
