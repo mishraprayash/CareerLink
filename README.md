@@ -23,10 +23,6 @@ CareerLink is a comprehensive web platform designed to connect college students 
 - **Company Engagement**: Companies can register on CareerLink to post new internship opportunities and mentorship programs, enhancing their engagement with talented college students.
 
 
-## License
-
-CareerLink is licensed under the [MIT License](LICENSE).
-
 ## Contact
 
 For any inquiries or support, please contact [mishraprayash00@gmail.com](mailto:your-email@example.com).
